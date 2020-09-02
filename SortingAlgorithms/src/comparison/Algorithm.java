@@ -46,7 +46,7 @@ public class Algorithm {
         this.numOfReadings = numOfReadings;
     }
 
-    public void setavgTime(int avgTime) {
+    public void setAvgTime(int avgTime) {
         this.avgTime = avgTime;
     }
 
