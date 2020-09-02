@@ -1,4 +1,4 @@
-package no.hvl.dat102.Comparison;
+package sortingalgorithms.comparison;
 
 public class Display {
 	private Comparison comparison;

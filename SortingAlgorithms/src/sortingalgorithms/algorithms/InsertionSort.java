@@ -1,6 +1,6 @@
-package no.hvl.dat102.InsertionSort;
+package sortingalgorithms.algorithms;
 
-import no.hvl.dat102.adt.SortingAlgorithmADT;
+import sortingalgorithms.adt.SortingAlgorithmADT;
 
 public class InsertionSort implements SortingAlgorithmADT {
 	private Integer[] arr;

@@ -1,8 +1,8 @@
-package no.hvl.dat102.SelectionSort;
+package sortingalgorithms.algorithms;
 
-import no.hvl.dat102.adt.SortingAlgorithmADT;
+import sortingalgorithms.adt.SortingAlgorithmADT;
 
-public class SelectionSort  implements SortingAlgorithmADT{
+public class SelectionSort  implements SortingAlgorithmADT {
 	private Integer[] arr;
 	private Integer[] testArr;
 	

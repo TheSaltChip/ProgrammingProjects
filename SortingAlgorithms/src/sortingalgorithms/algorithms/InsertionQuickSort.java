@@ -1,8 +1,8 @@
-package no.hvl.dat102.InsertionQuickSort;
+package sortingalgorithms.algorithms;
 
-import no.hvl.dat102.adt.SortingAlgorithmADT;
+import sortingalgorithms.adt.SortingAlgorithmADT;
 
-public class InsertionQuickSort implements SortingAlgorithmADT{
+public class InsertionQuickSort implements SortingAlgorithmADT {
 	private Integer[] array;
 	private Integer[] testArr;
 	private final int MIN;

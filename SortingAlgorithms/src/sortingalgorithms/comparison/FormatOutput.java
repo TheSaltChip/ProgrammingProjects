@@ -1,8 +1,8 @@
-package no.hvl.dat102.Comparison;
+package sortingalgorithms.comparison;
+
+import sortingalgorithms.adt.MengdeADT;
 
 import java.util.Iterator;
-
-import no.hvl.dat102.mengde.adt.MengdeADT;
 
 public class FormatOutput {
 	private Comparison comparison;

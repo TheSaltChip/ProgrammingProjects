@@ -1,8 +1,8 @@
-package no.hvl.dat102.RadixSort;
+package sortingalgorithms.algorithms;
 
-import no.hvl.dat102.adt.KoeADT;
-import no.hvl.dat102.adt.SortingAlgorithmADT;
-import no.hvl.dat102.sirkulaer.SirkulaerKoe;
+import sortingalgorithms.queue.SirkulaerKoe;
+import sortingalgorithms.adt.KoeADT;
+import sortingalgorithms.adt.SortingAlgorithmADT;
 
 public class RadixSort implements SortingAlgorithmADT {
 	private Integer[] arr;

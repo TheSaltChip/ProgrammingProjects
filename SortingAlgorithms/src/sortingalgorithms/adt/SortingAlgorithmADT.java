@@ -1,4 +1,4 @@
-package no.hvl.dat102.adt;
+package sortingalgorithms.adt;
 
 public interface SortingAlgorithmADT {
 	

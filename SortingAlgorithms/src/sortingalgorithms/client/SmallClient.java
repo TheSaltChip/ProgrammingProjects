@@ -1,13 +1,13 @@
-package no.hvl.dat102.Client;
+package sortingalgorithms.client;
+
+import sortingalgorithms.algorithms.BubbleSort;
+import sortingalgorithms.algorithms.InsertionSort;
+import sortingalgorithms.algorithms.MergeSort;
+import sortingalgorithms.algorithms.QuickSort;
+import sortingalgorithms.algorithms.RadixSort;
+import sortingalgorithms.algorithms.SelectionSort;
 
 import java.util.Random;
-
-import no.hvl.dat102.BubbleSort.BubbleSort;
-import no.hvl.dat102.InsertionSort.InsertionSort;
-import no.hvl.dat102.MergeSort.MergeSort;
-import no.hvl.dat102.QuickSort.QuickSort;
-import no.hvl.dat102.RadixSort.RadixSort;
-import no.hvl.dat102.SelectionSort.SelectionSort;
 
 public class SmallClient {
 	private static Integer[] arr;

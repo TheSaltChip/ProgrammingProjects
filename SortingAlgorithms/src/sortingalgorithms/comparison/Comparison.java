@@ -1,18 +1,18 @@
-package no.hvl.dat102.Comparison;
+package sortingalgorithms.comparison;
+
+import sortingalgorithms.algorithms.BubbleSort;
+import sortingalgorithms.algorithms.InsertionQuickSort;
+import sortingalgorithms.algorithms.InsertionSort;
+import sortingalgorithms.algorithms.MergeSort;
+import sortingalgorithms.algorithms.QuickSort;
+import sortingalgorithms.algorithms.RadixSort;
+import sortingalgorithms.algorithms.SelectionSort;
+import sortingalgorithms.adt.SortingAlgorithmADT;
+import sortingalgorithms.adt.MengdeADT;
+import sortingalgorithms.arraylist.TabellMengde;
 
 import java.util.Iterator;
 import java.util.Random;
-
-import no.hvl.dat102.BubbleSort.BubbleSort;
-import no.hvl.dat102.InsertionQuickSort.InsertionQuickSort;
-import no.hvl.dat102.InsertionSort.InsertionSort;
-import no.hvl.dat102.MergeSort.MergeSort;
-import no.hvl.dat102.QuickSort.QuickSort;
-import no.hvl.dat102.RadixSort.RadixSort;
-import no.hvl.dat102.SelectionSort.SelectionSort;
-import no.hvl.dat102.adt.SortingAlgorithmADT;
-import no.hvl.dat102.mengde.adt.MengdeADT;
-import no.hvl.dat102.mengde.kjedet.KjedetMengde;
 
 /**
  * Comparison class that is used to sort different sizes of arrays with an sorting algorithm
@@ -45,7 +45,7 @@ public class Comparison {
 	 */
 	public void decideWhichAlgorithm(String algorihtmName, int[] sizes) {
 		Integer[][] allArrays = makeArrays(sizes);
-		algorithmResult = new KjedetMengde<Algorithm>();
+		algorithmResult = new TabellMengde<>();
 		amount = 0;
 
 		if (algorihtmName.equals("bubblesort")) {

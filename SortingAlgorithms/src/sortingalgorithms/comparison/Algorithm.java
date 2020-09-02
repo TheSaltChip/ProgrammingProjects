@@ -1,10 +1,10 @@
-package no.hvl.dat102.Comparison;
+package sortingalgorithms.comparison;
+
+import sortingalgorithms.adt.SortingAlgorithmADT;
+import sortingalgorithms.adt.MengdeADT;
+import sortingalgorithms.arraylist.TabellMengde;
 
 import java.util.Iterator;
-
-import no.hvl.dat102.adt.SortingAlgorithmADT;
-import no.hvl.dat102.mengde.adt.MengdeADT;
-import no.hvl.dat102.mengde.kjedet.KjedetMengde;
 
 public class Algorithm {
 	private String name;
@@ -20,7 +20,7 @@ public class Algorithm {
 		this.name = name;
 		numOfReadings = 0;
 		avgTime = 0;
-		times = new KjedetMengde<Double>();
+		times = new TabellMengde<Double>();
 		sortedStatus = true;
 		this.bigO = bigO;
 		this.algorithm = algorithm;
@@ -37,7 +37,7 @@ public class Algorithm {
 	}
 	
 	public void addSortedStatus(boolean isSorted) {
-		if(sortedStatus == true && isSorted == false) {
+		if(sortedStatus && !isSorted) {
 			sortedStatus = false;
 		}
 	}

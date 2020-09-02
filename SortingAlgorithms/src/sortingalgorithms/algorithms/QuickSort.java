@@ -1,6 +1,6 @@
-package no.hvl.dat102.QuickSort;
+package sortingalgorithms.algorithms;
 
-import no.hvl.dat102.adt.SortingAlgorithmADT;
+import sortingalgorithms.adt.SortingAlgorithmADT;
 
 public class QuickSort implements SortingAlgorithmADT {
 	private Integer[] array;

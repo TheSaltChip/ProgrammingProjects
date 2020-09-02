@@ -1,8 +1,8 @@
-package no.hvl.dat102.Client;
+package sortingalgorithms.client;
+
+import sortingalgorithms.comparison.Display;
 
 import java.time.LocalTime;
-
-import no.hvl.dat102.Comparison.Display;
 
 public class Client {
 
