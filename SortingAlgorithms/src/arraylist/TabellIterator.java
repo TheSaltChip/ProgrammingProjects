@@ -8,9 +8,9 @@ public class TabellIterator<T> implements Iterator<T> {
 // i et objekt av klasse Mengde n�r denne klassen Mengde er
 // implementert vha tabell.
 //
-    private int antall;  // antall elementer i mengden
+    private int antall;  // amount elementer i mengden
     private int pos;    // posisjonen til aktuelt element
-    private T[] elementer;
+    private final T[] elementer;
 
 
     public TabellIterator(T[] tab, int lengde) {

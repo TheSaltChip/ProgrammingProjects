@@ -3,8 +3,8 @@ package algorithms;
 import adt.SortingAlgorithmADT;
 
 public class InsertionSort implements SortingAlgorithmADT {
-    private Integer[] arr;
-    private Integer[] testArr;
+    private final Integer[] arr;
+    private final Integer[] testArr;
 
     public InsertionSort(Integer[] arr) {
         this.arr = arr;

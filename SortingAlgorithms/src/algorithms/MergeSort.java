@@ -3,8 +3,8 @@ package algorithms;
 import adt.SortingAlgorithmADT;
 
 public class MergeSort implements SortingAlgorithmADT {
-    private Integer[] array;
-    private Integer[] testArr;
+    private final Integer[] array;
+    private final Integer[] testArr;
 
     public MergeSort(Integer[] array) {
         this.array = array;

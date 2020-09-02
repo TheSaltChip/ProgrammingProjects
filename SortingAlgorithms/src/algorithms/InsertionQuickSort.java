@@ -3,8 +3,8 @@ package algorithms;
 import adt.SortingAlgorithmADT;
 
 public class InsertionQuickSort implements SortingAlgorithmADT {
-    private Integer[] array;
-    private Integer[] testArr;
+    private final Integer[] array;
+    private final Integer[] testArr;
     private final int MIN;
 
     public InsertionQuickSort(Integer[] array, int min) {

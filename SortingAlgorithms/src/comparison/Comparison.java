@@ -9,7 +9,7 @@ import java.util.Iterator;
 import java.util.Random;
 
 /**
- * Comparison class that is used to sort different sizes of arrays with an sorting algorithm
+ * Comparison class that is used to sort different sizes of arrays with a sorting algorithm
  *
  * @author Sebastian
  */
@@ -18,12 +18,12 @@ public class Comparison {
     private int amount;
     private static final int STANDARD_SIZE = 20;
     private static final int STANDARD_SEED = 1337;
-    private int amountOfRuns;
-    private long seed;
+    private final int AMOUNT_OF_RUNS;
+    private final long SEED;
 
     public Comparison(int amountOfRuns, long seed) {
-        this.amountOfRuns = amountOfRuns;
-        this.seed = seed;
+        AMOUNT_OF_RUNS = amountOfRuns;
+        SEED = seed;
     }
 
     public Comparison() {
@@ -114,7 +114,7 @@ public class Comparison {
             Algorithm algorithm = it.next();
             SortingAlgorithmADT sortingAlg = algorithm.getAlgorithm();
 
-            for (int i = 0; i < amountOfRuns; i++) {
+            for (int i = 0; i < AMOUNT_OF_RUNS; i++) {
                 sortingAlg.makeTestArray();
 
                 timeStart = System.nanoTime();
@@ -161,7 +161,7 @@ public class Comparison {
         Integer[][] allArray = new Integer[sizes.length][];
 
         for (int i = 0; i < sizes.length; i++) {
-            Random rand = new Random(seed);
+            Random rand = new Random(SEED);
             allArray[i] = new Integer[sizes[i]];
 
             for (int j = 0; j < sizes[i]; j++) {

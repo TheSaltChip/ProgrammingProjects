@@ -7,20 +7,20 @@ import arraylist.TabellMengde;
 import java.util.Iterator;
 
 public class Algorithm {
-    private String name;
+    private final String NAME;
     private int numOfReadings;
     private double avgTime;
     private SortingAlgorithmADT algorithm;
-    private MengdeADT<Double> times;
+    private final MengdeADT<Double> TIMES;
     private boolean sortedStatus;
     private String bigO;
     private int lengthOfArr;
 
     public Algorithm(String name, String bigO, SortingAlgorithmADT algorithm, int lengthOfArr) {
-        this.name = name;
+        NAME = name;
         numOfReadings = 0;
         avgTime = 0;
-        times = new TabellMengde<Double>();
+        TIMES = new TabellMengde<Double>();
         sortedStatus = true;
         this.bigO = bigO;
         this.algorithm = algorithm;
@@ -32,7 +32,7 @@ public class Algorithm {
     }
 
     public void addTime(double time) {
-        times.leggTil(time);
+        TIMES.leggTil(time);
         incrementReadings();
     }
 
@@ -69,7 +69,7 @@ public class Algorithm {
     public double getAvgTime() {
         double sumTime = 0;
 
-        Iterator<Double> it = times.oppramser();
+        Iterator<Double> it = TIMES.oppramser();
 
         while (it.hasNext()) {
             sumTime += it.next();
@@ -81,7 +81,7 @@ public class Algorithm {
     }
 
     public String getName() {
-        return name;
+        return NAME;
     }
 
     public String getBigO() {

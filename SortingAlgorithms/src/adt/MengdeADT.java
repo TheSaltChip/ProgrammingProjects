@@ -58,9 +58,9 @@ public interface MengdeADT<T> {
     boolean erTom();
 
     /**
-     * Finner antall elementer i mengden
+     * Finner amount elementer i mengden
      *
-     * @return antall i mengden
+     * @return amount i mengden
      */
     int antall();
 
@@ -96,7 +96,7 @@ public interface MengdeADT<T> {
      * @param m2 er parameteren
      * @return sann hvis m2 er en undermengde av m1, ellers usann
      */
-    public boolean undermengde(MengdeADT<T> m2);
+    boolean undermengde(MengdeADT<T> m2);
 
     /**
      * Oppretter et 'oppramsobjekt' som kan brukes til � gjennomg� alle elementer i

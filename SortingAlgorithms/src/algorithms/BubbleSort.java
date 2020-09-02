@@ -3,8 +3,8 @@ package algorithms;
 import adt.SortingAlgorithmADT;
 
 public class BubbleSort implements SortingAlgorithmADT {
-    private Integer[] arr;
-    private Integer[] testArr;
+    private final Integer[] arr;
+    private final Integer[] testArr;
 
     public BubbleSort(Integer[] arr) {
         this.arr = arr;

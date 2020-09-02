@@ -146,7 +146,7 @@ public class TabellMengde<T> implements MengdeADT<T> {
      *
      * TabellMengde<T> begge = new TabellMengde<T>();
      *
-     * for (int i = 0; i < antall; i++) {
+     * for (int i = 0; i < amount; i++) {
      * 	begge.leggTil(tab[i]);
      * }
      *
@@ -240,11 +240,11 @@ public class TabellMengde<T> implements MengdeADT<T> {
     }
 
 	/*private void settInn(T element) {
-		if (antall == tab.length) {
+		if (amount == tab.length) {
 			utvidKapasitet();
 		}
-		tab[antall] = element;
-		antall++;
+		tab[amount] = element;
+		amount++;
 	}*/
 
     @Override
