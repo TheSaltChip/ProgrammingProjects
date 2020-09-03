@@ -12,9 +12,7 @@ public class MergeSort implements SortingAlgorithmADT {
     }
 
     public void makeTestArray() {
-        for (int i = 0; i < array.length; i++) {
-            testArr[i] = array[i];
-        }
+        System.arraycopy(array, 0, testArr, 0, array.length);
     }
 
     private void merge(Integer[] arr, int left, int mid, int right) {
@@ -22,9 +20,9 @@ public class MergeSort implements SortingAlgorithmADT {
 
         Integer[] helpArr = new Integer[size];
 
-        int leftArrFirst = left, leftArrLast = mid, rightArrFirst = mid + 1, rightArrLast = right, index = 0;
+        int leftArrFirst = left, rightArrFirst = mid + 1, index = 0;
 
-        while ((leftArrFirst <= leftArrLast) && (rightArrFirst <= rightArrLast)) {
+        while ((leftArrFirst <= mid) && (rightArrFirst <= right)) {
 
             if (arr[leftArrFirst].compareTo(arr[rightArrFirst]) <= 0) {
                 helpArr[index] = arr[leftArrFirst];
@@ -38,13 +36,13 @@ public class MergeSort implements SortingAlgorithmADT {
             index++;
         }
 
-        while (leftArrFirst <= leftArrLast) {
+        while (leftArrFirst <= mid) {
             helpArr[index] = arr[leftArrFirst];
             leftArrFirst++;
             index++;
         }
 
-        while (rightArrFirst <= rightArrLast) {
+        while (rightArrFirst <= right) {
             helpArr[index] = arr[rightArrFirst];
             rightArrFirst++;
             index++;

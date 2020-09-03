@@ -9,15 +9,15 @@ import exception.EmptyCollectionException;
  */
 public class CircularQueue<T> {
 
-    private final static int STDK = 100;
-    private int front, behind, amount;
-    private T[] queue;
+    private final static int STANDARD_CAPACITY = 100; // Standard capacity for the queue
+    private int front, behind, amount; // The front of the queue, the behind of the queue
+    private T[] queue; // The array of which the queue is made off
 
     /**
      * Makes a circular queue with the size of 100
      */
     public CircularQueue() {
-        this(STDK);
+        this(STANDARD_CAPACITY);
     }
 
     /**
@@ -65,19 +65,7 @@ public class CircularQueue<T> {
     }
 
     /**
-     * Returns the first element without removing the element
-     *
-     * @return The first element in the queue
-     */
-    public T first() {
-        if (isEmpty())
-            throw new EmptyCollectionException("Queue");
-
-        return queue[front];
-    }
-
-    /**
-     * Checks if the queue is emtpy
+     * Checks if the queue is empty
      * Returns true if it is empty
      * False if not
      *

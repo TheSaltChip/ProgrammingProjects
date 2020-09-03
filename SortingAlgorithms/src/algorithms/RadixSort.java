@@ -8,19 +8,17 @@ public class RadixSort implements SortingAlgorithmADT {
     private final Integer[] testArr;
     private Integer max;
 
-    public RadixSort(Integer[] arr, int highestDigit) {
+    public RadixSort(Integer[] arr) {
         this.arr = arr;
         testArr = new Integer[arr.length];
         findMax();
     }
 
     public void makeTestArray() {
-        for (int i = 0; i < arr.length; i++) {
-            testArr[i] = arr[i];
-        }
+        System.arraycopy(arr, 0, testArr, 0, arr.length);
     }
 
-    public Integer findMax() {
+    public void findMax() {
         max = arr[0];
 
         for (int i = 1; i < arr.length; i++) {
@@ -29,7 +27,6 @@ public class RadixSort implements SortingAlgorithmADT {
             }
         }
 
-        return max;
     }
 
     public Integer[] sort() {
@@ -37,21 +34,21 @@ public class RadixSort implements SortingAlgorithmADT {
         CircularQueue<Integer>[] digitArray = new CircularQueue[10];
 
         for (int i = 0; i < digitArray.length; i++) {
-            digitArray[i] = new CircularQueue<Integer>();
+            digitArray[i] = new CircularQueue<>();
         }
 
         max = (int) Math.pow(10, max.toString().length());
 
         for (int exp = 1; max / exp > 0; exp *= 10) {
-            for (int i = 0; i < testArr.length; i++) {
-                digitArray[(testArr[i] / exp) % 10].enqueue(testArr[i]);
+            for (Integer integer : testArr) {
+                digitArray[(integer / exp) % 10].enqueue(integer);
             }
 
             int index = 0;
 
-            for (int digit = 0; digit < digitArray.length; digit++) {
-                while (!digitArray[digit].isEmpty()) {
-                    testArr[index] = digitArray[digit].dequeue();
+            for (CircularQueue<Integer> integerCircularQueue : digitArray) {
+                while (!integerCircularQueue.isEmpty()) {
+                    testArr[index] = integerCircularQueue.dequeue();
                     index++;
                 }
             }

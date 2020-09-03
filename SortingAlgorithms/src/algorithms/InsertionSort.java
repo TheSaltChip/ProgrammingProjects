@@ -12,24 +12,26 @@ public class InsertionSort implements SortingAlgorithmADT {
     }
 
     public void makeTestArray() {
-        for (int i = 0; i < arr.length; i++) {
-            testArr[i] = arr[i];
-        }
+        System.arraycopy(arr, 0, testArr, 0, arr.length);
     }
 
     public Integer[] sort() {
         for (int i = 1; i < testArr.length; i++) {
-            Integer nextValue = testArr[i];
-            int pos = i;
-
-            while (pos > 0 && nextValue.compareTo(testArr[pos - 1]) < 0) {
-                testArr[pos] = testArr[pos - 1];
-                pos--;
-            }
-
-            testArr[pos] = nextValue;
+            sortLoop(i, testArr, testArr);
         }
 
         return testArr;
+    }
+
+    static void sortLoop(int i, Integer[] testArr, Integer[] testArr2) {
+        Integer nextValue = testArr[i];
+        int pos = i;
+
+        while (pos > 0 && nextValue.compareTo(testArr2[pos - 1]) < 0) {
+            testArr[pos] = testArr[pos - 1];
+            pos--;
+        }
+
+        testArr[pos] = nextValue;
     }
 }

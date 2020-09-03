@@ -1,27 +1,20 @@
 package comparison;
 
-import adt.MengdeADT;
-
+import arraylist.ArrayList;
 import java.util.Iterator;
 
 /**
  * Class used to format the results of the sorting algorithms
  */
 public class FormatOutput {
-    private final Comparison COMPARISON;
-    private final MengdeADT<Algorithm> ALGORITHMS;
+    private final Comparison COMPARISON; // The object used to compare the sorting of the different size of arrays
+    private final ArrayList<Algorithm> ALGORITHMS; // List of algorithms
 
-    private Algorithm titleAlgorithm;
-    private Algorithm algorithm;
-    private Algorithm findingCAlgorithm;
+    private Algorithm findingCAlgorithm; // The algorithm that was used to make the c-value
 
-    private String horizontalLine = "";
-    private String fancyLine = "";
-    private final String[] cString;
-
-    private final String MAIN_STRING_NAMES = "| %-18s | %-18s | %-18s | %-18s | %-18s | %-18s |";
-    private final String C_STRING_NAMES = "| %-18s | %-18s | %-18s | %-18s |";
-    private final String C_STRING_VALUES = "| %-18s | %-18s | %s | %s |";
+    private String horizontalLine = ""; // The horizontal line in the output
+    private String fancyLine = ""; // The fancy horizontal line in the output
+    private final String[] cString; // A string array of all the info about the c-value
 
     /**
      * Creates an FormatOutput object that creates a beautiful text output of the algorithms in the collection
@@ -29,7 +22,7 @@ public class FormatOutput {
      * @param algorithms Collection of algorithms that are finished and ready to be used
      * @param comparison A comparison object used to compute the c-values of the algorithms
      */
-    public FormatOutput(MengdeADT<Algorithm> algorithms, Comparison comparison) {
+    public FormatOutput(ArrayList<Algorithm> algorithms, Comparison comparison) {
         this.COMPARISON = comparison;
         this.ALGORITHMS = algorithms;
         getCAlgorithm();
@@ -43,13 +36,19 @@ public class FormatOutput {
      * Makes the horizontal lines in the output
      */
     private void makeLines() {
+        StringBuilder line = new StringBuilder();
+        StringBuilder fLine = new StringBuilder();
+
         for (int i = 0; i < 20; i++) {
-            horizontalLine += "-";
+             line.append("-");
 
             if (i % 2 == 0) {
-                fancyLine += "/\\";
+                fLine.append("/\\");
             }
         }
+
+        fancyLine = fLine.toString();
+        horizontalLine = line.toString();
     }
 
     /**
@@ -84,21 +83,24 @@ public class FormatOutput {
      * @return A fully formatted string which has the details of the algorithm
      */
     private String formatSingleEntryToString(Algorithm algorithm, double cValue) {
-        String leftAlign = "| %-18d | %-18d | %-18f | %-18f | %-18g | %-18b |";
-
-        String out = String.format(leftAlign, algorithm.getLengthOfArr(), algorithm.getNumOfReadings(),
+        return String.format("| %-18d | %-18d | %-18f | %-18f | %-18g | %-18b |", algorithm.getLengthOfArr(), algorithm.getNumOfReadings(),
                 (algorithm.getAvgTime()), COMPARISON.computeTheoreticalTime(cValue, algorithm), cValue,
                 algorithm.isAllSorted());
-
-        return out;
     }
 
     /**
-     * Assigns the algorithm used to find the c-value to the variable findingCAlgorithm
+     * Assigns the algorithm, the last one list of algorithms,
+     * used to find the c-value to the variable findingCAlgorithm
      */
     private void getCAlgorithm() {
-        Iterator<Algorithm> it = ALGORITHMS.oppramser();
-        findingCAlgorithm = ALGORITHMS.fjern(it.next());
+        Iterator<Algorithm> it = ALGORITHMS.iterator();
+
+        Algorithm cAlgorithm = null;
+
+        while(it.hasNext())
+            cAlgorithm = it.next();
+
+        findingCAlgorithm = ALGORITHMS.remove(cAlgorithm);
     }
 
     /**
@@ -110,14 +112,10 @@ public class FormatOutput {
      */
     private String[] buildCString(int size, Algorithm algorithm) {
 
-        double c = findC();
-
         String avgTime = String.format("%-18g", algorithm.getAvgTime());
-        String cValue = String.format("%-18g", c);
+        String cValue = String.format("%-18g", findC());
 
-        String[] findCString = {size + "", algorithm.getNumOfReadings() + "", avgTime, cValue, algorithm.getBigO()};
-
-        return findCString;
+        return new String[]{size + "", algorithm.getNumOfReadings() + "", avgTime, cValue, algorithm.getBigO()};
 
     }
 
@@ -133,6 +131,7 @@ public class FormatOutput {
 
         if (fn.equals("n^2")) {
             c = findingCAlgorithm.getAvgTime() / Math.pow(n, 2);
+
         } else if (fn.equals("nlog2n")) {
             double nlog2n = n * (Math.log(n) / Math.log(2));
             c = findingCAlgorithm.getAvgTime() / nlog2n;
@@ -148,15 +147,17 @@ public class FormatOutput {
      * Makes the header for the sorting algorithm box
      */
     private void makeHeader() {
-        titleAlgorithm = ALGORITHMS.oppramser().next();
+        Algorithm titleAlgorithm = ALGORITHMS.iterator().next();
 
         System.out.format("+%-18s+%n", horizontalLine);
         System.out.format("| %-18s |%n", titleAlgorithm.getName());
 
         completeLineForSort(horizontalLine);
 
+        String MAIN_STRING_NAMES = "| %-18s | %-18s | %-18s | %-18s | %-18s | %-18s |";
+
         System.out.format(MAIN_STRING_NAMES + "%n", "n", "Readings", "Average Time", "Theoretical Time", "c",
-                "All arryas sorted");
+                "All arrays sorted");
 
         System.out.format(MAIN_STRING_NAMES + "%n", "", "", "in ms", "in ms (c*" + titleAlgorithm.getBigO() + ")", "", "");
 
@@ -170,10 +171,10 @@ public class FormatOutput {
      * @param cValue The c-value of the algorithm
      */
     private void makeBody(double cValue) {
-        Iterator<Algorithm> it = ALGORITHMS.oppramser();
+        Iterator<Algorithm> it = ALGORITHMS.iterator();
 
         while (it.hasNext()) {
-            algorithm = it.next();
+            Algorithm algorithm = it.next();
             System.out.format(formatSingleEntryToString(algorithm, cValue) + "%n");
         }
 
@@ -192,13 +193,14 @@ public class FormatOutput {
 
         completeLineForCBox(horizontalLine);
 
-        System.out.format(C_STRING_NAMES + "%n", "n", "Readings", "Average Time", "c");
-        System.out.format(C_STRING_NAMES + "%n", "", "", "in ms", "AvgTime/" + cString[4]);
+        String c_STRING_NAMES = "| %-18s | %-18s | %-18s | %-18s |";
 
+        System.out.format(c_STRING_NAMES + "%n", "n", "Readings", "Average Time", "c");
+        System.out.format(c_STRING_NAMES + "%n", "", "", "in ms", "AvgTime/" + cString[4]);
 
         completeLineForCBox(horizontalLine);
 
-        System.out.format(C_STRING_VALUES + "%n", cString[0], cString[1], cString[2], cString[3]);
+        System.out.format("| %-18s | %-18s | %s | %s |" + "%n", cString[0], cString[1], cString[2], cString[3]);
 
         completeLineForCBox(horizontalLine);
 

@@ -1,11 +1,9 @@
 package comparison;
 
-import adt.MengdeADT;
 import adt.SortingAlgorithmADT;
 import algorithms.*;
-import arraylist.TabellMengde;
-
-import java.util.Iterator;
+import arraylist.ArrayIterator;
+import arraylist.ArrayList;
 import java.util.Random;
 
 /**
@@ -14,88 +12,88 @@ import java.util.Random;
  * @author Sebastian
  */
 public class Comparison {
-    private MengdeADT<Algorithm> algorithmResult;
-    private int amount;
-    private static final int STANDARD_SIZE = 20;
-    private static final int STANDARD_SEED = 1337;
+    private ArrayList<Algorithm> algorithmResult;
     private final int AMOUNT_OF_RUNS;
     private final long SEED;
 
+    /**
+     * Creates a comparison object with the amount of runs the algorithms are to be run
+     * and the seed to be used in the random generator
+     *
+     * @param amountOfRuns The amount of sorting runs for each algorithm
+     * @param seed The seed which is to be used in the random generator
+     */
     public Comparison(int amountOfRuns, long seed) {
         AMOUNT_OF_RUNS = amountOfRuns;
         SEED = seed;
     }
 
-    public Comparison() {
-        this(STANDARD_SIZE, STANDARD_SEED);
-    }
-
     /**
      * Decides which algorithm
      *
-     * @param algorihtmName The name of the algorithm that is to be used
+     * @param algorithmName The name of the algorithm that is to be used
      * @param sizes         Array of the sizes that is being used to make the arrays which is being sorted
      */
-    public void decideWhichAlgorithm(String algorihtmName, int[] sizes) {
+    public void decideWhichAlgorithm(String algorithmName, int[] sizes) {
         Integer[][] allArrays = makeArrays(sizes);
-        algorithmResult = new TabellMengde<>();
-        amount = 0;
+        algorithmResult = new ArrayList<>();
 
-        if (algorihtmName.equals("bubblesort")) {
+        switch (algorithmName) {
+            case "bubblesort":
 
-            for (int i = 0; i < sizes.length; i++) {
-                algorithmResult
-                        .leggTil(new Algorithm("BubbleSort", "n^2", new BubbleSort(allArrays[i]), allArrays[i].length));
-                amount++;
-            }
-        } else if (algorihtmName.equals("insertionsort")) {
+                for (int i = 0; i < sizes.length; i++) {
+                    algorithmResult
+                            .add(new Algorithm("BubbleSort", "n^2", new BubbleSort(allArrays[i]), allArrays[i].length));
+                }
+                break;
+            case "insertionsort":
 
-            for (int i = 0; i < sizes.length; i++) {
-                algorithmResult.leggTil(
-                        new Algorithm("InsertionSort", "n^2", new InsertionSort(allArrays[i]), allArrays[i].length));
-                amount++;
-            }
+                for (int i = 0; i < sizes.length; i++) {
+                    algorithmResult.add(
+                            new Algorithm("InsertionSort", "n^2", new InsertionSort(allArrays[i]), allArrays[i].length));
+                }
 
-        } else if (algorihtmName.equals("selectionsort")) {
+                break;
+            case "selectionsort":
 
-            for (int i = 0; i < sizes.length; i++) {
-                algorithmResult.leggTil(
-                        new Algorithm("SelectionSort", "n^2", new SelectionSort(allArrays[i]), allArrays[i].length));
-                amount++;
-            }
+                for (int i = 0; i < sizes.length; i++) {
+                    algorithmResult.add(
+                            new Algorithm("SelectionSort", "n^2", new SelectionSort(allArrays[i]), allArrays[i].length));
+                }
 
-        } else if (algorihtmName.equals("quicksort")) {
+                break;
+            case "quicksort":
 
-            for (int i = 0; i < sizes.length; i++) {
-                algorithmResult.leggTil(
-                        new Algorithm("QuickSort", "nlog2n", new QuickSort(allArrays[i]), allArrays[i].length));
-                amount++;
-            }
+                for (int i = 0; i < sizes.length; i++) {
+                    algorithmResult.add(
+                            new Algorithm("QuickSort", "nlog2n", new QuickSort(allArrays[i]), allArrays[i].length));
+                }
 
-        } else if (algorihtmName.equals("mergesort")) {
+                break;
+            case "mergesort":
 
-            for (int i = 0; i < sizes.length; i++) {
-                algorithmResult.leggTil(
-                        new Algorithm("MergeSort", "nlog2n", new MergeSort(allArrays[i]), allArrays[i].length));
-                amount++;
-            }
+                for (int i = 0; i < sizes.length; i++) {
+                    algorithmResult.add(
+                            new Algorithm("MergeSort", "nlog2n", new MergeSort(allArrays[i]), allArrays[i].length));
+                }
 
-        } else if (algorihtmName.equals("insertionquicksort")) {
+                break;
+            case "insertionquicksort":
 
-            for (int i = 0; i < sizes.length; i++) {
-                algorithmResult.leggTil(new Algorithm("InsertionQuickSort", "nlog2n",
-                        new InsertionQuickSort(allArrays[i], 30), allArrays[i].length));
-                amount++;
-            }
+                for (int i = 0; i < sizes.length; i++) {
+                    algorithmResult.add(new Algorithm("InsertionQuickSort", "nlog2n",
+                            new InsertionQuickSort(allArrays[i], 30), allArrays[i].length));
+                }
 
-        } else {
+                break;
+            default:
 
-            for (int i = 0; i < sizes.length; i++) {
-                algorithmResult.leggTil(
-                        new Algorithm("RadixSort", "kn", new RadixSort(allArrays[i], 10), allArrays[i].length));
-                amount++;
-            }
+                for (int i = 0; i < sizes.length; i++) {
+                    algorithmResult.add(
+                            new Algorithm("RadixSort", "kn", new RadixSort(allArrays[i]), allArrays[i].length));
+                }
 
+                break;
         }
     }
 
@@ -104,8 +102,8 @@ public class Comparison {
      *
      * @return A list of Algorithms where all the arrays are sorted
      */
-    public MengdeADT<Algorithm> executeSorting() {
-        Iterator<Algorithm> it = algorithmResult.oppramser();
+    public ArrayList<Algorithm> executeSorting() {
+        ArrayIterator<Algorithm> it = algorithmResult.iterator();
 
         Integer[] arr;
         double timeStart, time;
@@ -186,14 +184,5 @@ public class Comparison {
         }
 
         return true;
-    }
-
-    /**
-     * Gets the amount of algorithms in the list
-     *
-     * @return The amount of algorithms
-     */
-    public int getAmount() {
-        return amount;
     }
 }

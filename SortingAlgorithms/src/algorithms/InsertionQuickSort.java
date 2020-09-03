@@ -14,9 +14,7 @@ public class InsertionQuickSort implements SortingAlgorithmADT {
     }
 
     public void makeTestArray() {
-        for (int i = 0; i < array.length; i++) {
-            testArr[i] = array[i];
-        }
+        System.arraycopy(array, 0, testArr, 0, array.length);
     }
 
     public Integer[] sort() {
@@ -64,15 +62,7 @@ public class InsertionQuickSort implements SortingAlgorithmADT {
 
     public void insertionSort(Integer[] array, int min, int max) {
         for (int i = min + 1; i < max; i++) {
-            Integer nextValue = array[i];
-            int pos = i;
-
-            while (pos > 0 && nextValue.compareTo(testArr[pos - 1]) < 0) {
-                array[pos] = array[pos - 1];
-                pos--;
-            }
-
-            array[pos] = nextValue;
+            InsertionSort.sortLoop(i, array, testArr);
         }
     }
 }

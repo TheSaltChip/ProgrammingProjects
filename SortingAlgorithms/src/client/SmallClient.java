@@ -5,7 +5,6 @@ import algorithms.*;
 import java.util.Random;
 
 public class SmallClient {
-    private static Integer[] arr;
 
     private static void displayArray(Integer[] arr) {
         for (Integer i : arr) {
@@ -30,7 +29,7 @@ public class SmallClient {
 
         // BubbleSort
         System.out.println("BubbleSort");
-        arr = getNewArray();
+        Integer[] arr = getNewArray();
         displayArray(arr);
 
         BubbleSort bs = new BubbleSort(arr);
@@ -88,7 +87,7 @@ public class SmallClient {
         arr = getNewArray();
         displayArray(arr);
 
-        RadixSort rs = new RadixSort(arr, 10);
+        RadixSort rs = new RadixSort(arr);
         rs.makeTestArray();
         displayArray(rs.sort());
 

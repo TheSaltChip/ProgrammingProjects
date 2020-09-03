@@ -9,20 +9,13 @@ public class Display {
     private int[] sizes;
 
     /**
-     * Constructs a Dispaly object with the amount of runs wanted and with what seed is wanted for the random seed
+     * Constructs a Display object with the amount of runs wanted and with what seed is wanted for the random seed
      *
      * @param amountOfRuns The amount of sorting runs wanted for each algorithm
      * @param seed         The seed used for the random generator
      */
     public Display(int amountOfRuns, long seed) {
         COMPARISON = new Comparison(amountOfRuns, seed);
-    }
-
-    /**
-     * Constructs a display object with a standard comparison object
-     */
-    public Display() {
-        COMPARISON = new Comparison();
     }
 
     /**
@@ -36,7 +29,7 @@ public class Display {
     }
 
     /**
-     * Runs everything
+     * This method starts everything in the program
      *
      * @param whichAlgorithm Which algorithm to be used
      * @param sizes          The sizes of the arrays that are to be sorted
@@ -49,9 +42,7 @@ public class Display {
 
         arr[arr.length - 1] = testSize;
 
-        for (int i = 0; i < arr.length - 1; i++) {
-            arr[i] = sizes[i];
-        }
+        System.arraycopy(sizes, 0, arr, 0, arr.length - 1);
 
         this.sizes = arr;
 

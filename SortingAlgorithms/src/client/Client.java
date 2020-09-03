@@ -4,16 +4,19 @@ import comparison.Display;
 
 import java.time.LocalTime;
 
+/**
+ * The client for the program, which controls what sorting algorithms to use, the size of the arrays
+ * and the size of the test array
+ */
 public class Client {
 
     @SuppressWarnings("unused")
     public static void main(String[] args) {
-        //50 er hvor mange ganger hver algoritme skal sortere den samme listen, de blir tilfedige hver gang
-        //1337 er seed til random-generatoren
-        Display display = new Display(50, 1337);
 
-        int[] sizes = {16000, 32000, 20000, 500000};
-        int testSize = 16000;
+        Display display = new Display(5, 1337);
+
+        int[] sizes = {5_000_00, 2_500_00, 1_250_00};
+        int testSize = 2_000_00;
 
         LocalTime start = LocalTime.now();
 
@@ -23,7 +26,7 @@ public class Client {
 //		
 //		display.run("insertionsort", sizes, testSize);
 //		
-//   	display.run("mergesort", sizes, testSize);
+   	    display.run("mergesort", sizes, testSize);
 //		
 //		display.run("radixsort", sizes, testSize);
 //		

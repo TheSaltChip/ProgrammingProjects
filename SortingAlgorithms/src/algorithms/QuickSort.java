@@ -12,9 +12,7 @@ public class QuickSort implements SortingAlgorithmADT {
     }
 
     public void makeTestArray() {
-        for (int i = 0; i < array.length; i++) {
-            testArr[i] = array[i];
-        }
+        System.arraycopy(array, 0, testArr, 0, array.length);
     }
 
     public Integer[] sort() {
