@@ -20,6 +20,7 @@ public class BubbleSort implements SortingAlgorithmADT {
 
         for (int i = 0; i < testArr.length - 1; i++) {
             swapped = false;
+
             for (int j = 0; j < testArr.length - i - 1; j++) {
                 if (testArr[j].compareTo(testArr[j + 1]) > 0) {
                     Integer temp = testArr[j];

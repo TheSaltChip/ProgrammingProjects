@@ -5,6 +5,9 @@ import algorithms.*;
 import arraylist.ArrayIterator;
 import arraylist.ArrayList;
 import java.util.Random;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Comparison class that is used to sort different sizes of arrays with a sorting algorithm
@@ -108,9 +111,12 @@ public class Comparison {
         Integer[] arr;
         double timeStart, time;
 
+        ExecutorService es = Executors.newCachedThreadPool();
+
         while (it.hasNext()) {
             Algorithm algorithm = it.next();
             SortingAlgorithmADT sortingAlg = algorithm.getAlgorithm();
+
 
             for (int i = 0; i < AMOUNT_OF_RUNS; i++) {
                 sortingAlg.makeTestArray();
@@ -176,7 +182,7 @@ public class Comparison {
      * @param arr The array that is being checked
      * @return Returns true if the array is sorted in ascending order
      */
-    private boolean isSorted(Integer[] arr) {
+    public boolean isSorted(Integer[] arr) {
         for (int i = 0; i < arr.length - 1; i++) {
             if (arr[i] > arr[i + 1]) {
                 return false;

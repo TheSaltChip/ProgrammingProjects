@@ -11,7 +11,7 @@ public class MergeSort implements SortingAlgorithmADT {
         testArr = new Integer[array.length];
     }
 
-    public void makeTestArray() {
+    public synchronized void makeTestArray() {
         System.arraycopy(array, 0, testArr, 0, array.length);
     }
 
