@@ -3,28 +3,30 @@ package comparison;
 import adt.SortingAlgorithmADT;
 
 public class AlgorithmThread implements Runnable {
-    private SortingAlgorithmADT sAlg;
-    private Integer[] arr;
-    private double timeStart, time;
-    private Algorithm alg;
-    private Comparison c;
+    private final Comparison C;
+    private final int AMOUNT_OF_RUNS;
+    private final Algorithm ALG;
 
 
-    public AlgorithmThread(SortingAlgorithmADT sAlg, Algorithm alg, Comparison c){
-        this.sAlg = sAlg;
-        this.alg = alg;
-        this.c = c;
+    public AlgorithmThread(Algorithm alg, Comparison c, int aor) {
+        this.C = c;
+        this.AMOUNT_OF_RUNS = aor;
+        this.ALG = alg;
     }
 
     @Override
     public void run() {
-        sAlg.makeTestArray();
+        SortingAlgorithmADT sortingAlg = ALG.getAlgorithm();
 
-        timeStart = System.nanoTime();
-        arr = sAlg.sort();
-        time = (System.nanoTime() - timeStart) / 1000000.0;
+        for (int i = 0; i < AMOUNT_OF_RUNS; i++) {
+            sortingAlg.makeTestArray();
 
-        alg.addTime(time);
-        alg.addSortedStatus(c.isSorted(arr));
+            double timeStart = System.nanoTime();
+            Integer[] arr = sortingAlg.sort();
+            double time = (System.nanoTime() - timeStart) / 1000000.0;
+
+            ALG.addTime(time);
+            ALG.addSortedStatus(C.isSorted(arr));
+        }
     }
 }

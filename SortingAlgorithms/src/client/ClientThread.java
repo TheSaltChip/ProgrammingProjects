@@ -17,8 +17,8 @@ public class ClientThread {
 //
 //		run("insertionsort");
 //
-//        Thread m = new ClientThreadTest("mergesort");
-//        m.start();
+        Thread m = new ClientThreadTest("mergesort");
+        m.start();
 //
 //		display.run("radixsort");
 //

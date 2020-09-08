@@ -108,26 +108,23 @@ public class Comparison {
     public ArrayList<Algorithm> executeSorting() {
         ArrayIterator<Algorithm> it = algorithmResult.iterator();
 
-        Integer[] arr;
-        double timeStart, time;
+        //Integer[] arr;
+        //double timeStart, time;
 
         ExecutorService es = Executors.newCachedThreadPool();
 
         while (it.hasNext()) {
-            Algorithm algorithm = it.next();
-            SortingAlgorithmADT sortingAlg = algorithm.getAlgorithm();
+            es.execute(new AlgorithmThread(it.next(), this, AMOUNT_OF_RUNS));
+        }
 
+        es.shutdown();
 
-            for (int i = 0; i < AMOUNT_OF_RUNS; i++) {
-                sortingAlg.makeTestArray();
-
-                timeStart = System.nanoTime();
-                arr = sortingAlg.sort();
-                time = (System.nanoTime() - timeStart) / 1000000.0;
-
-                algorithm.addTime(time);
-                algorithm.addSortedStatus(isSorted(arr));
+        while(true){
+            try {
+                if (es.awaitTermination(10,TimeUnit.HOURS)) break;
+            } catch (InterruptedException ignored) {
             }
+
         }
 
         return algorithmResult;
@@ -182,7 +179,7 @@ public class Comparison {
      * @param arr The array that is being checked
      * @return Returns true if the array is sorted in ascending order
      */
-    public boolean isSorted(Integer[] arr) {
+    public synchronized boolean isSorted(Integer[] arr) {
         for (int i = 0; i < arr.length - 1; i++) {
             if (arr[i] > arr[i + 1]) {
                 return false;

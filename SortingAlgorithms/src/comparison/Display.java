@@ -25,7 +25,6 @@ public class Display {
         COMPARISON.decideWhichAlgorithm(whichAlgorithm, sizes);
         FormatOutput fo = new FormatOutput(COMPARISON.executeSorting(), COMPARISON);
         fo.run();
-
     }
 
     /**

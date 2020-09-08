@@ -210,7 +210,7 @@ public class FormatOutput {
     /**
      * Runs every method, and creates the output
      */
-    public void run() {
+    public synchronized void run() {
         makeHeader();
         makeBody(findC());
         makeCBox();

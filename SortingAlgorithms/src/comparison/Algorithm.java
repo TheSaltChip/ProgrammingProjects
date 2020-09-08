@@ -51,7 +51,7 @@ public class Algorithm {
      *
      * @param time The time taken to sort
      */
-    public void addTime(double time) {
+    public synchronized void addTime(double time) {
         TIMES.add(time);
         incrementReadings();
     }
@@ -61,7 +61,7 @@ public class Algorithm {
      *
      * @param isSorted Boolean value that describes if the array is sorted
      */
-    public void addSortedStatus(boolean isSorted) {
+    public synchronized void addSortedStatus(boolean isSorted) {
         if (sortedStatus && !isSorted) {
             sortedStatus = false;
         }

@@ -3,25 +3,25 @@ package algorithms;
 import adt.SortingAlgorithmADT;
 
 public class InsertionQuickSort implements SortingAlgorithmADT {
-    private final Integer[] array;
-    private final Integer[] testArr;
+    private final Integer[] ARRAY;
+    private final Integer[] TEST_ARR;
     private final int MIN;
 
     public InsertionQuickSort(Integer[] array, int min) {
-        this.array = array;
-        testArr = new Integer[array.length];
+        this.ARRAY = array;
+        TEST_ARR = new Integer[array.length];
         MIN = min;
     }
 
     public void makeTestArray() {
-        System.arraycopy(array, 0, testArr, 0, array.length);
+        System.arraycopy(ARRAY, 0, TEST_ARR, 0, ARRAY.length);
     }
 
     public Integer[] sort() {
-        quickSort(testArr, 0, testArr.length - 1);
-        insertionSort(testArr, 0, testArr.length);
+        quickSort(TEST_ARR, 0, TEST_ARR.length - 1);
+        insertionSort(TEST_ARR, 0, TEST_ARR.length);
 
-        return testArr;
+        return TEST_ARR;
     }
 
     private void quickSort(Integer[] arr, int left, int right) {
@@ -62,7 +62,7 @@ public class InsertionQuickSort implements SortingAlgorithmADT {
 
     public void insertionSort(Integer[] array, int min, int max) {
         for (int i = min + 1; i < max; i++) {
-            InsertionSort.sortLoop(i, array, testArr);
+            InsertionSort.sortLoop(i, array, TEST_ARR);
         }
     }
 }
