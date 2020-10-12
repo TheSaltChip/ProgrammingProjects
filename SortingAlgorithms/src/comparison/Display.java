@@ -1,5 +1,7 @@
 package comparison;
 
+import java.util.Random;
+
 /**
  * Class used to display the results of the comparison
  */

@@ -3,6 +3,7 @@ package client;
 import comparison.Display;
 
 import java.time.LocalTime;
+import java.util.Random;
 
 /**
  * The client for the program, which controls what sorting algorithms to use, the size of the arrays
@@ -10,29 +11,36 @@ import java.time.LocalTime;
  */
 public class Client {
 
-    @SuppressWarnings("unused")
+    private static final Display DISPLAY = new Display(100, new Random().nextInt(10000000));
+
+    private static void run(String s) {
+
+        int[] sizes = {500000, 200000, 100000};
+        int testSize = 200000;
+        DISPLAY.run(s, sizes, testSize);
+    }
+
     public static void main(String[] args) {
-
-        Display display = new Display(10, 1337);
-
-        int[] sizes = {1_000_000,1_000_000,1_000_000,1_000_000,1_000_000,1_000_000,1_000_000};
-        int testSize = 10_000;
 
         LocalTime start = LocalTime.now();
 
-        display.run("quicksort", sizes, testSize);
+        run("stalinsort");
 
-		display.run("insertionquicksort", sizes, testSize);
+        run("danielsstalinsort");
 
-        //display.run("insertionsort", sizes, testSize);
-
-      	//display.run("mergesort", sizes, testSize);
-
-        //display.run("radixsort", sizes, testSize);
-
-        //display.run("bubblesort", sizes, testSize);
-
-        //display.run("selectionsort", sizes, testSize);
+        //run("quicksort");
+//	
+//		run("insertionquicksort");
+//		
+//		run("insertionsort");
+//		
+//    	run("mergesort");
+//		
+//		run("radixsort");
+//		
+//		run("bubblesort");
+//		
+//		run("selectionsort");
 
         LocalTime end = LocalTime.now();
 

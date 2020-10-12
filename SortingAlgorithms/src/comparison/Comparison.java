@@ -4,6 +4,7 @@ import adt.SortingAlgorithmADT;
 import algorithms.*;
 import arraylist.ArrayIterator;
 import arraylist.ArrayList;
+
 import java.util.Random;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -24,7 +25,7 @@ public class Comparison {
      * and the seed to be used in the random generator
      *
      * @param amountOfRuns The amount of sorting runs for each algorithm
-     * @param seed The seed which is to be used in the random generator
+     * @param seed         The seed which is to be used in the random generator
      */
     public Comparison(int amountOfRuns, long seed) {
         AMOUNT_OF_RUNS = amountOfRuns;
@@ -89,6 +90,20 @@ public class Comparison {
                 }
 
                 break;
+            case "stalinsort":
+                for (int i = 0; i < sizes.length; i++) {
+                    algorithmResult.add(new Algorithm("StalinSort", "n",
+                            new StalinSort(allArrays[i]), allArrays[i].length));
+                }
+
+                break;
+            case "danielsstalinsort":
+                for (int i = 0; i < sizes.length; i++) {
+                    algorithmResult.add(new Algorithm("DanielsStalinSort", "n",
+                            new DanielsStalinSort(allArrays[i]), allArrays[i].length));
+                }
+
+                break;
             default:
 
                 for (int i = 0; i < sizes.length; i++) {
@@ -121,7 +136,7 @@ public class Comparison {
 
         while(true){
             try {
-                if (es.awaitTermination(10,TimeUnit.HOURS)) break;
+                if (es.awaitTermination(10, TimeUnit.HOURS)) break;
             } catch (InterruptedException ignored) {
             }
 

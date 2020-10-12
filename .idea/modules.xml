@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/ProgrammingProjects.iml" filepath="$PROJECT_DIR$/ProgrammingProjects.iml" />
+      <module fileurl="file://$PROJECT_DIR$/DiscordBots/DiscordBots.iml" filepath="$PROJECT_DIR$/DiscordBots/DiscordBots.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SortingAlgorithms/SortingAlgorithms.iml" filepath="$PROJECT_DIR$/SortingAlgorithms/SortingAlgorithms.iml" />
     </modules>
   </component>
 </project>
