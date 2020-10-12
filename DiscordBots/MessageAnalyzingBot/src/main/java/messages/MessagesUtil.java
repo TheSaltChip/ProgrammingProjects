@@ -31,6 +31,6 @@ public class MessagesUtil {
 
     public int countMessages(User user) {
         List<Message> m = getMessages(user);
-        return m != null ? getMessages(user).size() : 0;
+        return m != null ? m.size() : 0;
     }
 }

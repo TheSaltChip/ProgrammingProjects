@@ -22,26 +22,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="84a8f823-b9ed-4463-9c6f-50aae681b48d" name="Default Changelist" comment="Changed directories for better overview">
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.name" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FirstBot.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/BotTokens/DiscordBot/token.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Bot.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/GetMessageCount.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/WriteMessages.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/messages/MessagesUtil.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Bot.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/commands/GetMessageCount.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/commands/WriteMessages.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/messages/MessagesUtil.class" beforeDir="false" />
-    </list>
+    <list default="true" id="84a8f823-b9ed-4463-9c6f-50aae681b48d" name="Default Changelist" comment="Changed directories for better overview" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -114,6 +95,7 @@
       <workItem from="1602507188048" duration="449000" />
       <workItem from="1602507693021" duration="18000" />
       <workItem from="1602507721984" duration="162000" />
+      <workItem from="1602516150124" duration="6000" />
     </task>
     <task id="LOCAL−00001" summary="My First Discord Bot&#10;So far it counts the number of messages sent by a given user in the text channel where the command was written and writes n-amount of messages with a writeMessages command">
       <created>1602462525011</created>
