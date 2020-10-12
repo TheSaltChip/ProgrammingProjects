@@ -10,7 +10,7 @@ import java.util.Scanner;
 
 public class Bot {
     public static void main(String[] args) throws IOException {
-        String token = new Scanner(new File("src\\BotTokens\\DiscordBot\\token.txt")).nextLine();
+        String token = new Scanner(new File("src\\BotTokens\\MAB.txt")).nextLine();
         JDABuilder jdaBuilder = JDABuilder.createDefault(token);
         JDA jda;
 
