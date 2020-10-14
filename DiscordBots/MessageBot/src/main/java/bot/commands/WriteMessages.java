@@ -1,6 +1,6 @@
-package commands;
+package bot.commands;
 
-import messages.MessagesUtil;
+import bot.messages.MessagesUtil;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
