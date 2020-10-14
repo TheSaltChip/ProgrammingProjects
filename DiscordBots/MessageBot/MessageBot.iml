@@ -6,6 +6,7 @@
         <setting name="validation-enabled" value="true" />
         <datasource-mapping>
           <factory-entry name="default" />
+          <factory-entry name="discordBotPU" value="2d9d0854-904d-43e6-9278-bdd6fe6ba9c5" />
         </datasource-mapping>
         <naming-strategy-map />
         <deploymentDescriptor name="persistence.xml" url="file://$MODULE_DIR$/src/main/resources/META-INF/persistence.xml" />
