@@ -1,5 +1,5 @@
-import commands.GetMessageCount;
-import commands.WriteMessages;
+import bot.commands.GetMessageCount;
+import bot.commands.WriteMessages;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 

@@ -1,4 +1,4 @@
-package messages;
+package bot.messages;
 
 import net.dv8tion.jda.api.entities.*;
 

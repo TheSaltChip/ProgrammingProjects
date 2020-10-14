@@ -1,6 +1,6 @@
-package commands;
+package bot.commands;
 
-import messages.MessagesUtil;
+import bot.messages.MessagesUtil;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.TextChannel;
@@ -41,7 +41,7 @@ public class GetMessageCount extends ListenerAdapter {
             if (member != null) {
                 int numOfMsg = messagesUtil.countMessages(member.getUser());
 
-                channel.sendMessage(member.getEffectiveName() + " has sent " + numOfMsg + " messages").queue();
+                channel.sendMessage(member.getEffectiveName() + " has sent " + numOfMsg + "bot/messages").queue();
             } else
                 channel.sendMessage("User not found").queue();
         }
