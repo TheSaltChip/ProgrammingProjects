@@ -1,17 +1,9 @@
-import database.DAO.MessageDAO;
-import database.objects.MessageDB;
-
-import javax.ejb.EJB;
-import java.util.List;
-
 public class Main {
-    @EJB
-    private static MessageDAO dao = new MessageDAO();
 
     public static void main(String[] args) {
-        List<MessageDB> m = dao.getAllMessages();
+        Test test = new Test();
 
-        System.out.println(m);
+        test.main();
     }
 
 }
