@@ -59,4 +59,15 @@ public class MessageDAO {
                 .getResultList();
     }
 
+    /**
+     * Inserts a list of messages to the database
+     * All the messages must have the author already in the database,
+     * since the message entity is dependent on it
+     *
+     * @param messages The list of messages that are going to be added
+     */
+    public void insertMessages(List<MessageDB>  messages){
+        messages.forEach(m -> em.persist(m));
+    }
+
 }

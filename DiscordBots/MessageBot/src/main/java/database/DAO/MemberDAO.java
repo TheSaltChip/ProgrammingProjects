@@ -57,4 +57,13 @@ public class MemberDAO {
                 .setParameter("discriminator", discriminator)
                 .getSingleResult();
     }
+
+    /**
+     * Inserts a list of members into the database
+     *
+     * @param members The list of members that are going to be added
+     */
+    public void insertMembers(List<MemberDB> members){
+        members.forEach(m -> em.persist(m));
+    }
 }
