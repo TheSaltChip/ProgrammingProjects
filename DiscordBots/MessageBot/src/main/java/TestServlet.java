@@ -14,10 +14,12 @@ public class TestServlet extends HttpServlet {
     private MessageDAO dao = new MessageDAO();
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) {
         List<MessageDB> m = dao.getAllMessages();
 
         System.out.println(m);
+
+        System.out.println(dao.getMessageById("1912992"));
     }
 }
 
