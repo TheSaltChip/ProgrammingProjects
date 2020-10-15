@@ -37,4 +37,9 @@ public class MessageDB {
     public void setMsg_content(String msg_content) {
         this.msg_content = msg_content;
     }
+
+    @Override
+    public String toString(){
+        return "\n{message_id:" + message_id + "\nauthor:" + author + "\nmessage_content:" + msg_content + "}\n";
+    }
 }

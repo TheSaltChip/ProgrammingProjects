@@ -56,5 +56,10 @@ public class MemberDB {
         this.nickname = nickname;
     }
 
+    @Override
+    public String toString(){
+        return ("(user_id:" + user_id + ";username:" + username + ";discriminator:" + discriminator + ";nickname:" + nickname + ")");
+    }
+
 
 }
