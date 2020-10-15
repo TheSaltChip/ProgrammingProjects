@@ -14,7 +14,6 @@ public class MemberDB {
     private String nickname;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public int getUser_id() {
         return user_id;
     }

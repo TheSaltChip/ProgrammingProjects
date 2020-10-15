@@ -1,5 +1,7 @@
 package database.objects;
 
+import net.dv8tion.jda.api.entities.Message;
+
 import javax.persistence.*;
 
 @Entity
@@ -11,7 +13,6 @@ public class MessageDB {
     private String msg_content;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public int getMessage_id() {
         return message_id;
     }
