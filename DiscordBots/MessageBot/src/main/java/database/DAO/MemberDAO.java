@@ -66,4 +66,31 @@ public class MemberDAO {
     public void insertMembers(List<MemberDB> members){
         members.forEach(m -> em.persist(m));
     }
+
+
+    /**
+     * Checks if the user given by the id exists in the database
+     *
+     * @param id The id of the user
+     * @return True if the user exists, false if not
+     */
+    public boolean checkIfUserExistsId(int id){
+        MemberDB m = em.find(MemberDB.class, id);
+        return m != null;
+    }
+
+    /**
+     * Checks if a user with the given username and discord tag exists in the database
+     *
+     * @param username The username of the user
+     * @param discriminator The discord tag of the user, example #1234
+     * @return
+     */
+    public boolean checkIfUserExistsUsernameDisc(String username, String discriminator){
+        MemberDB m = em.createQuery("select m from MemberDB m where m.discriminator = :discriminator and m.username = :username", MemberDB.class)
+                .setParameter("discriminator", discriminator)
+                .setParameter("username", username).getSingleResult();
+
+        return m != null;
+    }
 }
