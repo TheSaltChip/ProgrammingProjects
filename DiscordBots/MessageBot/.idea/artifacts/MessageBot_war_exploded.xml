@@ -14,6 +14,7 @@
           <element id="module-output" name="MessageBot" />
         </element>
         <element id="directory" name="lib">
+          <element id="library" level="project" name="Maven: javax.persistence:javax.persistence-api:2.2" />
           <element id="library" level="project" name="Maven: net.dv8tion:JDA:4.2.0_209" />
           <element id="library" level="project" name="Maven: com.google.code.findbugs:jsr305:3.0.2" />
           <element id="library" level="project" name="Maven: org.jetbrains:annotations:16.0.1" />
