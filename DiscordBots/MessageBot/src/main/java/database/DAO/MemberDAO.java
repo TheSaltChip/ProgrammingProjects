@@ -2,10 +2,12 @@ package database.DAO;
 
 import database.objects.MemberDB;
 
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
 
+@Stateless
 public class MemberDAO {
     @PersistenceContext(name = "DiscordBotPU")
     private EntityManager em;
@@ -26,7 +28,7 @@ public class MemberDAO {
      * @param id The id that is to be search for
      * @return The member with the id if it exists
      */
-    public MemberDB findMemberById(int id){
+    public MemberDB findMemberById(String id){
         return em.find(MemberDB.class, id);
     }
 
@@ -67,6 +69,10 @@ public class MemberDAO {
         members.forEach(m -> em.persist(m));
     }
 
+    public void insertMember(MemberDB member){
+        em.persist(member);
+    }
+
 
     /**
      * Checks if the user given by the id exists in the database
@@ -74,9 +80,8 @@ public class MemberDAO {
      * @param id The id of the user
      * @return True if the user exists, false if not
      */
-    public boolean checkIfUserExistsId(int id){
-        MemberDB m = em.find(MemberDB.class, id);
-        return m != null;
+    public boolean checkIfUserExistsId(String id){
+        return findMemberById(id) != null;
     }
 
     /**
@@ -87,10 +92,6 @@ public class MemberDAO {
      * @return True if the user exists, false if not
      */
     public boolean checkIfUserExistsUsernameDisc(String username, String discriminator){
-        MemberDB m = em.createQuery("select m from MemberDB m where m.discriminator = :discriminator and m.username = :username", MemberDB.class)
-                .setParameter("discriminator", discriminator)
-                .setParameter("username", username).getSingleResult();
-
-        return m != null;
+        return getMemberWithUsernameDisc(username, discriminator) != null;
     }
 }
