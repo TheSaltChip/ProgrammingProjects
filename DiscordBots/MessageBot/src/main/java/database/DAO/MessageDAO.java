@@ -36,12 +36,12 @@ public class MessageDAO {
     }
 
     /**
-     * Attemps to find a message with the given id
+     * Attempts to find a message with the given id
      *
      * @param id The id of the message you want
      * @return The message with the given id if it exists
      */
-    public MessageDB getMessageById(int id) {
+    public MessageDB getMessageById(String id) {
         return em.find(MessageDB.class, id);
     }
 
@@ -66,8 +66,12 @@ public class MessageDAO {
      *
      * @param messages The list of messages that are going to be added
      */
-    public void insertMessages(List<MessageDB>  messages){
+    public void insertMessages(List<MessageDB> messages) {
         messages.forEach(m -> em.persist(m));
+    }
+
+    public boolean checkIfMessageExists(String id) {
+        return getMessageById(id) != null;
     }
 
 }
