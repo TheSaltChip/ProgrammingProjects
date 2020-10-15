@@ -84,7 +84,7 @@ public class MemberDAO {
      *
      * @param username The username of the user
      * @param discriminator The discord tag of the user, example #1234
-     * @return
+     * @return True if the user exists, false if not
      */
     public boolean checkIfUserExistsUsernameDisc(String username, String discriminator){
         MemberDB m = em.createQuery("select m from MemberDB m where m.discriminator = :discriminator and m.username = :username", MemberDB.class)
