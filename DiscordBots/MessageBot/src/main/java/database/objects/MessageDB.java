@@ -1,23 +1,21 @@
 package database.objects;
 
-import net.dv8tion.jda.api.entities.Message;
-
 import javax.persistence.*;
 
 @Entity
 @Table(name = "message", schema = "guild")
 public class MessageDB {
 
-    private int message_id;
+    private String message_id;
     private MemberDB author;
     private String msg_content;
 
     @Id
-    public int getMessage_id() {
+    public String getMessage_id() {
         return message_id;
     }
 
-    public void setMessage_id(int message_id) {
+    public void setMessage_id(String message_id) {
         this.message_id = message_id;
     }
 
@@ -40,7 +38,7 @@ public class MessageDB {
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return "\n{message_id:" + message_id + "\nauthor:" + author + "\nmessage_content:" + msg_content + "}\n";
     }
 }
