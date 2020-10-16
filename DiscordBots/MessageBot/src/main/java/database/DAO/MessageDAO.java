@@ -2,18 +2,15 @@ package database.DAO;
 
 import database.objects.MessageDB;
 
-import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.PersistenceContext;
+import javax.persistence.EntityTransaction;
+import javax.persistence.Persistence;
 import java.util.List;
 
-@Stateless
+@SuppressWarnings("DuplicatedCode")
 public class MessageDAO {
-    @PersistenceContext(name = "DiscordBotPU")
-    private EntityManagerFactory emf;
-    @PersistenceContext(name = "DiscordBotPU")
-    private EntityManager em = emf.createEntityManager();
+    private final EntityManagerFactory EMF = Persistence.createEntityManagerFactory("DiscordBotPU");
 
     /**
      * Returns all the message-objects in the schema
@@ -21,7 +18,25 @@ public class MessageDAO {
      * @return An unordered list of message objects
      */
     public List<MessageDB> getAllMessages() {
-        return em.createQuery("select m from MessageDB m", MessageDB.class).getResultList();
+        EntityManager em = EMF.createEntityManager();
+        EntityTransaction tx = em.getTransaction();
+        List<MessageDB> messageDBList = null;
+
+        try {
+            tx.begin();
+
+            messageDBList = em.createQuery("select m from MessageDB m", MessageDB.class).getResultList();
+
+            tx.commit();
+
+        } catch (Exception e) {
+            if (tx.isActive()) tx.rollback();
+
+        } finally {
+            em.close();
+        }
+
+        return messageDBList;
     }
 
     /**
@@ -33,9 +48,26 @@ public class MessageDAO {
      * @return List of all the messages sent by the given user
      */
     public List<MessageDB> getMessagesFromOneUser(String username, String discriminator) {
-        return em.createQuery("select m from MessageDB m where m.author = :username", MessageDB.class)
-                .setParameter("username", username + discriminator)
-                .getResultList();
+        EntityManager em = EMF.createEntityManager();
+        EntityTransaction tx = em.getTransaction();
+        List<MessageDB> messageDBList = null;
+
+        try {
+            tx.begin();
+
+            messageDBList = em.createQuery("select m from MessageDB m where m.author = :username", MessageDB.class)
+                    .setParameter("username", username + discriminator)
+                    .getResultList();
+
+            tx.commit();
+
+        } catch (Exception e) {
+            if (tx.isActive()) tx.rollback();
+
+        } finally {
+            em.close();
+        }
+        return messageDBList;
     }
 
     /**
@@ -45,7 +77,25 @@ public class MessageDAO {
      * @return The message with the given id if it exists
      */
     public MessageDB getMessageById(String id) {
-        return em.find(MessageDB.class, id);
+        EntityManager em = EMF.createEntityManager();
+        EntityTransaction tx = em.getTransaction();
+        MessageDB messageDB = null;
+
+        try {
+            tx.begin();
+
+            messageDB = em.find(MessageDB.class, id);
+
+            tx.commit();
+
+        } catch (Exception e) {
+            if (tx.isActive()) tx.rollback();
+
+        } finally {
+            em.close();
+        }
+
+        return messageDB;
     }
 
 
@@ -57,9 +107,26 @@ public class MessageDAO {
      * @return A list of all the messages that contains the searchTerm
      */
     public List<MessageDB> searchAfterMessageWithString(String searchTerm) {
-        return em.createQuery("select m from MessageDB m where locate(m.msg_content, :search) > 0 ", MessageDB.class)
-                .setParameter("search", searchTerm)
-                .getResultList();
+        EntityManager em = EMF.createEntityManager();
+        EntityTransaction tx = em.getTransaction();
+        List<MessageDB> messageDBList = null;
+
+        try {
+            tx.begin();
+
+            messageDBList = em.createQuery("select m from MessageDB m where locate(m.msg_content, :search) > 0 ", MessageDB.class)
+                    .setParameter("search", searchTerm)
+                    .getResultList();
+
+            tx.commit();
+
+        } catch (Exception e) {
+            if (tx.isActive()) tx.rollback();
+
+        } finally {
+            em.close();
+        }
+        return messageDBList;
     }
 
     /**
@@ -70,7 +137,24 @@ public class MessageDAO {
      * @param messages The list of messages that are going to be added
      */
     public void insertMessages(List<MessageDB> messages) {
-        messages.forEach(m -> em.persist(m));
+        EntityManager em = EMF.createEntityManager();
+        EntityTransaction tx = em.getTransaction();
+
+        try {
+            tx.begin();
+
+            messages.forEach(em::persist);
+
+            tx.commit();
+
+        } catch (Exception e) {
+            if (tx.isActive()) {
+                tx.rollback();
+            }
+        } finally {
+            em.close();
+        }
+
     }
 
     public boolean checkIfMessageExists(String id) {
