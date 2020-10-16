@@ -10,7 +10,7 @@ import java.util.List;
 
 @SuppressWarnings("DuplicatedCode")
 public class MessageDAO {
-    private final EntityManagerFactory EMF = Persistence.createEntityManagerFactory("DiscordBotPU");
+    private final EntityManagerFactory EMF = Persistence.createEntityManagerFactory("DiscordBotLocalPU");
 
     /**
      * Returns all the message-objects in the schema

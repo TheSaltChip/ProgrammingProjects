@@ -1,9 +1,0 @@
-<component name="libraryTable">
-  <library name="eclipselink-2.7.7">
-    <CLASSES>
-      <root url="jar://$PROJECT_DIR$/../../../TomEE/apache-tomee-plus-8.0.4/lib/eclipselink-2.7.7.jar!/" />
-    </CLASSES>
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>

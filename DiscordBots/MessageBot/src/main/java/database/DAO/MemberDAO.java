@@ -11,7 +11,7 @@ import java.util.List;
 @SuppressWarnings("DuplicatedCode")
 public class MemberDAO {
 
-    private final EntityManagerFactory EMF = Persistence.createEntityManagerFactory("DiscordBotPU");
+    private final EntityManagerFactory EMF = Persistence.createEntityManagerFactory("DiscordBotLocalPU");
 
     /**
      * Returns all the members in the schema
