@@ -1,9 +1,15 @@
+import database.DAO.MessageDAO;
+import database.objects.MessageDB;
+
+import java.util.List;
+
 public class Main {
+    private static MessageDAO dao = new MessageDAO();
 
     public static void main(String[] args) {
-        Test test = new Test();
+        List<MessageDB> m = dao.getAllMessages();
 
-        test.main();
+        System.out.println(m);
     }
 
 }
