@@ -789,7 +789,7 @@ false Zulu
     <database id="2" parent="1" name="DiscordBot">
       <ObjectId>16458</ObjectId>
       <Owner>postgres</Owner>
-      <IntrospectionStateNumber>633</IntrospectionStateNumber>
+      <IntrospectionStateNumber>665</IntrospectionStateNumber>
       <Current>1</Current>
     </database>
     <database id="3" parent="1" name="postgres">
@@ -835,7 +835,7 @@ false Zulu
       <Comment>standard public schema</Comment>
       <StateNumber>585</StateNumber>
       <Owner>postgres</Owner>
-      <IntrospectionStateNumber>634</IntrospectionStateNumber>
+      <IntrospectionStateNumber>666</IntrospectionStateNumber>
     </schema>
     <schema id="14" parent="2" name="information_schema">
       <ObjectId>13158</ObjectId>
@@ -847,7 +847,7 @@ false Zulu
       <Comment>system catalog schema</Comment>
       <StateNumber>286</StateNumber>
       <Owner>postgres</Owner>
-      <IntrospectionStateNumber>635</IntrospectionStateNumber>
+      <IntrospectionStateNumber>667</IntrospectionStateNumber>
       <Current>1</Current>
     </schema>
     <access-method id="16" parent="2" name="heap">
@@ -918,14 +918,14 @@ false Zulu
     <language id="26" parent="2" name="plpgsql"/>
     <language id="27" parent="2" name="sql"/>
     <table id="28" parent="13" name="member">
-      <ObjectId>16861</ObjectId>
+      <ObjectId>16921</ObjectId>
       <Owner>postgres</Owner>
-      <StateNumber>617</StateNumber>
+      <StateNumber>637</StateNumber>
     </table>
     <table id="29" parent="13" name="message">
-      <ObjectId>16869</ObjectId>
+      <ObjectId>16929</ObjectId>
       <Owner>postgres</Owner>
-      <StateNumber>617</StateNumber>
+      <StateNumber>637</StateNumber>
     </table>
     <object-type id="30" parent="15" name="bool">
       <ObjectId>16</ObjectId>
@@ -57698,115 +57698,115 @@ r/10
     </collation>
     <column id="4819" parent="28" name="user_id">
       <Position>1</Position>
-      <DataType>integer|0s</DataType>
+      <DataType>varchar(18)|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>617</StateNumber>
-      <TypeId>23</TypeId>
+      <StateNumber>637</StateNumber>
+      <TypeId>1043</TypeId>
     </column>
     <column id="4820" parent="28" name="username">
       <Position>2</Position>
       <DataType>varchar(32)|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>617</StateNumber>
+      <StateNumber>637</StateNumber>
       <TypeId>1043</TypeId>
     </column>
     <column id="4821" parent="28" name="discriminator">
       <Position>3</Position>
       <DataType>varchar(5)|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>617</StateNumber>
+      <StateNumber>637</StateNumber>
       <TypeId>1043</TypeId>
     </column>
     <column id="4822" parent="28" name="nickname">
       <Position>4</Position>
       <DataType>varchar(32)|0s</DataType>
-      <StateNumber>617</StateNumber>
+      <StateNumber>637</StateNumber>
       <TypeId>1043</TypeId>
     </column>
     <index id="4823" parent="28" name="member_pkey">
-      <ObjectId>16867</ObjectId>
-      <StateNumber>617</StateNumber>
+      <ObjectId>16927</ObjectId>
+      <StateNumber>637</StateNumber>
       <ColNames>user_id</ColNames>
       <Unique>1</Unique>
       <Primary>1</Primary>
     </index>
     <key id="4824" parent="28" name="member_pkey">
-      <ObjectId>16868</ObjectId>
-      <StateNumber>617</StateNumber>
+      <ObjectId>16928</ObjectId>
+      <StateNumber>637</StateNumber>
       <ColNames>user_id</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>member_pkey</UnderlyingIndexName>
     </key>
     <check id="4825" parent="28" name="member_discriminator_check">
-      <ObjectId>16865</ObjectId>
-      <StateNumber>617</StateNumber>
+      <ObjectId>16925</ObjectId>
+      <StateNumber>637</StateNumber>
       <ColNames>discriminator</ColNames>
       <Predicate>length((discriminator)::text) = 5</Predicate>
     </check>
     <check id="4826" parent="28" name="member_nickname_check">
-      <ObjectId>16866</ObjectId>
-      <StateNumber>617</StateNumber>
+      <ObjectId>16926</ObjectId>
+      <StateNumber>637</StateNumber>
       <ColNames>nickname</ColNames>
       <Predicate>length((nickname)::text) &gt;= 1</Predicate>
     </check>
     <check id="4827" parent="28" name="member_username_check">
-      <ObjectId>16864</ObjectId>
-      <StateNumber>617</StateNumber>
+      <ObjectId>16924</ObjectId>
+      <StateNumber>637</StateNumber>
       <ColNames>username</ColNames>
       <Predicate>length((username)::text) &gt;= 2</Predicate>
     </check>
     <column id="4828" parent="29" name="message_id">
       <Position>1</Position>
-      <DataType>integer|0s</DataType>
+      <DataType>varchar(18)|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>617</StateNumber>
-      <TypeId>23</TypeId>
+      <StateNumber>637</StateNumber>
+      <TypeId>1043</TypeId>
     </column>
     <column id="4829" parent="29" name="author_id">
       <Position>2</Position>
-      <DataType>integer|0s</DataType>
-      <StateNumber>617</StateNumber>
-      <TypeId>23</TypeId>
+      <DataType>varchar(18)|0s</DataType>
+      <StateNumber>637</StateNumber>
+      <TypeId>1043</TypeId>
     </column>
     <column id="4830" parent="29" name="author">
       <Position>3</Position>
       <DataType>varchar(37)|0s</DataType>
-      <StateNumber>617</StateNumber>
+      <StateNumber>637</StateNumber>
       <TypeId>1043</TypeId>
     </column>
     <column id="4831" parent="29" name="msg_content">
       <Position>4</Position>
       <DataType>varchar(2000)|0s</DataType>
-      <StateNumber>617</StateNumber>
+      <StateNumber>637</StateNumber>
       <TypeId>1043</TypeId>
     </column>
     <index id="4832" parent="29" name="message_pkey">
-      <ObjectId>16876</ObjectId>
-      <StateNumber>617</StateNumber>
+      <ObjectId>16936</ObjectId>
+      <StateNumber>637</StateNumber>
       <ColNames>message_id</ColNames>
       <Unique>1</Unique>
       <Primary>1</Primary>
     </index>
     <key id="4833" parent="29" name="message_pkey">
-      <ObjectId>16877</ObjectId>
-      <StateNumber>617</StateNumber>
+      <ObjectId>16937</ObjectId>
+      <StateNumber>637</StateNumber>
       <ColNames>message_id</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>message_pkey</UnderlyingIndexName>
     </key>
     <foreign-key id="4834" parent="29" name="message_author_id_fkey">
-      <ObjectId>16878</ObjectId>
-      <StateNumber>617</StateNumber>
+      <ObjectId>16938</ObjectId>
+      <StateNumber>637</StateNumber>
       <ColNames>author_id</ColNames>
-      <RefTableId>16861</RefTableId>
+      <RefTableId>16921</RefTableId>
       <RefColPositions>1</RefColPositions>
       <RefTableName>member</RefTableName>
       <RefKeyName>member_pkey</RefKeyName>
       <RefColNames>user_id</RefColNames>
     </foreign-key>
     <check id="4835" parent="29" name="message_author_check">
-      <ObjectId>16872</ObjectId>
-      <StateNumber>617</StateNumber>
+      <ObjectId>16932</ObjectId>
+      <StateNumber>637</StateNumber>
       <ColNames>author</ColNames>
       <Predicate>length((author)::text) &gt;= 7</Predicate>
     </check>
