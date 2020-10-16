@@ -12,6 +12,7 @@ import java.util.stream.Collectors;
 
 public class InsertIntoDatabase {
     private final TextChannel TEXT_CHANNEL;
+    
     @EJB
     MessageDAO messageDAO = new MessageDAO();
 

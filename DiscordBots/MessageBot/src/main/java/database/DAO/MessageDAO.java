@@ -4,13 +4,16 @@ import database.objects.MessageDB;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceContext;
 import java.util.List;
 
 @Stateless
 public class MessageDAO {
     @PersistenceContext(name = "DiscordBotPU")
-    private EntityManager em;
+    private EntityManagerFactory emf;
+    @PersistenceContext(name = "DiscordBotPU")
+    private EntityManager em = emf.createEntityManager();
 
     /**
      * Returns all the message-objects in the schema
