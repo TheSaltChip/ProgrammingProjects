@@ -19,7 +19,5 @@ public class Bot {
         } catch (LoginException e) {
             e.printStackTrace();
         }
-
-
     }
 }
