@@ -15,7 +15,7 @@ public class Bot {
 
         try {
             jda = jdaBuilder.build();
-            jda.addEventListener(new SetupDatabase(jda));
+            jda.addEventListener(new SetupDatabase());
         } catch (LoginException e) {
             e.printStackTrace();
         }

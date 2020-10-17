@@ -1,7 +1,6 @@
 package bot.commands;
 
 import bot.database.InsertIntoDatabase;
-import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.entities.User;
@@ -10,11 +9,6 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.jetbrains.annotations.NotNull;
 
 public class SetupDatabase extends ListenerAdapter {
-    JDA jda;
-
-    public SetupDatabase(JDA jda) {
-        this.jda = jda;
-    }
 
     @Override
     public void onGuildMessageReceived(@NotNull GuildMessageReceivedEvent event) {
