@@ -16,8 +16,8 @@ public class AnalyzeDatabase {
         USER = user;
     }
 
-    public boolean exists(User user){
-        return memberBotDAO.exists(user.getId());
+    public boolean exists(){
+        return memberBotDAO.exists(USER.getId());
     }
 
 
