@@ -1,4 +1,4 @@
-package database.DAO;
+package database.DAO_Local;
 
 import database.objects.MemberDB;
 
@@ -9,7 +9,7 @@ import javax.persistence.Persistence;
 import java.util.List;
 
 @SuppressWarnings("DuplicatedCode")
-public class MemberDAO {
+public class MemberBotDAO {
 
     private final EntityManagerFactory EMF = Persistence.createEntityManagerFactory("DiscordBotLocalPU");
 
@@ -154,6 +154,11 @@ public class MemberDAO {
 
     }
 
+    /**
+     * Inserts a member into the database
+     *
+     * @param member The member that is to be inserted to the database
+     */
     public void insertMember(MemberDB member) {
         EntityManager em = EMF.createEntityManager();
         EntityTransaction tx = em.getTransaction();
@@ -173,7 +178,6 @@ public class MemberDAO {
             em.close();
         }
     }
-
 
     /**
      * Checks if the user given by the id exists in the database

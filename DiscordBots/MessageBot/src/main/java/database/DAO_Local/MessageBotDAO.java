@@ -1,4 +1,4 @@
-package database.DAO;
+package database.DAO_Local;
 
 import database.objects.MessageDB;
 
@@ -9,7 +9,7 @@ import javax.persistence.Persistence;
 import java.util.List;
 
 @SuppressWarnings("DuplicatedCode")
-public class MessageDAO {
+public class MessageBotDAO {
     private final EntityManagerFactory EMF = Persistence.createEntityManagerFactory("DiscordBotLocalPU");
 
     /**
@@ -98,7 +98,6 @@ public class MessageDAO {
         return messageDB;
     }
 
-
     /**
      * Supposedly this method makes it possible to search for messages
      * containing a substring
@@ -157,6 +156,14 @@ public class MessageDAO {
 
     }
 
+    /**
+     * Checks if the message already exists in the database
+     * by checking if the id of the message corresponds to one
+     * of the messages already in the database
+     *
+     * @param id The ID of the message you want to check
+     * @return True if the message id exists in the database, false if not
+     */
     public boolean checkIfMessageExists(String id) {
         return getMessageById(id) != null;
     }
