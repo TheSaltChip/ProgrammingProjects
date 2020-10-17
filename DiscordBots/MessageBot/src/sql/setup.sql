@@ -1,7 +1,7 @@
-DROP TABLE "guild".member cascade;
-DROP TABLE "guild".message cascade;
+DROP table IF EXISTS guild.member CASCADE;
+drop table if exists guild.message cascade;
 
-set search_path to "guild";
+set search_path to guild;
 
 CREATE TABLE member
 (
@@ -14,9 +14,8 @@ CREATE TABLE member
 
 CREATE TABLE message
 (
-    message_id varchar(18) NOT NULL ,
+    message_id varchar(18) NOT NULL,
     author_id varchar(18),
-    author varchar(37) check (length(author) >= 7),
     msg_content varchar(2000),
     PRIMARY KEY (message_id),
     FOREIGN KEY (author_id) references member(user_id)
