@@ -1,5 +1,6 @@
-package database.DAO_Local;
+package database.DAO.message;
 
+import database.DAO.adt.MessageDAO;
 import database.objects.MessageDB;
 
 import javax.persistence.EntityManager;
@@ -9,15 +10,11 @@ import javax.persistence.Persistence;
 import java.util.List;
 
 @SuppressWarnings("DuplicatedCode")
-public class MessageBotDAO {
+public class MessageBotDAO implements MessageDAO {
     private final EntityManagerFactory EMF = Persistence.createEntityManagerFactory("DiscordBotLocalPU");
 
-    /**
-     * Returns all the message-objects in the schema
-     *
-     * @return An unordered list of message objects
-     */
-    public List<MessageDB> getAllMessages() {
+    @Override
+    public List<MessageDB> get() {
         EntityManager em = EMF.createEntityManager();
         EntityTransaction tx = em.getTransaction();
         List<MessageDB> messageDBList = null;
@@ -39,15 +36,8 @@ public class MessageBotDAO {
         return messageDBList;
     }
 
-    /**
-     * Attempts to get all the messages sent by a given user
-     * Returns an empty list if the given user has not written a message
-     *
-     * @param username      The actual name of the user
-     * @param discriminator The 4 digit discord-tag starting with a #, example: #1234
-     * @return List of all the messages sent by the given user
-     */
-    public List<MessageDB> getMessagesFromOneUser(String username, String discriminator) {
+    @Override
+    public List<MessageDB> get(String username, String discriminator) {
         EntityManager em = EMF.createEntityManager();
         EntityTransaction tx = em.getTransaction();
         List<MessageDB> messageDBList = null;
@@ -55,8 +45,15 @@ public class MessageBotDAO {
         try {
             tx.begin();
 
-            messageDBList = em.createQuery("select m from MessageDB m where m.author = :username", MessageDB.class)
-                    .setParameter("username", username + discriminator)
+            messageDBList = em.createQuery("select m " +
+                            "from MessageDB m " +
+                            "where m.author = " +
+                            "   (select mb from MemberDB mb " +
+                            "   where mb.username = :username " +
+                            "   and mb.discriminator = :discriminator)",
+                    MessageDB.class)
+                    .setParameter("username", username)
+                    .setParameter("discriminator", discriminator)
                     .getResultList();
 
             tx.commit();
@@ -70,13 +67,8 @@ public class MessageBotDAO {
         return messageDBList;
     }
 
-    /**
-     * Attempts to find a message with the given id
-     *
-     * @param id The id of the message you want
-     * @return The message with the given id if it exists
-     */
-    public MessageDB getMessageById(String id) {
+    @Override
+    public MessageDB get(String id) {
         EntityManager em = EMF.createEntityManager();
         EntityTransaction tx = em.getTransaction();
         MessageDB messageDB = null;
@@ -98,14 +90,8 @@ public class MessageBotDAO {
         return messageDB;
     }
 
-    /**
-     * Supposedly this method makes it possible to search for messages
-     * containing a substring
-     *
-     * @param searchTerm The string you want to search for
-     * @return A list of all the messages that contains the searchTerm
-     */
-    public List<MessageDB> searchAfterMessageWithString(String searchTerm) {
+    @Override
+    public List<MessageDB> search(String searchTerm) {
         EntityManager em = EMF.createEntityManager();
         EntityTransaction tx = em.getTransaction();
         List<MessageDB> messageDBList = null;
@@ -128,14 +114,8 @@ public class MessageBotDAO {
         return messageDBList;
     }
 
-    /**
-     * Inserts a list of messages to the database
-     * All the messages must have the author already in the database,
-     * since the message entity is dependent on it
-     *
-     * @param messages The list of messages that are going to be added
-     */
-    public void insertMessages(List<MessageDB> messages) {
+    @Override
+    public void insert(List<MessageDB> messages) {
         EntityManager em = EMF.createEntityManager();
         EntityTransaction tx = em.getTransaction();
 
@@ -156,16 +136,9 @@ public class MessageBotDAO {
 
     }
 
-    /**
-     * Checks if the message already exists in the database
-     * by checking if the id of the message corresponds to one
-     * of the messages already in the database
-     *
-     * @param id The ID of the message you want to check
-     * @return True if the message id exists in the database, false if not
-     */
-    public boolean checkIfMessageExists(String id) {
-        return getMessageById(id) != null;
+    @Override
+    public boolean exists(String id) {
+        return get(id) != null;
     }
 
 }

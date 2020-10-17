@@ -1,7 +1,7 @@
 package bot.database;
 
-import database.DAO_Local.MemberBotDAO;
-import database.DAO_Local.MessageBotDAO;
+import database.DAO.member.MemberBotDAO;
+import database.DAO.message.MessageBotDAO;
 import database.objects.MemberDB;
 import database.objects.MessageDB;
 import net.dv8tion.jda.api.entities.*;
@@ -11,9 +11,7 @@ import java.util.stream.Collectors;
 
 public class InsertIntoDatabase {
     private final TextChannel TEXT_CHANNEL;
-
     MessageBotDAO messageBotDAO = new MessageBotDAO();
-
     MemberBotDAO memberBotDAO = new MemberBotDAO();
 
     public InsertIntoDatabase(TextChannel textChannel) {
@@ -30,10 +28,10 @@ public class InsertIntoDatabase {
 
         List<MemberDB> memberDBS = members.stream()
                 .map(this::convertToMemberDB)
-                .filter(m -> !memberBotDAO.checkIfUserExistsId(m.getUser_id()))
+                .filter(m -> !memberBotDAO.exists(m.getUser_id()))
                 .collect(Collectors.toList());
 
-        memberBotDAO.insertMembers(memberDBS);
+        memberBotDAO.insert(memberDBS);
     }
 
     private void getAllMessagesAndInsert() {
@@ -47,7 +45,7 @@ public class InsertIntoDatabase {
                     .map(this::convertToMessageDB)
                     .collect(Collectors.toList());
 
-            messageBotDAO.insertMessages(dbList);
+            messageBotDAO.insert(dbList);
         }
     }
 
@@ -65,14 +63,14 @@ public class InsertIntoDatabase {
 
     private List<Message> getMessagesFromMessageHistory(List<Message> messages) {
         return messages.stream()
-                .filter(m -> !messageBotDAO.checkIfMessageExists(m.getId()))
+                .filter(m -> !messageBotDAO.exists(m.getId()))
                 .collect(Collectors.toList());
     }
 
     private MessageDB convertToMessageDB(Message message) {
         MessageDB messageDB = new MessageDB();
         messageDB.setMessage_id(message.getId());
-        messageDB.setAuthor(memberBotDAO.findMemberById(message.getAuthor().getId()));
+        messageDB.setAuthor(memberBotDAO.get(message.getAuthor().getId()));
         messageDB.setMsg_content(message.getContentStripped());
 
         return messageDB;

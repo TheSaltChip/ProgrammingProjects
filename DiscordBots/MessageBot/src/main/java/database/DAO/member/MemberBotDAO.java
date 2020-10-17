@@ -1,5 +1,6 @@
-package database.DAO_Local;
+package database.DAO.member;
 
+import database.DAO.adt.MemberDAO;
 import database.objects.MemberDB;
 
 import javax.persistence.EntityManager;
@@ -9,16 +10,12 @@ import javax.persistence.Persistence;
 import java.util.List;
 
 @SuppressWarnings("DuplicatedCode")
-public class MemberBotDAO {
+public class MemberBotDAO implements MemberDAO {
 
     private final EntityManagerFactory EMF = Persistence.createEntityManagerFactory("DiscordBotLocalPU");
 
-    /**
-     * Returns all the members in the schema
-     *
-     * @return A list of all the members
-     */
-    public List<MemberDB> getAllMembers() {
+    @Override
+    public List<MemberDB> get() {
         EntityManager em = EMF.createEntityManager();
         EntityTransaction tx = em.getTransaction();
         List<MemberDB> memberDBS = null;
@@ -39,13 +36,8 @@ public class MemberBotDAO {
         return memberDBS;
     }
 
-    /**
-     * Attempts to find a member with the given id
-     *
-     * @param id The id that is to be search for
-     * @return The member with the id if it exists
-     */
-    public MemberDB findMemberById(String id) {
+    @Override
+    public MemberDB get(String id) {
         EntityManager em = EMF.createEntityManager();
         EntityTransaction tx = em.getTransaction();
         MemberDB memberDB = null;
@@ -66,15 +58,8 @@ public class MemberBotDAO {
         return memberDB;
     }
 
-    /**
-     * Attempts to find all the members with the given username
-     * And since multiple people can have the same username it returns
-     * a list of the users with the username
-     *
-     * @param username The username you want to search for
-     * @return A list of all the users with the given username
-     */
-    public List<MemberDB> findMemberByUsername(String username) {
+    @Override
+    public List<MemberDB> find(String username) {
         EntityManager em = EMF.createEntityManager();
         EntityTransaction tx = em.getTransaction();
         List<MemberDB> memberDBS = null;
@@ -97,14 +82,8 @@ public class MemberBotDAO {
         return memberDBS;
     }
 
-    /**
-     * Attempts to find a member by their full discord name, which includes their username and discord tag
-     *
-     * @param username      The username of the member that is to be search for
-     * @param discriminator The 4 digit discord tag starting with #, example #1234
-     * @return A member with the given username and discriminator
-     */
-    public MemberDB getMemberWithUsernameDisc(String username, String discriminator) {
+    @Override
+    public MemberDB get(String username, String discriminator) {
         EntityManager em = EMF.createEntityManager();
         EntityTransaction tx = em.getTransaction();
         MemberDB memberDB = null;
@@ -133,7 +112,7 @@ public class MemberBotDAO {
      *
      * @param members The list of members that are going to be added
      */
-    public void insertMembers(List<MemberDB> members) {
+    public void insert(List<MemberDB> members) {
         EntityManager em = EMF.createEntityManager();
         EntityTransaction tx = em.getTransaction();
 
@@ -159,7 +138,7 @@ public class MemberBotDAO {
      *
      * @param member The member that is to be inserted to the database
      */
-    public void insertMember(MemberDB member) {
+    public void insert(MemberDB member) {
         EntityManager em = EMF.createEntityManager();
         EntityTransaction tx = em.getTransaction();
 
@@ -185,8 +164,8 @@ public class MemberBotDAO {
      * @param id The id of the user
      * @return True if the user exists, false if not
      */
-    public boolean checkIfUserExistsId(String id) {
-        return findMemberById(id) != null;
+    public boolean exists(String id) {
+        return get(id) != null;
     }
 
     /**
@@ -196,7 +175,7 @@ public class MemberBotDAO {
      * @param discriminator The discord tag of the user, example #1234
      * @return True if the user exists, false if not
      */
-    public boolean checkIfUserExistsUsernameDisc(String username, String discriminator) {
-        return getMemberWithUsernameDisc(username, discriminator) != null;
+    public boolean exists(String username, String discriminator) {
+        return get(username, discriminator) != null;
     }
 }
