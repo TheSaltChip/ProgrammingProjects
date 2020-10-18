@@ -7,7 +7,7 @@ import java.util.List;
 @Table(name = "user", schema = "guild")
 public class UserDB {
     @Id
-    private String user_id;
+    private String id;
 
     @OneToMany(mappedBy = "author")
     private List<MessageDB> messages;
@@ -21,64 +21,20 @@ public class UserDB {
 
     protected UserDB () {}
 
-    public UserDB(String user_id, String username, String discriminator, String nickname) {
-        this.user_id = user_id;
+    public UserDB(String id, String username, String discriminator, String nickname) {
+        this.id = id;
         this.username = username;
         this.discriminator = discriminator;
         this.nickname = nickname;
     }
 
-    public String getUser_id() {
-        return user_id;
-    }
-
-    public void setUser_id(String user_id) {
-        this.user_id = user_id;
-    }
-
-    public List<MessageDB> getMessages() {
-        return messages;
-    }
-
-    public void setMessages(List<MessageDB> messages) {
-        this.messages = messages;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getDiscriminator() {
-        return discriminator;
-    }
-
-    public void setDiscriminator(String discriminator) {
-        this.discriminator = discriminator;
-    }
-
-    public String getNickname() {
-        return nickname;
-    }
-
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
-    }
-
-    public Info getInfo() {
-        return info;
-    }
-
-    public void setInfo(Info info) {
-        this.info = info;
+    public String getId() {
+        return id;
     }
 
     @Override
     public String toString() {
-        return ("(user_id:" + user_id + ";username:" + username + ";discriminator:" + discriminator + ";nickname:" + nickname + ")");
+        return ("(id:" + id + ";username:" + username + ";discriminator:" + discriminator + ";nickname:" + nickname + ")");
     }
 
 
