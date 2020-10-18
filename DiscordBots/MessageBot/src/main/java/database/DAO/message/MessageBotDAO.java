@@ -48,7 +48,7 @@ public class MessageBotDAO implements MessageDAO {
             messageDBList = em.createQuery("select m " +
                             "from MessageDB m " +
                             "where m.author = " +
-                            "   (select mb from MemberDB mb " +
+                            "   (select mb from UserDB mb " +
                             "   where mb.username = :username " +
                             "   and mb.discriminator = :discriminator)",
                     MessageDB.class)
