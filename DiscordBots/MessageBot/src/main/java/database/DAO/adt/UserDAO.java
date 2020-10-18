@@ -1,57 +1,57 @@
 package database.DAO.adt;
 
-import database.objects.MemberDB;
+import database.objects.UserDB;
 
 import java.util.List;
 
-public interface MemberDAO {
+public interface UserDAO {
     /**
-     * Returns all the members in the schema
+     * Returns all the users in the schema
      *
-     * @return A list of all the members
+     * @return A list of all the users
      */
-    List<MemberDB> get();
+    List<UserDB> get();
 
     /**
-     * Attempts to get a member with the given id
+     * Attempts to get a user with the given id
      *
      * @param id The id that is to be search for
-     * @return The member with the id if it exists
+     * @return The user with the id if it exists
      */
-    MemberDB get(String id);
+    UserDB get(String id);
 
     /**
-     * Attempts to find all the members with the given username
+     * Attempts to find all the users with the given username
      * And since multiple people can have the same username it returns
      * a list of the users with the username
      *
      * @param username The username you want to search for
      * @return A list of all the users with the given username
      */
-    List<MemberDB> find(String username);
+    List<UserDB> find(String username);
 
     /**
-     * Attempts to find a member by their full discord name, which includes their username and discord tag
+     * Attempts to find a user by their full discord name, which includes their username and discord tag
      *
-     * @param username      The username of the member that is to be search for
+     * @param username      The username of the user that is to be search for
      * @param discriminator The 4 digit discord tag starting with #, example #1234
-     * @return A member with the given username and discriminator
+     * @return A user with the given username and discriminator
      */
-    MemberDB get(String username, String discriminator);
+    UserDB get(String username, String discriminator);
 
     /**
-     * Inserts a list of members into the database
+     * Inserts a list of users into the database
      *
-     * @param members The list of members that are going to be added
+     * @param users The list of users that are going to be added
      */
-    void insert(List<MemberDB> members);
+    void insert(List<UserDB> users);
 
     /**
-     * Inserts a member into the database
+     * Inserts a user into the database
      *
-     * @param member The member that is to be inserted to the database
+     * @param user The user that is to be inserted to the database
      */
-    void insert(MemberDB member);
+    void insert(UserDB user);
 
     /**
      * Checks if the user given by the id exists in the database

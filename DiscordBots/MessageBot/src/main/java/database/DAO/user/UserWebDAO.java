@@ -1,7 +1,7 @@
-package database.DAO.member;
+package database.DAO.user;
 
-import database.DAO.adt.MemberDAO;
-import database.objects.MemberDB;
+import database.DAO.adt.UserDAO;
+import database.objects.UserDB;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -9,53 +9,53 @@ import javax.persistence.PersistenceContext;
 import java.util.List;
 
 @Stateless
-public class MemberWebDAO implements MemberDAO {
+public class UserWebDAO implements UserDAO {
     @PersistenceContext (name = "DiscordBotJTAPU")
     private EntityManager em;
 
 
     @Override
-    public List<MemberDB> get() {
-        return em.createQuery("select m from MemberDB m", MemberDB.class)
+    public List<UserDB> get() {
+        return em.createQuery("select m from UserDB m", UserDB.class)
                 .getResultList();
     }
 
     @Override
-    public MemberDB get(String id) {
-        return em.find(MemberDB.class, id);
+    public UserDB get(String id) {
+        return em.find(UserDB.class, id);
     }
 
     @Override
-    public List<MemberDB> find(String username) {
-        return em.createQuery("select m from MemberDB m " +
-                "where m.username = :username", MemberDB.class)
+    public List<UserDB> find(String username) {
+        return em.createQuery("select m from UserDB m " +
+                "where m.username = :username", UserDB.class)
                 .setParameter("username", username)
                 .getResultList();
     }
 
     @Override
-    public MemberDB get(String username, String discriminator) {
-        return em.createQuery("select m from MemberDB m " +
+    public UserDB get(String username, String discriminator) {
+        return em.createQuery("select m from UserDB m " +
                 "where m.username = :username " +
-                "and m.discriminator = :discriminator", MemberDB.class)
+                "and m.discriminator = :discriminator", UserDB.class)
                 .setParameter("username", username)
                 .setParameter("discriminator", discriminator)
                 .getSingleResult();
     }
 
     @Override
-    public void insert(List<MemberDB> members) {
+    public void insert(List<UserDB> members) {
         members.forEach(em::persist);
     }
 
     @Override
-    public void insert(MemberDB member) {
+    public void insert(UserDB member) {
         em.persist(member);
     }
 
     @Override
     public boolean exists(String id) {
-        return em.find(MemberDB.class, id) != null;
+        return em.find(UserDB.class, id) != null;
     }
 
     @Override

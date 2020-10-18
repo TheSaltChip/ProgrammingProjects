@@ -1,7 +1,7 @@
-package database.DAO.member;
+package database.DAO.user;
 
-import database.DAO.adt.MemberDAO;
-import database.objects.MemberDB;
+import database.DAO.adt.UserDAO;
+import database.objects.UserDB;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -10,20 +10,20 @@ import javax.persistence.Persistence;
 import java.util.List;
 
 @SuppressWarnings("DuplicatedCode")
-public class MemberBotDAO implements MemberDAO {
+public class UserBotDAO implements UserDAO {
 
     private final EntityManagerFactory EMF = Persistence.createEntityManagerFactory("DiscordBotLocalPU");
 
     @Override
-    public List<MemberDB> get() {
+    public List<UserDB> get() {
         EntityManager em = EMF.createEntityManager();
         EntityTransaction tx = em.getTransaction();
-        List<MemberDB> memberDBS = null;
+        List<UserDB> userDBS = null;
 
         try {
             tx.begin();
 
-            memberDBS = em.createQuery("select m from MemberDB m", MemberDB.class)
+            userDBS = em.createQuery("select m from UserDB m", UserDB.class)
                     .getResultList();
 
             tx.commit();
@@ -33,19 +33,19 @@ public class MemberBotDAO implements MemberDAO {
             em.close();
         }
 
-        return memberDBS;
+        return userDBS;
     }
 
     @Override
-    public MemberDB get(String id) {
+    public UserDB get(String id) {
         EntityManager em = EMF.createEntityManager();
         EntityTransaction tx = em.getTransaction();
-        MemberDB memberDB = null;
+        UserDB userDB = null;
 
         try {
             tx.begin();
 
-            memberDB = em.find(MemberDB.class, id);
+            userDB = em.find(UserDB.class, id);
 
             tx.commit();
         } catch (Exception e) {
@@ -55,19 +55,19 @@ public class MemberBotDAO implements MemberDAO {
             em.close();
         }
 
-        return memberDB;
+        return userDB;
     }
 
     @Override
-    public List<MemberDB> find(String username) {
+    public List<UserDB> find(String username) {
         EntityManager em = EMF.createEntityManager();
         EntityTransaction tx = em.getTransaction();
-        List<MemberDB> memberDBS = null;
+        List<UserDB> userDBS = null;
 
         try {
             tx.begin();
 
-            memberDBS = em.createQuery("select m from MemberDB m where m.username = :username", MemberDB.class)
+            userDBS = em.createQuery("select m from UserDB m where m.username = :username", UserDB.class)
                     .setParameter("username", username)
                     .getResultList();
 
@@ -79,19 +79,19 @@ public class MemberBotDAO implements MemberDAO {
             em.close();
         }
 
-        return memberDBS;
+        return userDBS;
     }
 
     @Override
-    public MemberDB get(String username, String discriminator) {
+    public UserDB get(String username, String discriminator) {
         EntityManager em = EMF.createEntityManager();
         EntityTransaction tx = em.getTransaction();
-        MemberDB memberDB = null;
+        UserDB userDB = null;
 
         try {
             tx.begin();
 
-            memberDB = em.createQuery("select m from MemberDB m where m.username = :username and m.discriminator = :discriminator", MemberDB.class)
+            userDB = em.createQuery("select m from UserDB m where m.username = :username and m.discriminator = :discriminator", UserDB.class)
                     .setParameter("username", username)
                     .setParameter("discriminator", discriminator)
                     .getSingleResult();
@@ -104,7 +104,7 @@ public class MemberBotDAO implements MemberDAO {
             em.close();
         }
 
-        return memberDB;
+        return userDB;
     }
 
     /**
@@ -112,7 +112,7 @@ public class MemberBotDAO implements MemberDAO {
      *
      * @param members The list of members that are going to be added
      */
-    public void insert(List<MemberDB> members) {
+    public void insert(List<UserDB> members) {
         EntityManager em = EMF.createEntityManager();
         EntityTransaction tx = em.getTransaction();
 
@@ -138,7 +138,7 @@ public class MemberBotDAO implements MemberDAO {
      *
      * @param member The member that is to be inserted to the database
      */
-    public void insert(MemberDB member) {
+    public void insert(UserDB member) {
         EntityManager em = EMF.createEntityManager();
         EntityTransaction tx = em.getTransaction();
 
