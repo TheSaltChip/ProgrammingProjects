@@ -57,9 +57,11 @@ create table word
 alter table "user"
     add
         foreign key (info_id) references info (id);
+
 alter table info
     add
         foreign key (letters_id) references letter (letter);
+
 alter table info
     add
         foreign key (words_id) references word (word);
