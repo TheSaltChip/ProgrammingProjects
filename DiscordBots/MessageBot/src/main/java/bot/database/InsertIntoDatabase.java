@@ -1,7 +1,7 @@
 package bot.database;
 
-import database.DAO.message.MessageBotDAO;
-import database.DAO.user.UserBotDAO;
+import database.dao.message.MessageBotDAO;
+import database.dao.user.UserBotDAO;
 import database.objects.MessageDB;
 import database.objects.UserDB;
 import net.dv8tion.jda.api.entities.*;
@@ -28,7 +28,7 @@ public class InsertIntoDatabase {
 
         List<UserDB> userDBS = members.stream()
                 .map(this::convertToUserDB)
-                .filter(m -> !userBotDAO.exists(m.getUser_id()))
+                .filter(m -> !userBotDAO.exists(m.getId()))
                 .collect(Collectors.toList());
 
         userBotDAO.insert(userDBS);
