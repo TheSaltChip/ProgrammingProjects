@@ -5,12 +5,23 @@ import javax.persistence.*;
 @Entity
 @Table(name = "message", schema = "guild")
 public class MessageDB {
-
+    @Id
     private String message_id;
-    private MemberDB author;
+
+    @ManyToOne
+    @JoinColumn(name = "author_id", referencedColumnName = "id")
+    private UserDB author;
     private String msg_content;
 
-    @Id
+    protected MessageDB() {
+    }
+
+    public MessageDB(String message_id, UserDB author, String msg_content) {
+        this.message_id = message_id;
+        this.author = author;
+        this.msg_content = msg_content;
+    }
+
     public String getMessage_id() {
         return message_id;
     }
@@ -19,13 +30,11 @@ public class MessageDB {
         this.message_id = message_id;
     }
 
-    @ManyToOne
-    @JoinColumn(name = "author_id", referencedColumnName = "user_id")
-    public MemberDB getAuthor() {
+    public UserDB getAuthor() {
         return author;
     }
 
-    public void setAuthor(MemberDB author) {
+    public void setAuthor(UserDB author) {
         this.author = author;
     }
 
