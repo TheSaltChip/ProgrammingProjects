@@ -8,6 +8,7 @@
         <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
         <class>database.objects.UserDB</class>
         <class>database.objects.MessageDB</class>
+        <class>database.objects.Info</class>
         <properties>
             <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/DiscordBot"/>
             <property name="javax.persistence.jdbc.user" value="postgres"/>
@@ -22,5 +23,6 @@
         <jta-data-source>DiscordBotDS</jta-data-source>
         <class>database.objects.UserDB</class>
         <class>database.objects.MessageDB</class>
+        <class>database.objects.Info</class>
     </persistence-unit>
 </persistence>
