@@ -1,6 +1,6 @@
-package database.DAO.user;
+package database.dao.user;
 
-import database.DAO.adt.UserDAO;
+import database.dao.adt.UserDAO;
 import database.objects.UserDB;
 
 import javax.ejb.Stateless;

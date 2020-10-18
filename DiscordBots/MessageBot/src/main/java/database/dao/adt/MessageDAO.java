@@ -1,4 +1,4 @@
-package database.DAO.adt;
+package database.dao.adt;
 
 import database.objects.MessageDB;
 
