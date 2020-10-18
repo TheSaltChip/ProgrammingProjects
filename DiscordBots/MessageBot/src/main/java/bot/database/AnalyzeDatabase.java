@@ -1,7 +1,7 @@
 package bot.database;
 
-import database.DAO.user.UserBotDAO;
-import database.DAO.message.MessageBotDAO;
+import database.dao.user.UserBotDAO;
+import database.dao.message.MessageBotDAO;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.entities.User;
 
@@ -20,5 +20,7 @@ public class AnalyzeDatabase {
         return userBotDAO.exists(USER.getId());
     }
 
+    public void getWords(){
 
+    }
 }

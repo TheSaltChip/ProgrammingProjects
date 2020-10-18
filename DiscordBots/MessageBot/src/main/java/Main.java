@@ -1,4 +1,4 @@
-import database.DAO.message.MessageBotDAO;
+import database.dao.message.MessageBotDAO;
 import database.objects.MessageDB;
 
 import java.util.List;
