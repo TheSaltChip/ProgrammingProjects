@@ -22,6 +22,10 @@ public class MessageDB {
         this.msg_content = msg_content;
     }
 
+    public String getMsg_content() {
+        return msg_content;
+    }
+
     @Override
     public String toString() {
         return "\n{id:" + id + "\nauthor:" + author + "\nmessage_content:" + msg_content + "}\n";
