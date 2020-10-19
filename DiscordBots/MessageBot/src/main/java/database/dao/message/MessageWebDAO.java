@@ -34,7 +34,19 @@ public class MessageWebDAO implements MessageDAO {
     }
 
     @Override
-    public MessageDB get(String id) {
+    public List<MessageDB> get(String id) {
+        return em.createQuery("select m " +
+                        "from MessageDB m " +
+                        "where m.author = " +
+                        "   (select mb from UserDB mb " +
+                        "   where mb.id = :id)",
+                MessageDB.class)
+                .setParameter("id", id)
+                .getResultList();
+    }
+
+    @Override
+    public MessageDB find(String id) {
         return em.find(MessageDB.class, id);
     }
 
@@ -53,6 +65,6 @@ public class MessageWebDAO implements MessageDAO {
 
     @Override
     public boolean exists(String id) {
-        return get(id) != null;
+        return find(id) != null;
     }
 }
