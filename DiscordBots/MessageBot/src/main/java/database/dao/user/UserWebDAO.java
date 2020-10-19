@@ -10,7 +10,7 @@ import java.util.List;
 
 @Stateless
 public class UserWebDAO implements UserDAO {
-    @PersistenceContext (name = "DiscordBotJTAPU")
+    @PersistenceContext(name = "DiscordBotJTAPU")
     private EntityManager em;
 
 

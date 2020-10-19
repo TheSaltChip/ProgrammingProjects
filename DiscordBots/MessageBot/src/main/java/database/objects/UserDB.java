@@ -19,7 +19,8 @@ public class UserDB {
     @JoinColumn(name = "info_id", referencedColumnName = "id")
     private Info info;
 
-    protected UserDB () {}
+    protected UserDB() {
+    }
 
     public UserDB(String id, String username, String discriminator, String nickname) {
         this.id = id;

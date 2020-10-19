@@ -90,7 +90,7 @@ public class InfoBotDAO {
         return letters;
     }
 
-    public void insert(Map<Character, Integer> lettersInfo){
+    public void insert(Map<Character, Integer> lettersInfo) {
         EntityManager em = EMF.createEntityManager();
         EntityTransaction tx = em.getTransaction();
         try {
