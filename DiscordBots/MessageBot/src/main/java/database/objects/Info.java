@@ -26,6 +26,14 @@ public class Info {
     @Column(name = "times")
     private Map<Character, Integer> letters;
 
+    protected Info(){}
+
+    public Info(UserDB user, Map<String, Integer> words, Map<Character, Integer> letters){
+        this.user = user;
+        this.words = words;
+        this.letters = letters;
+    }
+
     public int getId() {
         return id;
     }
@@ -56,5 +64,10 @@ public class Info {
 
     public void setLetters(Map<Character, Integer> letters) {
         this.letters = letters;
+    }
+
+    @Override
+    public String toString(){
+        return "\n{id:" + id + "\nuser:" + user.getId() + "\nwords:" + words + "\nletters: " + letters + "}\n";
     }
 }
