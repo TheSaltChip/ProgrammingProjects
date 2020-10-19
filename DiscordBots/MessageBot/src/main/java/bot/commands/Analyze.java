@@ -11,14 +11,13 @@ public class Analyze extends ListenerAdapter {
     public void onGuildMessageReceived(@NotNull GuildMessageReceivedEvent event) {
         Message m = event.getMessage();
 
-        if (m.getContentStripped().strip().equals("!analyze")) {
+        if (m.getContentStripped().strip().startsWith("!analyze")) {
 
             if (m.getContentStripped().length() == 8) {
                 event.getChannel().sendMessage("This is the !analyze command\n" +
-                        "To use this command write the username of the person you want to analyze\n" +
-                        "after !analyze. You may also @ the person.\n").queue();
+                        "To use this command write @ and pick the user you want to analyze.\n").queue();
 
-            } else if (m.getContentStripped().strip().length() > 9) {
+            } else if (m.getContentStripped().strip().length() > 8 && m.getContentStripped().strip().charAt(8) == ' ') {
                 if (m.getMentionedMembers().size() == 1) {
                     AnalyzeDatabase aD = new AnalyzeDatabase(event.getChannel(), event.getMessage().getMentionedUsers().get(0));
 
@@ -26,10 +25,9 @@ public class Analyze extends ListenerAdapter {
                         event.getChannel().sendMessage("User not found in the Database, run !setup to update the database").queue();
 
                     } else {
-
+                        event.getChannel().sendMessage(aD.computeLetters() + "").queue();
                     }
                 }
-
             }
         }
 
