@@ -789,7 +789,7 @@ false Zulu
     <database id="2" parent="1" name="DiscordBot">
       <ObjectId>16458</ObjectId>
       <Owner>postgres</Owner>
-      <IntrospectionStateNumber>811</IntrospectionStateNumber>
+      <IntrospectionStateNumber>825</IntrospectionStateNumber>
       <Current>1</Current>
       <Relations>sequence|table|17383|17385|1
 </Relations>
@@ -837,7 +837,7 @@ false Zulu
       <Comment>standard public schema</Comment>
       <StateNumber>585</StateNumber>
       <Owner>postgres</Owner>
-      <IntrospectionStateNumber>812</IntrospectionStateNumber>
+      <IntrospectionStateNumber>826</IntrospectionStateNumber>
     </schema>
     <schema id="14" parent="2" name="information_schema">
       <ObjectId>13158</ObjectId>
@@ -849,7 +849,7 @@ false Zulu
       <Comment>system catalog schema</Comment>
       <StateNumber>286</StateNumber>
       <Owner>postgres</Owner>
-      <IntrospectionStateNumber>813</IntrospectionStateNumber>
+      <IntrospectionStateNumber>827</IntrospectionStateNumber>
       <Current>1</Current>
     </schema>
     <access-method id="16" parent="2" name="heap">
