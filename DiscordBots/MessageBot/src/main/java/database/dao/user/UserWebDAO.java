@@ -1,6 +1,7 @@
 package database.dao.user;
 
 import database.dao.adt.UserDAO;
+import database.objects.Info;
 import database.objects.UserDB;
 
 import javax.ejb.Stateless;
@@ -61,5 +62,12 @@ public class UserWebDAO implements UserDAO {
     @Override
     public boolean exists(String username, String discriminator) {
         return get(username, discriminator) != null;
+    }
+
+    @Override
+    public void add(Info info) {
+        UserDB user = info.getUser();
+        user.setInfo(info);
+        em.merge(user);
     }
 }
