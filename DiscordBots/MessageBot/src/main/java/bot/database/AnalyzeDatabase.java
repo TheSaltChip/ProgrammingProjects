@@ -1,6 +1,5 @@
 package bot.database;
 
-import analyzing.Analyzer;
 import database.dao.info.InfoBotDAO;
 import database.dao.message.MessageBotDAO;
 import database.dao.user.UserBotDAO;
@@ -8,7 +7,10 @@ import database.objects.MessageDB;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.entities.User;
 
-import java.util.*;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 import java.util.stream.Collectors;
 
 public class AnalyzeDatabase {
@@ -17,7 +19,6 @@ public class AnalyzeDatabase {
     private final MessageBotDAO MESSAGE_BOT_DAO = new MessageBotDAO();
     private final UserBotDAO USER_BOT_DAO = new UserBotDAO();
     private final InfoBotDAO INFO_BOT_DAO = new InfoBotDAO();
-    private final Analyzer ANALYZER = new Analyzer();
 
     public AnalyzeDatabase(TextChannel text_channel, User user) {
         TEXT_CHANNEL = text_channel;
