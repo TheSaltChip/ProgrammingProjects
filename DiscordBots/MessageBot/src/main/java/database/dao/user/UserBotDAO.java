@@ -1,6 +1,7 @@
 package database.dao.user;
 
 import database.dao.adt.UserDAO;
+import database.objects.Info;
 import database.objects.UserDB;
 
 import javax.persistence.EntityManager;
@@ -107,19 +108,15 @@ public class UserBotDAO implements UserDAO {
         return userDB;
     }
 
-    /**
-     * Inserts a list of members into the database
-     *
-     * @param members The list of members that are going to be added
-     */
-    public void insert(List<UserDB> members) {
+    @Override
+    public void insert(List<UserDB> users) {
         EntityManager em = EMF.createEntityManager();
         EntityTransaction tx = em.getTransaction();
 
         try {
             tx.begin();
 
-            members.forEach(em::persist);
+            users.forEach(em::persist);
 
             tx.commit();
 
@@ -133,19 +130,15 @@ public class UserBotDAO implements UserDAO {
 
     }
 
-    /**
-     * Inserts a member into the database
-     *
-     * @param member The member that is to be inserted to the database
-     */
-    public void insert(UserDB member) {
+    @Override
+    public void insert(UserDB user) {
         EntityManager em = EMF.createEntityManager();
         EntityTransaction tx = em.getTransaction();
 
         try {
             tx.begin();
 
-            em.persist(member);
+            em.persist(user);
 
             tx.commit();
 
@@ -158,24 +151,36 @@ public class UserBotDAO implements UserDAO {
         }
     }
 
-    /**
-     * Checks if the user given by the id exists in the database
-     *
-     * @param id The id of the user
-     * @return True if the user exists, false if not
-     */
+    @Override
     public boolean exists(String id) {
         return get(id) != null;
     }
 
-    /**
-     * Checks if a user with the given username and discord tag exists in the database
-     *
-     * @param username      The username of the user
-     * @param discriminator The discord tag of the user, example #1234
-     * @return True if the user exists, false if not
-     */
+    @Override
     public boolean exists(String username, String discriminator) {
         return get(username, discriminator) != null;
+    }
+
+    @Override
+    public void add(Info info) {
+        EntityManager em = EMF.createEntityManager();
+        EntityTransaction tx = em.getTransaction();
+
+        try {
+            tx.begin();
+            UserDB user = this.get(info.getUser().getId());
+
+            UserDB newUser = em.merge(user);
+            newUser.setInfo(info);
+
+            tx.commit();
+
+        } catch (Exception e) {
+            if (tx.isActive()) {
+                tx.rollback();
+            }
+        } finally {
+            em.close();
+        }
     }
 }
