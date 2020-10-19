@@ -32,6 +32,10 @@ public class UserDB {
         return id;
     }
 
+    public List<MessageDB> getMessages() {
+        return messages;
+    }
+
     @Override
     public String toString() {
         return ("(id:" + id + ";username:" + username + ";discriminator:" + discriminator + ";nickname:" + nickname + ")");
