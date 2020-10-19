@@ -37,10 +37,12 @@ public class UserDB {
         return messages;
     }
 
+    public void setInfo(Info info) {
+        this.info = info;
+    }
+
     @Override
     public String toString() {
         return ("(id:" + id + ";username:" + username + ";discriminator:" + discriminator + ";nickname:" + nickname + ")");
     }
-
-
 }
