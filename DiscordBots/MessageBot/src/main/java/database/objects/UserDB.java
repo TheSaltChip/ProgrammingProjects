@@ -13,7 +13,6 @@ public class UserDB {
     private List<MessageDB> messages;
     private String username;
     private String discriminator;
-    private String nickname;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "info_id", referencedColumnName = "id")
@@ -22,11 +21,10 @@ public class UserDB {
     protected UserDB() {
     }
 
-    public UserDB(String id, String username, String discriminator, String nickname) {
+    public UserDB(String id, String username, String discriminator) {
         this.id = id;
         this.username = username;
         this.discriminator = discriminator;
-        this.nickname = nickname;
     }
 
     public String getId() {
@@ -43,6 +41,6 @@ public class UserDB {
 
     @Override
     public String toString() {
-        return ("(id:" + id + ";username:" + username + ";discriminator:" + discriminator + ";nickname:" + nickname + ")");
+        return "(id:" + id + ";username:" + username + ";discriminator:" + discriminator + ")";
     }
 }

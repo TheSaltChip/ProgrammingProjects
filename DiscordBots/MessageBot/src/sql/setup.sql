@@ -11,7 +11,6 @@ CREATE TABLE "user"
     id            varchar(18) not null check (length(id) = 18),
     username      varchar(32) NOT NULL check (length(username) >= 2),
     discriminator varchar(5)  NOT NULL check (length(discriminator) = 5),
-    nickname      varchar(32) check (length(nickname) >= 1),
     info_id       int,
     PRIMARY KEY (id)
 );
