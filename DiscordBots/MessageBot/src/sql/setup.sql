@@ -26,7 +26,7 @@ CREATE TABLE message
 
 create table info
 (
-    id         serial,
+    id         serial not null,
     user_id    varchar(18),
     letters_id char,
     words_id   varchar(50),
