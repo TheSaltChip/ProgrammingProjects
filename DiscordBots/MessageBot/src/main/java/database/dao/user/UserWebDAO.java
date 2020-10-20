@@ -2,12 +2,14 @@ package database.dao.user;
 
 import database.dao.adt.UserDAO;
 import database.objects.Info;
+import database.objects.MessageDB;
 import database.objects.UserDB;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Stateless
 public class UserWebDAO implements UserDAO {
@@ -45,6 +47,11 @@ public class UserWebDAO implements UserDAO {
     }
 
     @Override
+    public List<UserDB> get(List<MessageDB> messages) {
+        return null;
+    }
+
+    @Override
     public void insert(List<UserDB> members) {
         members.forEach(em::persist);
     }
@@ -69,5 +76,20 @@ public class UserWebDAO implements UserDAO {
         UserDB user = info.getUser();
         user.setInfo(info);
         em.merge(user);
+    }
+
+    @Override
+    public void update(List<MessageDB> messageDBList) {
+        
+        List<UserDB> users = this.get(messageDBList);
+
+        for (UserDB u :
+                users) {
+            List<MessageDB> msg = messageDBList.stream()
+                    .filter(m -> m.getAuthor().getId().equals(u.getId()))
+                    .collect(Collectors.toList());
+            u.updateMessages(msg);
+            em.merge(u);
+        }
     }
 }

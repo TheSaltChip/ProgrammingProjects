@@ -26,6 +26,10 @@ public class MessageDB {
         return msg_content;
     }
 
+    public UserDB getAuthor() {
+        return author;
+    }
+
     @Override
     public String toString() {
         return "\n{id:" + id + "\nauthor:" + author + "\nmessage_content:" + msg_content + "}\n";

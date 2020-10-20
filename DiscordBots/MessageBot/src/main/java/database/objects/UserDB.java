@@ -35,6 +35,10 @@ public class UserDB {
         return messages;
     }
 
+    public void updateMessages(List<MessageDB> messages) {
+        this.messages.addAll(messages);
+    }
+
     public void setInfo(Info info) {
         this.info = info;
     }

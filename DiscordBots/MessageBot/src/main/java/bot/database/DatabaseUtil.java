@@ -68,25 +68,26 @@ public class DatabaseUtil {
             userBotDAO.insert(userDBS);
         }
 
-        //Messages -- TODO Get this to work
-        MessageHistory messageHistory = channel.getHistoryAfter(lastMessage, 100).complete();
-        List<Message> messages = messageHistory.getRetrievedHistory();
+        MessageHistory messageHistory = null;
+        List<Message> messages = null;
 
-        while (!messages.isEmpty()) {
-            messages = messageHistory.retrieveFuture(100).complete();
+        while (messages == null || !messages.isEmpty()) {
+            if(messages == null){
+                messageHistory = channel.getHistoryAfter(lastMessage, 100).complete();
+                messages = messageHistory.getRetrievedHistory();
+            } else {
+                messages = messageHistory.retrieveFuture(100).complete();
+            }
 
-            //Filters out all the messages that already exists
-            List<Message> newMessages = messages.stream()
-                    .filter(m -> !messageBotDAO.exists(m.getId()))
-                    .collect(Collectors.toList());
-
-            List<MessageDB> dbList = newMessages.stream()
+            List<MessageDB> dbList = messages.stream()
                     .map(m -> new MessageDB(m.getId(),
                             userBotDAO.get(m.getAuthor().getId()),
                             m.getContentStripped()))
                     .collect(Collectors.toList());
 
             messageBotDAO.insert(dbList);
+            userBotDAO.update(dbList);
+
         }
     }
 }

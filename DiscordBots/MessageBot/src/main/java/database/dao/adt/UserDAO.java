@@ -1,6 +1,7 @@
 package database.dao.adt;
 
 import database.objects.Info;
+import database.objects.MessageDB;
 import database.objects.UserDB;
 
 import java.util.List;
@@ -22,6 +23,25 @@ public interface UserDAO {
     UserDB get(String id);
 
     /**
+     * Attempts to find a user by their full discord name,
+     * which includes their username and discord tag
+     *
+     * @param username      The username of the user that is to be search for
+     * @param discriminator The 4 digit discord tag starting with #, example #1234
+     * @return A user with the given username and discriminator
+     */
+    UserDB get(String username, String discriminator);
+
+    /**
+     * Attempts to get all users which has written the messages
+     * in the message list
+     *
+     * @param messages The list of messages where the users are to be found
+     * @return A list of all the users that has written the messages
+     */
+    List<UserDB> get(List<MessageDB> messages);
+
+    /**
      * Attempts to find all the users with the given username
      * And since multiple people can have the same username it returns
      * a list of the users with the username
@@ -30,15 +50,6 @@ public interface UserDAO {
      * @return A list of all the users with the given username
      */
     List<UserDB> find(String username);
-
-    /**
-     * Attempts to find a user by their full discord name, which includes their username and discord tag
-     *
-     * @param username      The username of the user that is to be search for
-     * @param discriminator The 4 digit discord tag starting with #, example #1234
-     * @return A user with the given username and discriminator
-     */
-    UserDB get(String username, String discriminator);
 
     /**
      * Inserts a list of users into the database
@@ -77,4 +88,12 @@ public interface UserDAO {
      * @param info Info-object
      */
     void add(Info info);
+
+    /**
+     * Updates all the users who have written messages
+     * that exists in the given list
+     *
+     * @param messageDBList The list of all new messages
+     */
+    void update(List<MessageDB> messageDBList);
 }
