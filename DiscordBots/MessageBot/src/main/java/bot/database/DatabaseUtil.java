@@ -1,5 +1,6 @@
 package bot.database;
 
+import database.dao.adt.UserDAO;
 import database.dao.message.MessageBotDAO;
 import database.dao.user.UserBotDAO;
 import database.objects.MessageDB;
@@ -15,7 +16,6 @@ import java.util.stream.Collectors;
 public class DatabaseUtil {
     private final MessageBotDAO messageBotDAO = new MessageBotDAO();
     private final UserBotDAO userBotDAO = new UserBotDAO();
-    private boolean hasRun = false;
     private String lastMessage = null;
 
     public void setup(TextChannel channel) {
@@ -46,12 +46,10 @@ public class DatabaseUtil {
 
             messageBotDAO.insert(dbList);
         }
-
-        hasRun = true;
     }
 
     public boolean hasRun() {
-        return hasRun;
+        return !(userBotDAO.get().isEmpty() || messageBotDAO.get().isEmpty());
     }
 
     public void update(TextChannel channel) {
