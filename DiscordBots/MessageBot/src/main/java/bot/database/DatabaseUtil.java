@@ -58,8 +58,8 @@ public class DatabaseUtil {
         //Users
         List<UserDB> userDBS = channel.getMembers().stream()
                 .map(Member::getUser)
+                .filter(u -> !userBotDAO.exists(u.getId()))
                 .map(user -> new UserDB(user.getId(), user.getName(), "#" + user.getDiscriminator()))
-                .filter(m -> !userBotDAO.exists(m.getId()))
                 .collect(Collectors.toList());
 
         if (userDBS.size() == 1) {
@@ -68,6 +68,7 @@ public class DatabaseUtil {
             userBotDAO.insert(userDBS);
         }
 
+        //Message
         MessageHistory messageHistory = null;
         List<Message> messages = null;
 
