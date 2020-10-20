@@ -29,6 +29,9 @@ public class MessageDB {
     public UserDB getAuthor() {
         return author;
     }
+    public String getId() {
+        return id;
+    }
 
     @Override
     public String toString() {
