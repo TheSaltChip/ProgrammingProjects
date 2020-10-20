@@ -85,6 +85,8 @@ public class DatabaseUtil {
                             m.getContentStripped()))
                     .collect(Collectors.toList());
 
+            lastMessage = dbList.get(0).getId();
+
             messageBotDAO.insert(dbList);
             userBotDAO.update(dbList);
 
