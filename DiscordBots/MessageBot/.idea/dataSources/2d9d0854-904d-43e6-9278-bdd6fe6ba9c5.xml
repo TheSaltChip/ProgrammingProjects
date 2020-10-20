@@ -789,9 +789,9 @@ false Zulu
     <database id="2" parent="1" name="DiscordBot">
       <ObjectId>16394</ObjectId>
       <Owner>postgres</Owner>
-      <IntrospectionStateNumber>575</IntrospectionStateNumber>
+      <IntrospectionStateNumber>600</IntrospectionStateNumber>
       <Current>1</Current>
-      <Relations>sequence|table|24608|24610|1
+      <Relations>sequence|table|24677|24679|1
 </Relations>
     </database>
     <database id="3" parent="1" name="postgres">
@@ -836,7 +836,7 @@ false Zulu
       <ObjectId>16395</ObjectId>
       <StateNumber>490</StateNumber>
       <Owner>postgres</Owner>
-      <IntrospectionStateNumber>576</IntrospectionStateNumber>
+      <IntrospectionStateNumber>601</IntrospectionStateNumber>
     </schema>
     <schema id="14" parent="2" name="information_schema">
       <ObjectId>13158</ObjectId>
@@ -854,7 +854,7 @@ false Zulu
       <Comment>standard public schema</Comment>
       <StateNumber>287</StateNumber>
       <Owner>postgres</Owner>
-      <IntrospectionStateNumber>577</IntrospectionStateNumber>
+      <IntrospectionStateNumber>602</IntrospectionStateNumber>
       <Current>1</Current>
     </schema>
     <access-method id="17" parent="2" name="heap">
@@ -925,20 +925,20 @@ false Zulu
     <language id="27" parent="2" name="plpgsql"/>
     <language id="28" parent="2" name="sql"/>
     <sequence id="29" parent="13" name="info_id_seq">
-      <ObjectId>24608</ObjectId>
+      <ObjectId>24677</ObjectId>
       <Owner>postgres</Owner>
-      <StateNumber>569</StateNumber>
+      <StateNumber>594</StateNumber>
       <DataType>integer|0s</DataType>
     </sequence>
     <table id="30" parent="13" name="info">
-      <ObjectId>24610</ObjectId>
+      <ObjectId>24679</ObjectId>
       <Owner>postgres</Owner>
-      <StateNumber>569</StateNumber>
+      <StateNumber>594</StateNumber>
     </table>
     <table id="31" parent="13" name="letter">
-      <ObjectId>24621</ObjectId>
+      <ObjectId>24690</ObjectId>
       <Owner>postgres</Owner>
-      <StateNumber>570</StateNumber>
+      <StateNumber>595</StateNumber>
     </table>
     <table id="32" parent="13" name="member">
       <ObjectId>16418</ObjectId>
@@ -946,85 +946,85 @@ false Zulu
       <StateNumber>512</StateNumber>
     </table>
     <table id="33" parent="13" name="message">
-      <ObjectId>24595</ObjectId>
+      <ObjectId>24664</ObjectId>
       <Owner>postgres</Owner>
-      <StateNumber>568</StateNumber>
+      <StateNumber>593</StateNumber>
     </table>
     <table id="34" parent="13" name="user">
-      <ObjectId>24587</ObjectId>
+      <ObjectId>24656</ObjectId>
       <Owner>postgres</Owner>
-      <StateNumber>568</StateNumber>
+      <StateNumber>593</StateNumber>
     </table>
     <table id="35" parent="13" name="word">
-      <ObjectId>24631</ObjectId>
+      <ObjectId>24700</ObjectId>
       <Owner>postgres</Owner>
-      <StateNumber>571</StateNumber>
+      <StateNumber>596</StateNumber>
     </table>
     <column id="36" parent="30" name="id">
       <Position>1</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>569</StateNumber>
+      <StateNumber>594</StateNumber>
       <DefaultExpression>nextval(&apos;guild.info_id_seq&apos;::regclass)</DefaultExpression>
       <TypeId>23</TypeId>
     </column>
     <column id="37" parent="30" name="user_id">
       <Position>2</Position>
       <DataType>varchar(18)|0s</DataType>
-      <StateNumber>569</StateNumber>
+      <StateNumber>594</StateNumber>
       <TypeId>1043</TypeId>
     </column>
     <column id="38" parent="30" name="letters_id">
       <Position>3</Position>
       <DataType>char|0s</DataType>
-      <StateNumber>569</StateNumber>
+      <StateNumber>594</StateNumber>
       <TypeId>1042</TypeId>
     </column>
     <column id="39" parent="30" name="words_id">
       <Position>4</Position>
       <DataType>varchar(50)|0s</DataType>
-      <StateNumber>569</StateNumber>
+      <StateNumber>594</StateNumber>
       <TypeId>1043</TypeId>
     </column>
     <index id="40" parent="30" name="info_pkey">
-      <ObjectId>24614</ObjectId>
-      <StateNumber>569</StateNumber>
+      <ObjectId>24683</ObjectId>
+      <StateNumber>594</StateNumber>
       <ColNames>id</ColNames>
       <Unique>1</Unique>
       <Primary>1</Primary>
     </index>
     <key id="41" parent="30" name="info_pkey">
-      <ObjectId>24615</ObjectId>
-      <StateNumber>569</StateNumber>
+      <ObjectId>24684</ObjectId>
+      <StateNumber>594</StateNumber>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>info_pkey</UnderlyingIndexName>
     </key>
     <foreign-key id="42" parent="30" name="info_user_id_fkey">
-      <ObjectId>24616</ObjectId>
-      <StateNumber>569</StateNumber>
+      <ObjectId>24685</ObjectId>
+      <StateNumber>594</StateNumber>
       <ColNames>user_id</ColNames>
-      <RefTableId>24587</RefTableId>
+      <RefTableId>24656</RefTableId>
       <RefColPositions>1</RefColPositions>
       <RefTableName>user</RefTableName>
       <RefKeyName>user_pkey</RefKeyName>
       <RefColNames>id</RefColNames>
     </foreign-key>
     <foreign-key id="43" parent="30" name="info_letters_id_fkey">
-      <ObjectId>24646</ObjectId>
-      <StateNumber>573</StateNumber>
+      <ObjectId>24715</ObjectId>
+      <StateNumber>598</StateNumber>
       <ColNames>letters_id</ColNames>
-      <RefTableId>24621</RefTableId>
+      <RefTableId>24690</RefTableId>
       <RefColPositions>1</RefColPositions>
       <RefTableName>letter</RefTableName>
       <RefKeyName>letter_pkey</RefKeyName>
       <RefColNames>letter</RefColNames>
     </foreign-key>
     <foreign-key id="44" parent="30" name="info_words_id_fkey">
-      <ObjectId>24651</ObjectId>
-      <StateNumber>574</StateNumber>
+      <ObjectId>24720</ObjectId>
+      <StateNumber>599</StateNumber>
       <ColNames>words_id</ColNames>
-      <RefTableId>24631</RefTableId>
+      <RefTableId>24700</RefTableId>
       <RefColPositions>1</RefColPositions>
       <RefTableName>word</RefTableName>
       <RefKeyName>word_pkey</RefKeyName>
@@ -1034,40 +1034,40 @@ false Zulu
       <Position>1</Position>
       <DataType>char|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>570</StateNumber>
+      <StateNumber>595</StateNumber>
       <TypeId>1042</TypeId>
     </column>
     <column id="46" parent="31" name="times">
       <Position>2</Position>
       <DataType>integer|0s</DataType>
-      <StateNumber>570</StateNumber>
+      <StateNumber>595</StateNumber>
       <TypeId>23</TypeId>
     </column>
     <column id="47" parent="31" name="info_id">
       <Position>3</Position>
       <DataType>integer|0s</DataType>
-      <StateNumber>570</StateNumber>
+      <StateNumber>595</StateNumber>
       <TypeId>23</TypeId>
     </column>
     <index id="48" parent="31" name="letter_pkey">
-      <ObjectId>24624</ObjectId>
-      <StateNumber>570</StateNumber>
+      <ObjectId>24693</ObjectId>
+      <StateNumber>595</StateNumber>
       <ColNames>letter</ColNames>
       <Unique>1</Unique>
       <Primary>1</Primary>
     </index>
     <key id="49" parent="31" name="letter_pkey">
-      <ObjectId>24625</ObjectId>
-      <StateNumber>570</StateNumber>
+      <ObjectId>24694</ObjectId>
+      <StateNumber>595</StateNumber>
       <ColNames>letter</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>letter_pkey</UnderlyingIndexName>
     </key>
     <foreign-key id="50" parent="31" name="letter_info_id_fkey">
-      <ObjectId>24626</ObjectId>
-      <StateNumber>570</StateNumber>
+      <ObjectId>24695</ObjectId>
+      <StateNumber>595</StateNumber>
       <ColNames>info_id</ColNames>
-      <RefTableId>24610</RefTableId>
+      <RefTableId>24679</RefTableId>
       <RefColPositions>1</RefColPositions>
       <RefTableName>info</RefTableName>
       <RefKeyName>info_pkey</RefKeyName>
@@ -1136,40 +1136,40 @@ false Zulu
       <Position>1</Position>
       <DataType>varchar(18)|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>568</StateNumber>
+      <StateNumber>593</StateNumber>
       <TypeId>1043</TypeId>
     </column>
     <column id="61" parent="33" name="author_id">
       <Position>2</Position>
       <DataType>varchar(18)|0s</DataType>
-      <StateNumber>568</StateNumber>
+      <StateNumber>593</StateNumber>
       <TypeId>1043</TypeId>
     </column>
     <column id="62" parent="33" name="msg_content">
       <Position>3</Position>
       <DataType>varchar(2000)|0s</DataType>
-      <StateNumber>568</StateNumber>
+      <StateNumber>593</StateNumber>
       <TypeId>1043</TypeId>
     </column>
     <index id="63" parent="33" name="message_pkey">
-      <ObjectId>24601</ObjectId>
-      <StateNumber>568</StateNumber>
+      <ObjectId>24670</ObjectId>
+      <StateNumber>593</StateNumber>
       <ColNames>id</ColNames>
       <Unique>1</Unique>
       <Primary>1</Primary>
     </index>
     <key id="64" parent="33" name="message_pkey">
-      <ObjectId>24602</ObjectId>
-      <StateNumber>568</StateNumber>
+      <ObjectId>24671</ObjectId>
+      <StateNumber>593</StateNumber>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>message_pkey</UnderlyingIndexName>
     </key>
     <foreign-key id="65" parent="33" name="message_author_id_fkey">
-      <ObjectId>24603</ObjectId>
-      <StateNumber>568</StateNumber>
+      <ObjectId>24672</ObjectId>
+      <StateNumber>593</StateNumber>
       <ColNames>author_id</ColNames>
-      <RefTableId>24587</RefTableId>
+      <RefTableId>24656</RefTableId>
       <RefColPositions>1</RefColPositions>
       <RefTableName>user</RefTableName>
       <RefKeyName>user_pkey</RefKeyName>
@@ -1179,68 +1179,68 @@ false Zulu
       <Position>1</Position>
       <DataType>varchar(18)|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>567</StateNumber>
+      <StateNumber>592</StateNumber>
       <TypeId>1043</TypeId>
     </column>
     <column id="67" parent="34" name="username">
       <Position>2</Position>
       <DataType>varchar(32)|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>567</StateNumber>
+      <StateNumber>592</StateNumber>
       <TypeId>1043</TypeId>
     </column>
     <column id="68" parent="34" name="discriminator">
       <Position>3</Position>
       <DataType>varchar(5)|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>567</StateNumber>
+      <StateNumber>592</StateNumber>
       <TypeId>1043</TypeId>
     </column>
     <column id="69" parent="34" name="info_id">
       <Position>4</Position>
       <DataType>integer|0s</DataType>
-      <StateNumber>567</StateNumber>
+      <StateNumber>592</StateNumber>
       <TypeId>23</TypeId>
     </column>
     <index id="70" parent="34" name="user_pkey">
-      <ObjectId>24593</ObjectId>
-      <StateNumber>567</StateNumber>
+      <ObjectId>24662</ObjectId>
+      <StateNumber>592</StateNumber>
       <ColNames>id</ColNames>
       <Unique>1</Unique>
       <Primary>1</Primary>
     </index>
     <key id="71" parent="34" name="user_pkey">
-      <ObjectId>24594</ObjectId>
-      <StateNumber>567</StateNumber>
+      <ObjectId>24663</ObjectId>
+      <StateNumber>592</StateNumber>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>user_pkey</UnderlyingIndexName>
     </key>
     <foreign-key id="72" parent="34" name="user_info_id_fkey">
-      <ObjectId>24641</ObjectId>
-      <StateNumber>572</StateNumber>
+      <ObjectId>24710</ObjectId>
+      <StateNumber>597</StateNumber>
       <ColNames>info_id</ColNames>
-      <RefTableId>24610</RefTableId>
+      <RefTableId>24679</RefTableId>
       <RefColPositions>1</RefColPositions>
       <RefTableName>info</RefTableName>
       <RefKeyName>info_pkey</RefKeyName>
       <RefColNames>id</RefColNames>
     </foreign-key>
     <check id="73" parent="34" name="user_discriminator_check">
-      <ObjectId>24592</ObjectId>
-      <StateNumber>567</StateNumber>
+      <ObjectId>24661</ObjectId>
+      <StateNumber>592</StateNumber>
       <ColNames>discriminator</ColNames>
       <Predicate>length((discriminator)::text) = 5</Predicate>
     </check>
     <check id="74" parent="34" name="user_id_check">
-      <ObjectId>24590</ObjectId>
-      <StateNumber>567</StateNumber>
+      <ObjectId>24659</ObjectId>
+      <StateNumber>592</StateNumber>
       <ColNames>id</ColNames>
       <Predicate>length((id)::text) = 18</Predicate>
     </check>
     <check id="75" parent="34" name="user_username_check">
-      <ObjectId>24591</ObjectId>
-      <StateNumber>567</StateNumber>
+      <ObjectId>24660</ObjectId>
+      <StateNumber>592</StateNumber>
       <ColNames>username</ColNames>
       <Predicate>length((username)::text) &gt;= 2</Predicate>
     </check>
@@ -1248,40 +1248,40 @@ false Zulu
       <Position>1</Position>
       <DataType>varchar(50)|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>571</StateNumber>
+      <StateNumber>596</StateNumber>
       <TypeId>1043</TypeId>
     </column>
     <column id="77" parent="35" name="times">
       <Position>2</Position>
       <DataType>integer|0s</DataType>
-      <StateNumber>571</StateNumber>
+      <StateNumber>596</StateNumber>
       <TypeId>23</TypeId>
     </column>
     <column id="78" parent="35" name="info_id">
       <Position>3</Position>
       <DataType>integer|0s</DataType>
-      <StateNumber>571</StateNumber>
+      <StateNumber>596</StateNumber>
       <TypeId>23</TypeId>
     </column>
     <index id="79" parent="35" name="word_pkey">
-      <ObjectId>24634</ObjectId>
-      <StateNumber>571</StateNumber>
+      <ObjectId>24703</ObjectId>
+      <StateNumber>596</StateNumber>
       <ColNames>word</ColNames>
       <Unique>1</Unique>
       <Primary>1</Primary>
     </index>
     <key id="80" parent="35" name="word_pkey">
-      <ObjectId>24635</ObjectId>
-      <StateNumber>571</StateNumber>
+      <ObjectId>24704</ObjectId>
+      <StateNumber>596</StateNumber>
       <ColNames>word</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>word_pkey</UnderlyingIndexName>
     </key>
     <foreign-key id="81" parent="35" name="word_info_id_fkey">
-      <ObjectId>24636</ObjectId>
-      <StateNumber>571</StateNumber>
+      <ObjectId>24705</ObjectId>
+      <StateNumber>596</StateNumber>
       <ColNames>info_id</ColNames>
-      <RefTableId>24610</RefTableId>
+      <RefTableId>24679</RefTableId>
       <RefColPositions>1</RefColPositions>
       <RefTableName>info</RefTableName>
       <RefKeyName>info_pkey</RefKeyName>
