@@ -24,34 +24,12 @@ public class AnalyzeDatabase {
     }
 
     public void compute() {
-        List<String> messages = MESSAGE_DAO.get(USER.getId())
+        List<String> messages = USER_DAO.get(USER.getId()).getMessages()
                 .stream()
                 .map(MessageDB::getMsg_content)
                 .collect(Collectors.toList());
 
-        Map<Character, Integer> letters = this.computeLetters(messages);
-        Map<String, Integer> words = this.computeWords(messages);
-
-        if (INFO_DAO.get(USER.getId()) != null) {
-            Info info = INFO_DAO.get(USER.getId());
-            System.out.println(info);
-
-            INFO_DAO.insert(USER.getId(), letters, words);
-
-            info = INFO_DAO.get(USER.getId());
-            System.out.println(info);
-        } else {
-            System.out.println("Right after else");
-            Info info = new Info(USER_DAO.get(USER.getId()), words, letters);
-            System.out.println("After creating");
-            USER_DAO.add(info);
-            System.out.println("After adding");
-            INFO_DAO.insert(info);
-            System.out.println("After inserting");
-        }
-    }
-
-    public Map<Character, Integer> computeLetters(List<String> messages) {
+        //Compute the info about the letters
         Map<Character, Integer> letters = new TreeMap<>(
                 Comparator.comparingInt(c -> c)
         );
@@ -67,11 +45,7 @@ public class AnalyzeDatabase {
                 })
         );
 
-        return letters;
-
-    }
-
-    public Map<String, Integer> computeWords(List<String> messages) {
+        //Compute the info about the words
         Map<String, Integer> words = new TreeMap<>(
                 Comparator.comparing(c -> c)
         );
@@ -81,21 +55,32 @@ public class AnalyzeDatabase {
                 .forEach(sA -> Arrays.stream(sA)
                         .filter(s -> !(s.matches("[,. ?!]") || s.length() > 100))
                         .forEach(s -> {
-                            if (!words.containsKey(s)) {
-                                words.put(s, 1);
-                            } else {
-                                words.compute(s, (k, i) -> (i == null) ? 1 : i + 1);
-                            }
-                        }));
+                                    if (!words.containsKey(s)) {
+                                        words.put(s, 1);
+                                    } else {
+                                        words.compute(s, (k, i) -> (i == null) ? 1 : i + 1);
+                                    }
+                                }
+                        )
+                );
 
-        return words;
+        if (INFO_DAO.get(USER.getId()) != null) {
+            Info info = INFO_DAO.get(USER.getId());
+            System.out.println(info);
+
+            INFO_DAO.insert(USER.getId(), letters, words);
+
+            info = INFO_DAO.get(USER.getId());
+            System.out.println(info);
+
+        } else {
+            Info info = new Info(USER_DAO.get(USER.getId()), words, letters);
+            USER_DAO.add(info);
+            INFO_DAO.insert(info);
+        }
     }
 
     public boolean exists() {
         return USER_DAO.exists(USER.getId());
-    }
-
-    public Map<Character, Integer> getLetters() {
-        return INFO_DAO.getLetters(USER.getId());
     }
 }
