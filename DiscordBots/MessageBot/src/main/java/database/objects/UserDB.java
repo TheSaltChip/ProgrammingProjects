@@ -1,6 +1,7 @@
 package database.objects;
 
 import javax.persistence.*;
+import javax.xml.registry.infomodel.User;
 import java.util.List;
 
 @Entity
@@ -41,6 +42,20 @@ public class UserDB {
 
     public void setInfo(Info info) {
         this.info = info;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        }
+
+        if (!(obj instanceof UserDB)) {
+            return false;
+        }
+
+        UserDB u = (UserDB) obj;
+        return this.id.equals(u.getId());
     }
 
     @Override
