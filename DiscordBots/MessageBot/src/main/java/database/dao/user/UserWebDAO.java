@@ -1,6 +1,7 @@
-package database.DAO.user;
+package database.dao.user;
 
-import database.DAO.adt.UserDAO;
+import database.dao.adt.UserDAO;
+import database.objects.Info;
 import database.objects.UserDB;
 
 import javax.ejb.Stateless;
@@ -10,7 +11,7 @@ import java.util.List;
 
 @Stateless
 public class UserWebDAO implements UserDAO {
-    @PersistenceContext (name = "DiscordBotJTAPU")
+    @PersistenceContext(name = "DiscordBotJTAPU")
     private EntityManager em;
 
 
@@ -61,5 +62,12 @@ public class UserWebDAO implements UserDAO {
     @Override
     public boolean exists(String username, String discriminator) {
         return get(username, discriminator) != null;
+    }
+
+    @Override
+    public void add(Info info) {
+        UserDB user = info.getUser();
+        user.setInfo(info);
+        em.merge(user);
     }
 }

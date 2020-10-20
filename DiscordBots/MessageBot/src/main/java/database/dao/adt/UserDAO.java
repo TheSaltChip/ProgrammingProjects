@@ -1,5 +1,6 @@
-package database.DAO.adt;
+package database.dao.adt;
 
+import database.objects.Info;
 import database.objects.UserDB;
 
 import java.util.List;
@@ -69,4 +70,11 @@ public interface UserDAO {
      * @return True if the user exists, false if not
      */
     boolean exists(String username, String discriminator);
+
+    /**
+     * Adds an info-object to the user
+     *
+     * @param info Info-object
+     */
+    void add(Info info);
 }

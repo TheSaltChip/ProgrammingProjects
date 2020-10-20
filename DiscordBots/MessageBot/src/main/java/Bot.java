@@ -1,4 +1,5 @@
-import bot.commands.SetupDatabase;
+import bot.commands.Analyze;
+import bot.commands.Setup;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 
@@ -15,7 +16,8 @@ public class Bot {
 
         try {
             jda = jdaBuilder.build();
-            jda.addEventListener(new SetupDatabase());
+            jda.addEventListener(new Setup());
+            jda.addEventListener(new Analyze());
         } catch (LoginException e) {
             e.printStackTrace();
         }

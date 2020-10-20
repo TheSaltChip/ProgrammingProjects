@@ -1,4 +1,4 @@
-package database.DAO.adt;
+package database.dao.adt;
 
 import database.objects.MessageDB;
 
@@ -23,12 +23,21 @@ public interface MessageDAO {
     List<MessageDB> get(String username, String discriminator);
 
     /**
+     * Attempts to get all the messages sent by a given user
+     * Returns an empty list if the given user has not written a message
+     *
+     * @param id The id of the user
+     * @return A list of all messages sent by the user
+     */
+    List<MessageDB> get(String id);
+
+    /**
      * Attempts to find a message with the given id
      *
      * @param id The id of the message you want
      * @return The message with the given id if it exists
      */
-    MessageDB get(String id);
+    MessageDB find(String id);
 
     /**
      * Supposedly this method makes it possible to search for messages

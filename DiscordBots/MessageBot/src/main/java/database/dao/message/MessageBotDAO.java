@@ -1,6 +1,6 @@
-package database.DAO.message;
+package database.dao.message;
 
-import database.DAO.adt.MessageDAO;
+import database.dao.adt.MessageDAO;
 import database.objects.MessageDB;
 
 import javax.persistence.EntityManager;
@@ -68,7 +68,36 @@ public class MessageBotDAO implements MessageDAO {
     }
 
     @Override
-    public MessageDB get(String id) {
+    public List<MessageDB> get(String id) {
+        EntityManager em = EMF.createEntityManager();
+        EntityTransaction tx = em.getTransaction();
+        List<MessageDB> messageDBList = null;
+
+        try {
+            tx.begin();
+
+            messageDBList = em.createQuery("select m " +
+                            "from MessageDB m " +
+                            "where m.author = " +
+                            "   (select mb from UserDB mb " +
+                            "   where mb.id = :id)",
+                    MessageDB.class)
+                    .setParameter("id", id)
+                    .getResultList();
+
+            tx.commit();
+
+        } catch (Exception e) {
+            if (tx.isActive()) tx.rollback();
+
+        } finally {
+            em.close();
+        }
+        return messageDBList;
+    }
+
+    @Override
+    public MessageDB find(String id) {
         EntityManager em = EMF.createEntityManager();
         EntityTransaction tx = em.getTransaction();
         MessageDB messageDB = null;
@@ -138,7 +167,7 @@ public class MessageBotDAO implements MessageDAO {
 
     @Override
     public boolean exists(String id) {
-        return get(id) != null;
+        return find(id) != null;
     }
 
 }
