@@ -1,6 +1,5 @@
 package bot.database;
 
-import database.dao.adt.UserDAO;
 import database.dao.message.MessageBotDAO;
 import database.dao.user.UserBotDAO;
 import database.objects.MessageDB;
@@ -16,7 +15,6 @@ import java.util.stream.Collectors;
 public class DatabaseUtil {
     private final MessageBotDAO messageBotDAO = new MessageBotDAO();
     private final UserBotDAO userBotDAO = new UserBotDAO();
-    private String lastMessage = null;
 
     public void setup(TextChannel channel) {
         //Gets all the users from the channel
@@ -34,14 +32,10 @@ public class DatabaseUtil {
         while (messages == null || !messages.isEmpty()) {
             messages = messageHistory.retrievePast(100).complete();
 
-            if (lastMessage == null) {
-                lastMessage = messages.get(0).getId();
-            }
-
             List<MessageDB> dbList = messages.stream()
                     .map(m -> new MessageDB(m.getId(),
                             userBotDAO.get(m.getAuthor().getId()),
-                            m.getContentStripped()))
+                            m.getContentStripped(), m.getTimeCreated().toLocalDateTime()))
                     .collect(Collectors.toList());
 
             messageBotDAO.insert(dbList);
@@ -52,6 +46,7 @@ public class DatabaseUtil {
         return !(userBotDAO.get().isEmpty() || messageBotDAO.get().isEmpty());
     }
 
+    //TODO -- Get the latest message from the database and search from that
     public void update(TextChannel channel) {
         //Users
         List<UserDB> userDBS = channel.getMembers().stream()
@@ -70,25 +65,24 @@ public class DatabaseUtil {
         MessageHistory messageHistory = null;
         List<Message> messages = null;
 
-        while (messages == null || !messages.isEmpty()) {
-            if(messages == null){
-                messageHistory = channel.getHistoryAfter(lastMessage, 100).complete();
+        while (true) {
+            if (messages == null) {
+                messageHistory = channel.getHistoryAfter(messageBotDAO.mostRecent().getId(), 100).complete();
                 messages = messageHistory.getRetrievedHistory();
             } else {
                 messages = messageHistory.retrieveFuture(100).complete();
             }
 
+            if (messages.size() == 0) break;
+
             List<MessageDB> dbList = messages.stream()
                     .map(m -> new MessageDB(m.getId(),
                             userBotDAO.get(m.getAuthor().getId()),
-                            m.getContentStripped()))
+                            m.getContentStripped(), m.getTimeCreated().toLocalDateTime()))
                     .collect(Collectors.toList());
-
-            lastMessage = dbList.get(0).getId();
 
             messageBotDAO.insert(dbList);
             userBotDAO.update(dbList);
-
         }
     }
 }
