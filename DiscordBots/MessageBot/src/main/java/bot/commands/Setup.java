@@ -32,6 +32,11 @@ public class Setup extends ListenerAdapter {
             }
         } else if (msg.equals("!update")) {
             if(user.getName().equals("TheSaltChip") && user.getDiscriminator().equals("8756")){
+                if(!SETUP.hasRun()){
+                    channel.sendMessage("The database has not been setup\nUse !setup to setup the database").queue();
+                    return;
+                }
+
                 channel.sendMessage("Starting update").queue();
                 SETUP.update(channel);
                 channel.sendMessage("Update finished").queue();
