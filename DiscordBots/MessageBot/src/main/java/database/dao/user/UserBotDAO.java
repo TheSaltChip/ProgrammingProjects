@@ -204,8 +204,8 @@ public class UserBotDAO implements UserDAO {
             tx.begin();
             UserDB user = this.get(info.getUser().getId());
 
-            UserDB newUser = em.merge(user);
-            newUser.setInfo(info);
+            user.setInfo(info);
+            em.merge(user);
 
             tx.commit();
 
