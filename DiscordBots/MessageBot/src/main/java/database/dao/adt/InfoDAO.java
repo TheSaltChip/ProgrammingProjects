@@ -1,6 +1,8 @@
 package database.dao.adt;
 
 import database.objects.Info;
+import database.objects.Letter;
+import database.objects.Word;
 
 import java.util.List;
 import java.util.Map;
@@ -47,13 +49,13 @@ public interface InfoDAO {
     void insert(Info info);
 
     /**
-     * Insert the given map of letters and the given map of words
+     * Insert the given list of letters and the given list of words
      * to the info-table associated with the user that has user_id
      * as id
      *
      * @param user_id The id of the user
-     * @param letters The map of letters
-     * @param words The map of words
+     * @param letters The list of letter objects
+     * @param words The list of word objects
      */
-    void insert(String user_id, Map<Character, Integer> letters, Map<String, Integer> words);
+    void insert(String user_id, List<Letter> letters, List<Word> words);
 }

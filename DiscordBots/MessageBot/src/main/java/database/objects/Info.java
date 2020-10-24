@@ -1,6 +1,7 @@
 package database.objects;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Map;
 
 @Entity
@@ -9,26 +10,21 @@ public class Info {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private int id;
 
     @OneToOne(mappedBy = "info")
     private UserDB user;
 
-    @ElementCollection
-    @CollectionTable(name = "word", joinColumns = @JoinColumn(name = "word"))
-    @MapKeyColumn(name = "word", length = 50)
-    @Column(name = "times")
-    private Map<String, Integer> words;
+    @OneToMany(mappedBy = "info")
+    private List<Word> words;
 
-    @ElementCollection
-    @CollectionTable(name = "letter", joinColumns = @JoinColumn(name = "letter"))
-    @MapKeyColumn(name = "letter")
-    @Column(name = "times")
-    private Map<Character, Integer> letters;
+    @OneToMany(mappedBy = "info")
+    private List<Letter> letters;
 
     protected Info(){}
 
-    public Info(UserDB user, Map<String, Integer> words, Map<Character, Integer> letters){
+    public Info(UserDB user, List<Word> words, List<Letter> letters){
         this.user = user;
         this.words = words;
         this.letters = letters;
@@ -50,19 +46,19 @@ public class Info {
         this.user = user;
     }
 
-    public Map<String, Integer> getWords() {
+    public List<Word> getWords() {
         return words;
     }
 
-    public void setWords(Map<String, Integer> words) {
+    public void setWords(List<Word> words) {
         this.words = words;
     }
 
-    public Map<Character, Integer> getLetters() {
+    public List<Letter> getLetters() {
         return letters;
     }
 
-    public void setLetters(Map<Character, Integer> letters) {
+    public void setLetters(List<Letter> letters) {
         this.letters = letters;
     }
 
