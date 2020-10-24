@@ -1,6 +1,7 @@
 package database.dao.message;
 
 import database.dao.adt.MessageDAO;
+import database.objects.Info;
 import database.objects.MessageDB;
 
 import javax.persistence.EntityManager;
@@ -128,7 +129,7 @@ public class MessageBotDAO implements MessageDAO {
         try {
             tx.begin();
 
-            messageDBList = em.createQuery("select m from MessageDB m where locate(m.msg_content, :search) > 0 ", MessageDB.class)
+            messageDBList = em.createQuery("select m from MessageDB m where locate(m.msgContent, :search) > 0 ", MessageDB.class)
                     .setParameter("search", searchTerm)
                     .getResultList();
 
@@ -170,4 +171,26 @@ public class MessageBotDAO implements MessageDAO {
         return find(id) != null;
     }
 
+    public MessageDB mostRecent() {
+        EntityManager em = EMF.createEntityManager();
+        EntityTransaction tx = em.getTransaction();
+        MessageDB messageDB = null;
+
+        try {
+            tx.begin();
+
+            messageDB = em.createQuery("select m from MessageDB m where m.dateCreated = (select max(m.dateCreated) from MessageDB m)", MessageDB.class).getSingleResult();
+
+            tx.commit();
+
+        } catch (Exception e) {
+            if (tx.isActive()) {
+                tx.rollback();
+            }
+        } finally {
+            em.close();
+        }
+
+        return messageDB;
+    }
 }
