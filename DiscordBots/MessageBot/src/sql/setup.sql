@@ -20,19 +20,22 @@ CREATE TABLE message
     id          varchar(18) NOT NULL,
     author_id   varchar(18),
     msg_content varchar(2000),
+    time_created timestamp,
     PRIMARY KEY (id),
     FOREIGN KEY (author_id) references "user" (id)
 );
 
 create table info
 (
-    id         serial not null,
+    id         serial,
     user_id    varchar(18),
     letters_id char,
     words_id   varchar(50),
     primary key (id),
     foreign key (user_id) references "user" (id)
 );
+
+create sequence info_seq start with 1 increment by 1 owned by guild.info.id;
 
 create table letter
 (
@@ -46,7 +49,6 @@ create table letter
 create table word
 (
     word    varchar(50),
-
     times   int,
     info_id int,
     primary key (word),
