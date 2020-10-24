@@ -52,6 +52,7 @@ public class AnalyzeDatabase {
                 .map(s -> s.split(" "))
                 .forEach(sA -> Arrays.stream(sA)
                         .filter(s -> !(s.matches("[,. ?!]") || s.length() > 100))
+                        .map(s -> s.replaceAll("^[a-zA-Z]", ""))
                         .forEach(s -> {
                                     if (!words.contains(s)) {
                                         words.add();
