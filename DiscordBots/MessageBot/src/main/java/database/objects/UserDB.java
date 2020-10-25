@@ -15,8 +15,8 @@ public class UserDB {
     private String username;
     private String discriminator;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "info_id", referencedColumnName = "id")
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "user")
+    @JoinColumn(name = "id", referencedColumnName = "id")
     private Info info;
 
     protected UserDB() {
