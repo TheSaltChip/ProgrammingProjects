@@ -2,7 +2,6 @@ package database.objects;
 
 import javax.persistence.*;
 import java.util.List;
-import java.util.Map;
 
 @Entity
 @Table(name = "info", schema = "guild")
@@ -22,9 +21,10 @@ public class Info {
     @OneToMany(mappedBy = "info", cascade = CascadeType.ALL)
     private List<Letter> letters;
 
-    protected Info(){}
+    protected Info() {
+    }
 
-    public Info(UserDB user, List<Word> words, List<Letter> letters){
+    public Info(UserDB user, List<Word> words, List<Letter> letters) {
         this.user = user;
         this.words = words;
         this.letters = letters;
@@ -63,7 +63,7 @@ public class Info {
     }
 
     @Override
-    public String toString(){
-        return "\n{id:" + id + "\nuser:" + user.getId() + "\nwords:" + words + "\nletters: " + letters + "}\n";
+    public String toString() {
+        return String.format("{id: %s, user: %s, words: %s, letters: %s}", id, user, words, letters);
     }
 }

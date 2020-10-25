@@ -48,4 +48,13 @@ public class Word {
         return this.getWord().equals(word1.getWord());
 
     }
+
+    @Override
+    public String toString(){
+        return String.format("[word: %s, times: %d]", word, times);//"[word: " + word + ", times: " + times + "]";
+    }
+
+    public void incTimes() {
+        times++;
+    }
 }

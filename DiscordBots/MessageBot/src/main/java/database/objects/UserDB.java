@@ -60,6 +60,6 @@ public class UserDB {
 
     @Override
     public String toString() {
-        return "(id:" + id + ";username:" + username + ";discriminator:" + discriminator + ")";
+        return String.format("(id: %s, username: %s, discriminator: %s)", id, username, discriminator);
     }
 }

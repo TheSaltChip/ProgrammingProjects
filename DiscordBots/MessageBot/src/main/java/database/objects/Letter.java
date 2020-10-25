@@ -48,17 +48,15 @@ public class Letter {
             return l.getLetter() == this.letter;
         }
 
-        if(o instanceof Character){
-          Character c = (Character) o;
-
-          return this.getLetter() == c;
-        }
-
         return false;
     }
 
     @Override
     public String toString(){
-        return "[letter: " + letter + ", times: " + times + "]";
+        return String.format("[letter: %c, times: %d", letter, times);
+    }
+
+    public void incTimes() {
+        times++;
     }
 }

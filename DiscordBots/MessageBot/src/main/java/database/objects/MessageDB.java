@@ -42,6 +42,6 @@ public class MessageDB {
 
     @Override
     public String toString() {
-        return "\n{id:" + id + "\nauthor:" + author + "\nmessage_content:" + msgContent + "}\n";
+        return String.format("{id: %s, author: %s, messageContent: %s}", id, author, msgContent);//"\n{id:" + id + "\nauthor:" + author + "\nmessage_content:" + msgContent + "}\n";
     }
 }
