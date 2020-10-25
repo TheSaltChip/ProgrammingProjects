@@ -1,10 +1,8 @@
 package bot.database;
 
 import database.dao.adt.InfoDAO;
-import database.dao.adt.MessageDAO;
 import database.dao.adt.UserDAO;
 import database.dao.info.InfoBotDAO;
-import database.dao.message.MessageBotDAO;
 import database.dao.user.UserBotDAO;
 import database.objects.Info;
 import database.objects.Letter;
@@ -21,7 +19,6 @@ public class AnalyzeDatabase {
     private final User USER;
     private final UserDAO USER_DAO = new UserBotDAO();
     private final InfoDAO INFO_DAO = new InfoBotDAO();
-    private final MessageDAO MESSAGE_DAO = new MessageBotDAO();
 
     public AnalyzeDatabase(User user) {
         USER = user;
@@ -34,80 +31,63 @@ public class AnalyzeDatabase {
                 .map(MessageDB::getMsg_content)
                 .collect(Collectors.toList());
 
+        Info info = INFO_DAO.get(USER.getId());
+
         //Compute the info about the letters
-        List<Letter> letters = new LinkedList<>();
+        List<Letter> letters = info == null ? new LinkedList<>() : info.getLetters();
 
         messages.forEach(m -> m.chars()
                 .mapToObj(i -> (char) i)
                 .forEach(c -> {
-                    if (!letters.contains(c)) {
-                        letters.add(new Letter(c, 1));
+                    Letter letter = letters.stream()
+                            .filter(l -> l.getLetter() == c)
+                            .findFirst().orElse(null);
+
+                    if (letter == null) {
+                        letter = new Letter(c, 1);
                     } else {
-                        letters.stream().filter(l -> l.getLetter() == c).forEach(l -> l.setTimes(l.getTimes() + 1));
+                        letter.incTimes();
+                        letters.remove(letter);
                     }
+                    letters.add(letter);
                 })
         );
 
         //Compute the info about the words
-        List<Word> words = new LinkedList<>(){
-            @Override
-            public boolean contains(Object o){
-                if(this == o) return true;
-
-                if(!(o instanceof String)) return false;
-
-                String word = (String) o;
-
-                for (Word w:
-                     this) {
-                    if(w.getWord().equals(word)) return true;
-                }
-
-                return false;
-            }
-        };
+        List<Word> words = info == null ? new LinkedList<>() : info.getWords();
 
         messages.stream()
                 .map(s -> s.split(" "))
                 .forEach(sA -> Arrays.stream(sA)
-                        .filter(s -> (s.matches("[^,. ?!]") || s.length() > 100))
-                        //.map(s -> s.replaceAll("[^a-zA-Z]", ""))
+                        .filter(s -> !(s.matches("[,. ?!]") || s.length() > 100))
+                        .map(s -> s.replaceAll("[^a-zA-ZøæåØÆÅ]", ""))
                         .forEach(s -> {
-                                    if (!words.contains(s)) {
-                                        words.add(new Word(s, 1));
+                                    Word word = words.stream()
+                                            .filter(w -> w.getWord().equals(s))
+                                            .findFirst().orElse(null);
+
+                                    if (word == null) {
+                                        word = new Word(s, 1);
                                     } else {
-                                        words.stream()
-                                                .filter(w -> w.getWord().equals(s))
-                                                .forEach(w -> w.setTimes(w.getTimes() + 1));
+                                        word.incTimes();
+                                        words.remove(word);
                                     }
+
+                                    words.add(word);
                                 }
                         )
                 );
 
-        if (INFO_DAO.get().isEmpty()) {
-            Info info = new Info(USER_DAO.get(USER.getId()), words, letters);
+        if (info == null) {
+            info = new Info(USER_DAO.get(USER.getId()), words, letters);
 
-            System.out.println(info.getId() + " " + info.getUser() + " " + info.getLetters() + " " + info.getWords());
-            System.out.println();
             INFO_DAO.insert(info);
-            System.out.println("HELLO");
-            System.out.println();
             USER_DAO.add(info);
-            System.out.println("GoodBye");
-
-        } else if (INFO_DAO.get(USER.getId()) != null) {
-            Info info = INFO_DAO.get(USER.getId());
-            System.out.println(info);
-
-            INFO_DAO.insert(USER.getId(), letters, words);
-
-            info = INFO_DAO.get(USER.getId());
-            System.out.println(info);
 
         } else {
-            Info info = new Info(USER_DAO.get(USER.getId()), words, letters);
-            USER_DAO.add(info);
-            INFO_DAO.insert(info);
+            INFO_DAO.insert(USER.getId(), letters, words);
+
+
         }
     }
 
