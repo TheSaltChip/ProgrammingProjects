@@ -49,13 +49,29 @@ public class AnalyzeDatabase {
         );
 
         //Compute the info about the words
-        List<Word> words = new LinkedList<>();
+        List<Word> words = new LinkedList<>(){
+            @Override
+            public boolean contains(Object o){
+                if(this == o) return true;
+
+                if(!(o instanceof String)) return false;
+
+                String word = (String) o;
+
+                for (Word w:
+                     this) {
+                    if(w.getWord().equals(word)) return true;
+                }
+
+                return false;
+            }
+        };
 
         messages.stream()
                 .map(s -> s.split(" "))
                 .forEach(sA -> Arrays.stream(sA)
                         .filter(s -> (s.matches("[^,. ?!]") || s.length() > 100))
-                        .map(s -> s.replaceAll("[^a-zA-Z]", ""))
+                        //.map(s -> s.replaceAll("[^a-zA-Z]", ""))
                         .forEach(s -> {
                                     if (!words.contains(s)) {
                                         words.add(new Word(s, 1));
