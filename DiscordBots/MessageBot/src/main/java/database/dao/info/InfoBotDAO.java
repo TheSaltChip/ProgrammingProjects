@@ -152,14 +152,13 @@ public class InfoBotDAO implements InfoDAO {
     }
 
     @Override
-    public void insert(String user_id, List<Letter> letters, List<Word> words) {
+    public void insert(Info info, List<Letter> letters, List<Word> words) {
         EntityManager em = EMF.createEntityManager();
         EntityTransaction tx = em.getTransaction();
 
         try {
             tx.begin();
 
-            Info info = this.get(user_id);
             info.setLetters(letters);
             info.setWords(words);
 

@@ -71,8 +71,7 @@ public class InfoWebDAO implements InfoDAO {
     }
 
     @Override
-    public void insert(String user_id, List<Letter> letters, List<Word> words) {
-        Info info = this.get(user_id);
+    public void insert(Info info, List<Letter> letters, List<Word> words) {
         info.setWords(words);
         info.setLetters(letters);
         em.merge(info);
