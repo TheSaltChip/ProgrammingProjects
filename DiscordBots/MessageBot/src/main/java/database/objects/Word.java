@@ -6,6 +6,9 @@ import javax.persistence.*;
 @Table(name = "word", schema = "guild")
 public class Word {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+
     private String word;
     private int times;
 
@@ -25,16 +28,8 @@ public class Word {
         return word;
     }
 
-    public void setWord(String word) {
-        this.word = word;
-    }
-
-    public int getTimes() {
-        return times;
-    }
-
-    public void setTimes(int times) {
-        this.times = times;
+    public void setInfo(Info info) {
+        this.info = info;
     }
 
     @Override

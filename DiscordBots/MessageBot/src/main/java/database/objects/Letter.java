@@ -6,6 +6,9 @@ import javax.persistence.*;
 @Table(name = "letter", schema = "guild")
 public class Letter {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+
     private Character letter;
     private int times;
 
@@ -25,16 +28,8 @@ public class Letter {
         return letter;
     }
 
-    public void setLetter(Character letter) {
-        this.letter = letter;
-    }
-
-    public int getTimes() {
-        return times;
-    }
-
-    public void setTimes(int times) {
-        this.times = times;
+    public void setInfo(Info info) {
+        this.info = info;
     }
 
     @Override
