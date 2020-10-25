@@ -13,13 +13,13 @@ public class Info {
     @Column(name = "id")
     private int id;
 
-    @OneToOne(mappedBy = "info")
+    @OneToOne
     private UserDB user;
 
-    @OneToMany(mappedBy = "info")
+    @OneToMany(mappedBy = "info", cascade = CascadeType.ALL)
     private List<Word> words;
 
-    @OneToMany(mappedBy = "info")
+    @OneToMany(mappedBy = "info", cascade = CascadeType.ALL)
     private List<Letter> letters;
 
     protected Info(){}
