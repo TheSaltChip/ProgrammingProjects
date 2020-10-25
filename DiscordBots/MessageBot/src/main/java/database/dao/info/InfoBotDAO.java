@@ -3,14 +3,16 @@ package database.dao.info;
 import database.dao.adt.InfoDAO;
 import database.objects.Info;
 import database.objects.Letter;
-import database.objects.UserDB;
 import database.objects.Word;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
-import java.util.*;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 @SuppressWarnings("DuplicatedCode")
 public class InfoBotDAO implements InfoDAO {
@@ -150,7 +152,7 @@ public class InfoBotDAO implements InfoDAO {
     }
 
     @Override
-    public void insert(String user_id, List<Letter> letters, List<Word> words){
+    public void insert(String user_id, List<Letter> letters, List<Word> words) {
         EntityManager em = EMF.createEntityManager();
         EntityTransaction tx = em.getTransaction();
 
