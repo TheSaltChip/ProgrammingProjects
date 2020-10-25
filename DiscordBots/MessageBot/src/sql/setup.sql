@@ -29,27 +29,29 @@ create table info
 (
     id         serial,
     user_id    varchar(18),
-    letters_id char,
-    words_id   varchar(50),
+    letters_id int,
+    words_id   int,
     primary key (id),
     foreign key (user_id) references "user" (id)
 );
 
 create table letter
 (
+    id serial,
     letter  char,
     times   int,
     info_id int,
-    primary key (letter),
+    primary key (id),
     foreign key (info_id) references info (id)
 );
 
 create table word
 (
+    id serial,
     word    varchar(50),
     times   int,
     info_id int,
-    primary key (word),
+    primary key (id),
     foreign key (info_id) references info (id)
 );
 
@@ -59,8 +61,8 @@ alter table "user"
 
 alter table info
     add
-        foreign key (letters_id) references letter (letter);
+        foreign key (letters_id) references letter (id);
 
 alter table info
     add
-        foreign key (words_id) references word (word);
+        foreign key (words_id) references word (id);
