@@ -35,8 +35,6 @@ create table info
     foreign key (user_id) references "user" (id)
 );
 
-create sequence info_seq start with 1 increment by 1 owned by guild.info.id;
-
 create table letter
 (
     letter  char,
