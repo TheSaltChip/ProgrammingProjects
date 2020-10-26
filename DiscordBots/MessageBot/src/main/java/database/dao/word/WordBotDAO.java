@@ -1,6 +1,6 @@
 package database.dao.word;
 
-import database.objects.Word;
+import database.objects.WordAmount;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -11,7 +11,7 @@ import java.util.List;
 public class WordBotDAO {
     private final EntityManagerFactory EMF = Persistence.createEntityManagerFactory("DiscordBotLocalPU");
 
-    public void insert(Word word){
+    public void insert(WordAmount word) {
         EntityManager em = EMF.createEntityManager();
         EntityTransaction tx = em.getTransaction();
 
@@ -30,22 +30,8 @@ public class WordBotDAO {
         }
     }
 
-    public void insert(List<Word> words) {
-        EntityManager em = EMF.createEntityManager();
-        EntityTransaction tx = em.getTransaction();
+    public void insert(List<WordAmount> words) {
 
-        try {
-            tx.begin();
-
-            words.forEach(em::persist);
-
-            tx.commit();
-
-        } catch (Exception e) {
-            if (tx.isActive()) tx.rollback();
-
-        } finally {
-            em.close();
-        }
+        words.forEach(this::insert);
     }
 }

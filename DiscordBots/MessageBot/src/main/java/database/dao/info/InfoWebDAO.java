@@ -2,8 +2,8 @@ package database.dao.info;
 
 import database.dao.adt.InfoDAO;
 import database.objects.Info;
-import database.objects.Letter;
-import database.objects.Word;
+import database.objects.LetterAmount;
+import database.objects.WordAmount;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -71,9 +71,9 @@ public class InfoWebDAO implements InfoDAO {
     }
 
     @Override
-    public void insert(Info info, List<Letter> letters, List<Word> words) {
+    public void insert(Info info, List<LetterAmount> letterTimes, List<WordAmount> words) {
         info.setWords(words);
-        info.setLetters(letters);
+        info.setLetters(letterTimes);
         em.merge(info);
     }
 

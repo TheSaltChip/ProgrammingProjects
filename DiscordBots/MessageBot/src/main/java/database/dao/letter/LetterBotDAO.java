@@ -1,6 +1,6 @@
 package database.dao.letter;
 
-import database.objects.Letter;
+import database.objects.LetterAmount;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -11,14 +11,14 @@ import java.util.List;
 public class LetterBotDAO {
     private final EntityManagerFactory EMF = Persistence.createEntityManagerFactory("DiscordBotLocalPU");
 
-    public void insert(Letter letter) {
+    public void insert(LetterAmount letterAmount) {
         EntityManager em = EMF.createEntityManager();
         EntityTransaction tx = em.getTransaction();
 
         try {
             tx.begin();
 
-            em.persist(letter);
+            em.persist(letterAmount);
 
             tx.commit();
 
@@ -30,22 +30,9 @@ public class LetterBotDAO {
         }
     }
 
-    public void insert(List<Letter> letters) {
-        EntityManager em = EMF.createEntityManager();
-        EntityTransaction tx = em.getTransaction();
+    public void insert(List<LetterAmount> letterTimes) {
 
-        try {
-            tx.begin();
+        letterTimes.forEach(this::insert);
 
-            letters.forEach(em::persist);
-
-            tx.commit();
-
-        } catch (Exception e) {
-            if (tx.isActive()) tx.rollback();
-
-        } finally {
-            em.close();
-        }
     }
 }

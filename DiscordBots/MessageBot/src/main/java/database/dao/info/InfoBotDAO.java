@@ -2,8 +2,8 @@ package database.dao.info;
 
 import database.dao.adt.InfoDAO;
 import database.objects.Info;
-import database.objects.Letter;
-import database.objects.Word;
+import database.objects.LetterAmount;
+import database.objects.WordAmount;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -152,14 +152,14 @@ public class InfoBotDAO implements InfoDAO {
     }
 
     @Override
-    public void insert(Info info, List<Letter> letters, List<Word> words) {
+    public void insert(Info info, List<LetterAmount> letterTimes, List<WordAmount> words) {
         EntityManager em = EMF.createEntityManager();
         EntityTransaction tx = em.getTransaction();
 
         try {
             tx.begin();
 
-            info.setLetters(letters);
+            info.setLetters(letterTimes);
             info.setWords(words);
 
             em.merge(info);

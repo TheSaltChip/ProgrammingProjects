@@ -1,8 +1,8 @@
 package database.dao.adt;
 
 import database.objects.Info;
-import database.objects.Letter;
-import database.objects.Word;
+import database.objects.LetterAmount;
+import database.objects.WordAmount;
 
 import java.util.List;
 import java.util.Map;
@@ -53,8 +53,8 @@ public interface InfoDAO {
      * to the given info-object
      *
      * @param info The info that the lists are going to be associated to
-     * @param letters The list of letter objects
+     * @param letterTimes The list of letter objects
      * @param words The list of word objects
      */
-    void insert(Info info, List<Letter> letters, List<Word> words);
+    void insert(Info info, List<LetterAmount> letterTimes, List<WordAmount> words);
 }
