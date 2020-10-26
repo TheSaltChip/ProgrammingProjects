@@ -9,8 +9,11 @@
         <class>database.objects.UserDB</class>
         <class>database.objects.MessageDB</class>
         <class>database.objects.Info</class>
+        <class>database.objects.WordAmount</class>
+        <class>database.objects.LetterAmount</class>
         <class>database.objects.Word</class>
         <class>database.objects.Letter</class>
+        <class>database.objects.Amount</class>
         <properties>
             <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/DiscordBot"/>
             <property name="javax.persistence.jdbc.user" value="postgres"/>
@@ -26,7 +29,10 @@
         <class>database.objects.UserDB</class>
         <class>database.objects.MessageDB</class>
         <class>database.objects.Info</class>
+        <class>database.objects.WordAmount</class>
+        <class>database.objects.LetterAmount</class>
         <class>database.objects.Word</class>
         <class>database.objects.Letter</class>
+        <class>database.objects.Amount</class>
     </persistence-unit>
 </persistence>
