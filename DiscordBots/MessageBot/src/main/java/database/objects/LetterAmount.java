@@ -28,6 +28,8 @@ public class LetterAmount {
 
     public LetterAmount(Info info) {
         this.info = info;
+        letter = null;
+        amount = null;
     }
 
     public Letter getLetter() {
