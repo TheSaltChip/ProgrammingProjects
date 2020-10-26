@@ -3,28 +3,32 @@ package database.objects;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "word_times", schema = "guild")
+@Table(name = "word_amount", schema = "guild")
 public class WordAmount {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
 
-    private String word;
-    private int times;
+    @Id
+    @ManyToOne
+    @JoinColumn(name = "info_id", referencedColumnName = "user_id")
+    private Info info;
 
     @ManyToOne
-    @JoinColumn(name = "collection", referencedColumnName = "user_id")
-    private Info info;
+    @JoinColumn(name = "word", referencedColumnName = "word")
+    private Word word;
+
+    @ManyToOne
+    @JoinColumn(name = "amount", referencedColumnName = "amount")
+    private Amount amount;
+
 
     protected WordAmount() {
     }
 
-    public WordAmount(String word, int times) {
+    public WordAmount(Word word, Amount amount) {
         this.word = word;
-        this.times = times;
+        this.amount = amount;
     }
 
-    public String getWord() {
+    public Word getWord() {
         return word;
     }
 
@@ -45,11 +49,7 @@ public class WordAmount {
     }
 
     @Override
-    public String toString(){
-        return String.format("[word: %s, times: %d]", word, times);//"[word: " + word + ", times: " + times + "]";
-    }
-
-    public void incTimes() {
-        times++;
+    public String toString() {
+        return String.format("[word: %s, times: %s]", word, amount);//"[word: " + word + ", times: " + times + "]";
     }
 }

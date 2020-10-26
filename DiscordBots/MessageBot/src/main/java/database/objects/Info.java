@@ -13,18 +13,18 @@ public class Info {
     private UserDB user;
 
     @OneToMany(mappedBy = "info")
-    private List<WordAmount> words;
+    private List<WordAmount> wordAmounts;
 
     @OneToMany(mappedBy = "info")
-    private List<LetterAmount> letterTimes;
+    private List<LetterAmount> letterAmounts;
 
     protected Info() {
     }
 
-    public Info(UserDB user, List<WordAmount> words, List<LetterAmount> letterTimes) {
+    public Info(UserDB user, List<WordAmount> words, List<LetterAmount> letterAmounts) {
         this.user = user;
-        this.words = words;
-        this.letterTimes = letterTimes;
+        this.wordAmounts = words;
+        this.letterAmounts = letterAmounts;
     }
 
     public UserDB getUser() {
@@ -36,23 +36,23 @@ public class Info {
     }
 
     public List<WordAmount> getWords() {
-        return words;
+        return wordAmounts;
     }
 
-    public void setWords(List<WordAmount> words) {
-        this.words = words;
+    public void setWords(List<WordAmount> wordAmounts) {
+        this.wordAmounts = wordAmounts;
     }
 
     public List<LetterAmount> getLetters() {
-        return letterTimes;
+        return letterAmounts;
     }
 
-    public void setLetters(List<LetterAmount> letterTimes) {
-        this.letterTimes = letterTimes;
+    public void setLetters(List<LetterAmount> letterAmounts) {
+        this.letterAmounts = letterAmounts;
     }
 
     @Override
     public String toString() {
-        return String.format("{user: %s, words: %s, letters: %s}", user, words, letterTimes);
+        return String.format("{user: %s, words: %s, letters: %s}", user, wordAmounts, letterAmounts);
     }
 }

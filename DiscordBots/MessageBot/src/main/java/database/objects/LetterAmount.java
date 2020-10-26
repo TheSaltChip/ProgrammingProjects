@@ -5,28 +5,32 @@ import database.objects.composite_keys.LetterId;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "letter_times", schema = "guild")
+@Table(name = "letter_amount", schema = "guild")
 @IdClass(LetterId.class)
 public class LetterAmount {
     @Id
-    private Character letter;
-
-    @Id
-    private int times;
+    @ManyToOne
+    @JoinColumn(name = "info_id", referencedColumnName = "user_id")
+    private Info info;
 
     @ManyToOne
-    @JoinColumn(name = "collection", referencedColumnName = "user_id")
-    private Info info;
+    @JoinColumn(name = "letter", referencedColumnName = "letter")
+    private Letter letter;
+
+    @ManyToOne
+    @JoinColumn(name = "amount", referencedColumnName = "amount")
+    private Amount amount;
+
 
     protected LetterAmount() {
     }
 
-    public LetterAmount(char letter, int times) {
+    public LetterAmount(Letter letter, Amount amount) {
         this.letter = letter;
-        this.times = times;
+        this.amount = amount;
     }
 
-    public Character getLetter() {
+    public Letter getLetter() {
         return letter;
     }
 
@@ -50,10 +54,6 @@ public class LetterAmount {
 
     @Override
     public String toString(){
-        return String.format("[letter: %c, times: %d", letter, times);
-    }
-
-    public void incTimes() {
-        times++;
+        return String.format("[letter: %s, times: %s", letter, amount);
     }
 }

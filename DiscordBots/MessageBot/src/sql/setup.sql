@@ -1,6 +1,6 @@
 DROP table IF EXISTS guild.user CASCADE;
 drop table if exists guild.message cascade;
-drop table if exists guild.letterAmount cascade;
+drop table if exists guild.letter cascade;
 drop table if exists guild.word cascade;
 drop table if exists guild.info cascade;
 drop table if exists guild.letter_amount cascade;
@@ -36,9 +36,9 @@ alter table "user"
     add info_id varchar(18) references info (user_id);
 
 --LETTER
-create table letterAmount
+create table letter
 (
-    letterAmount char primary key
+    letter char primary key
 );
 
 -- WORD
@@ -53,24 +53,24 @@ create table amount
     amount int primary key
 );
 
---WORD_AMOUNT 1 info has many word_amount
+--WORD_AMOUNT 1 info has 1 word_amount
 create table word_amount
 (
-    collection varchar(18) references info (user_id) primary key,
-    word       varchar(100) references word (word),
-    amount      int references amount (amount)
+    info_id   varchar(18) references info (user_id) primary key,
+    word   varchar(100) references word (word),
+    amount int references amount (amount)
 );
 
 alter table info
-    add words varchar(18) references word_amount (collection);
+    add words varchar(18) references word_amount (info_id);
 
---LETTER_AMOUNT 1 info has many letter_amount
+--LETTER_AMOUNT 1 info has 1 letter_amount
 create table letter_amount
 (
-    collection varchar(18) references info (user_id) primary key,
-    letterAmount     char references letterAmount (letterAmount),
-    amount      int references amount (amount)
+    info_id varchar(18) references info (user_id) primary key,
+    letter     char references letter (letter),
+    amount     int references amount (amount)
 );
 
 alter table info
-    add letterAmount varchar(18) references letter_amount (collection);
+    add letters varchar(18) references letter_amount (info_id);
