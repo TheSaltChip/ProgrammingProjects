@@ -49,12 +49,12 @@ public interface InfoDAO {
     void insert(Info info);
 
     /**
-     * Insert the given list of letters and the given list of words
+     * Updates list of letters and the list of words
      * to the given info-object
      *
      * @param info The info that the lists are going to be associated to
      * @param letterTimes The list of letter objects
      * @param words The list of word objects
      */
-    void insert(Info info, List<LetterAmount> letterTimes, List<WordAmount> words);
+    void update(Info info, List<LetterAmount> letterTimes, List<WordAmount> words);
 }
