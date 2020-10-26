@@ -38,9 +38,9 @@ public class LetterAmountBotDAO {
         try {
             tx.begin();
 
-            la = em.merge(la);
-            la.setAmount(a);
-            la.setLetter(l);
+            LetterAmount letterAmount = em.merge(la);
+            letterAmount.setAmount(em.merge(a));
+            letterAmount.setLetter(em.merge(l));
 
             tx.commit();
 
