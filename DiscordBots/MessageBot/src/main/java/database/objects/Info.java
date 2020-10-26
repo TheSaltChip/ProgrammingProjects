@@ -16,10 +16,10 @@ public class Info {
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private UserDB user;
 
-    @OneToMany(mappedBy = "info", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "info", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<WordAmount> wordAmounts;
 
-    @OneToMany(mappedBy = "info", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "info", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<LetterAmount> letterAmounts;
 
     protected Info() {
