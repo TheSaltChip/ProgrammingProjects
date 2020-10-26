@@ -1,4 +1,4 @@
-package database.dao.word;
+package database.dao.word_amount;
 
 import database.objects.WordAmount;
 
@@ -8,7 +8,7 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import java.util.List;
 
-public class WordBotDAO {
+public class WordAmountBotDAO {
     private final EntityManagerFactory EMF = Persistence.createEntityManagerFactory("DiscordBotLocalPU");
 
     public void insert(WordAmount word) {
