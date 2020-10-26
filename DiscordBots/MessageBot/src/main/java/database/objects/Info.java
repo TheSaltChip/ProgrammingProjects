@@ -8,23 +8,31 @@ import java.util.List;
 public class Info {
 
     @Id
-    @OneToOne(mappedBy = "info")
     @Column(name = "user_id")
+    private String id;
+
+    @OneToOne
+    @MapsId
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
     private UserDB user;
 
-    @OneToMany(mappedBy = "info")
+    @OneToMany(mappedBy = "info", cascade = CascadeType.ALL)
     private List<WordAmount> wordAmounts;
 
-    @OneToMany(mappedBy = "info")
+    @OneToMany(mappedBy = "info", cascade = CascadeType.ALL)
     private List<LetterAmount> letterAmounts;
 
     protected Info() {
     }
 
-    public Info(UserDB user, List<WordAmount> words, List<LetterAmount> letterAmounts) {
+    public Info(UserDB user) {
         this.user = user;
-        this.wordAmounts = words;
-        this.letterAmounts = letterAmounts;
+        letterAmounts = null;
+        wordAmounts = null;
+    }
+
+    public String getId() {
+        return id;
     }
 
     public UserDB getUser() {
