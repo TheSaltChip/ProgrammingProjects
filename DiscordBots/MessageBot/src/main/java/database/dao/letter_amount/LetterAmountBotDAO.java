@@ -31,7 +31,7 @@ public class LetterAmountBotDAO {
         }
     }
 
-    public void update(LetterAmount la, Amount a, Letter l) {
+    public void update(LetterAmount la, Amount a) {
         EntityManager em = EMF.createEntityManager();
         EntityTransaction tx = em.getTransaction();
 
@@ -39,8 +39,7 @@ public class LetterAmountBotDAO {
             tx.begin();
 
             LetterAmount letterAmount = em.merge(la);
-            letterAmount.setAmount(em.merge(a));
-            letterAmount.setLetter(em.merge(l));
+            letterAmount.setAmount(a);
 
             tx.commit();
 
