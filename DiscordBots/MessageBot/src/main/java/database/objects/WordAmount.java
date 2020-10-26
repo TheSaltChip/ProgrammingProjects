@@ -3,8 +3,8 @@ package database.objects;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "word", schema = "guild")
-public class Word {
+@Table(name = "word_times", schema = "guild")
+public class WordAmount {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -13,13 +13,13 @@ public class Word {
     private int times;
 
     @ManyToOne
-    @JoinColumn(name = "info_id", referencedColumnName = "id")
+    @JoinColumn(name = "collection", referencedColumnName = "user_id")
     private Info info;
 
-    protected Word() {
+    protected WordAmount() {
     }
 
-    public Word(String word, int times) {
+    public WordAmount(String word, int times) {
         this.word = word;
         this.times = times;
     }
@@ -36,9 +36,9 @@ public class Word {
     public boolean equals(Object o) {
         if (this == o) return true;
 
-        if (!(o instanceof Word)) return false;
+        if (!(o instanceof WordAmount)) return false;
 
-        Word word1 = (Word) o;
+        WordAmount word1 = (WordAmount) o;
 
         return this.getWord().equals(word1.getWord());
 
