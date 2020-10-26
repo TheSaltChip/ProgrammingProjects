@@ -66,8 +66,6 @@ public class Main {
                     amountBotDAO.insert(a);
                 }
 
-                Thread.sleep(5000);
-
                 letterAmount = new LetterAmount(INFO_DAO.get(info.getId()));
 
                 LETTER_AMOUNT_DAO.insert(letterAmount);
@@ -78,6 +76,8 @@ public class Main {
 
                 letterAmounts.add(letterAmount);
 
+                System.out.println("SLEEP");
+                Thread.sleep(5000);
             } else {
                 System.out.println("NOT NULL");
 
