@@ -7,17 +7,17 @@ import javax.persistence.*;
 public class LetterAmount {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String id;
+    private int id;
 
     @ManyToOne
     @JoinColumn(name = "info_id", referencedColumnName = "user_id")
     private Info info;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "letter", referencedColumnName = "letter")
     private Letter letter;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "amount", referencedColumnName = "amount")
     private Amount amount;
 
@@ -25,11 +25,14 @@ public class LetterAmount {
     protected LetterAmount() {
     }
 
-
     public LetterAmount(Info info) {
         this.info = info;
-        letter = null;
-        amount = null;
+    }
+
+    public LetterAmount(Info info, Letter letter, Amount amount) {
+        this.info = info;
+        this.letter = letter;
+        this.amount = amount;
     }
 
     public Letter getLetter() {
@@ -79,6 +82,6 @@ public class LetterAmount {
 
     @Override
     public String toString() {
-        return String.format("[info: %s, letter: %s, times: %s]", info.getId(), letter, amount);
+        return String.format("[id: %d, info: %s, letter: %s, times: %s]", id, info.getId(), letter, amount);
     }
 }
