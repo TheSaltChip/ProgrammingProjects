@@ -159,10 +159,10 @@ public class InfoBotDAO implements InfoDAO {
         try {
             tx.begin();
 
-            info = em.merge(info);
+            Info newInfo = em.merge(info);
 
-            info.setLetters(letterTimes);
-            info.setWords(words);
+            newInfo.setLetters(letterTimes);
+            newInfo.setWords(words);
 
             tx.commit();
         } catch (Exception e) {
