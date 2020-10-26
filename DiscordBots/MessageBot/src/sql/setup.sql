@@ -56,21 +56,23 @@ create table amount
 --WORD_AMOUNT 1 info has 1 word_amount
 create table word_amount
 (
-    info_id   varchar(18) references info (user_id) primary key,
-    word   varchar(100) references word (word),
-    amount int references amount (amount)
+    id      serial primary key,
+    info_id varchar(18) references info (user_id),
+    word    varchar(100) references word (word),
+    amount  int references amount (amount)
 );
 
 alter table info
-    add words varchar(18) references word_amount (info_id);
+    add word_id int references word_amount (id);
 
 --LETTER_AMOUNT 1 info has 1 letter_amount
 create table letter_amount
 (
-    info_id varchar(18) references info (user_id) primary key,
-    letter     char references letter (letter),
-    amount     int references amount (amount)
+    id      serial primary key,
+    info_id varchar(18) references info (user_id),
+    letter  char references letter (letter),
+    amount  int references amount (amount)
 );
 
 alter table info
-    add letters varchar(18) references letter_amount (info_id);
+    add letter_id int references letter_amount (id);
