@@ -5,20 +5,21 @@ import javax.persistence.*;
 @Entity
 @Table(name = "word_amount", schema = "guild")
 public class WordAmount {
-
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+
     @ManyToOne
     @JoinColumn(name = "info_id", referencedColumnName = "user_id")
     private Info info;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "word", referencedColumnName = "word")
     private Word word;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "amount", referencedColumnName = "amount")
     private Amount amount;
-
 
     protected WordAmount() {
     }
@@ -30,10 +31,6 @@ public class WordAmount {
 
     public Word getWord() {
         return word;
-    }
-
-    public void setInfo(Info info) {
-        this.info = info;
     }
 
     @Override
