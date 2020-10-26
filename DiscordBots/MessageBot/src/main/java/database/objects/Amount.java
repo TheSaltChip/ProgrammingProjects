@@ -21,6 +21,10 @@ public class Amount {
         return amount;
     }
 
+    protected void setAmount(int amount){
+        this.amount = amount;
+    }
+
     @Override
     public String toString(){
         return amount + "";
