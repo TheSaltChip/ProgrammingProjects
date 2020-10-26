@@ -1,25 +1,27 @@
 package database.objects;
 
+import database.objects.composite_keys.LetterId;
+
 import javax.persistence.*;
 
 @Entity
-@Table(name = "letter", schema = "guild")
-public class Letter {
+@Table(name = "letter_times", schema = "guild")
+@IdClass(LetterId.class)
+public class LetterAmount {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-
     private Character letter;
+
+    @Id
     private int times;
 
     @ManyToOne
-    @JoinColumn(name = "info_id", referencedColumnName = "id")
+    @JoinColumn(name = "collection", referencedColumnName = "user_id")
     private Info info;
 
-    protected Letter() {
+    protected LetterAmount() {
     }
 
-    public Letter(char letter, int times) {
+    public LetterAmount(char letter, int times) {
         this.letter = letter;
         this.times = times;
     }
@@ -36,9 +38,9 @@ public class Letter {
     public boolean equals(Object o) {
         if (this == o) return true;
 
-        if (o instanceof Letter){
+        if (o instanceof LetterAmount){
 
-            Letter l = (Letter) o;
+            LetterAmount l = (LetterAmount) o;
 
             return l.getLetter() == this.letter;
         }
