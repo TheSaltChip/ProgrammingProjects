@@ -1,7 +1,6 @@
 package database.dao.message;
 
 import database.dao.adt.MessageDAO;
-import database.objects.Info;
 import database.objects.MessageDB;
 
 import javax.persistence.EntityManager;
