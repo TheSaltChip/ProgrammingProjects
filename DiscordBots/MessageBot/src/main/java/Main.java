@@ -30,7 +30,9 @@ public class Main {
         if (info == null) {
             info = new Info(userBotDAO.get("159995722429628416"));
             INFO_DAO.insert(info);
+            info = INFO_DAO.get("159995722429628416");
         }
+
         //LETTERS
         List<LetterAmount> letterAmounts = info.getLetters() == null ? new LinkedList<>() : info.getLetters();
 
@@ -60,37 +62,35 @@ public class Main {
                 }
 
                 Amount a = amountBotDAO.get(1);
-                System.out.println("First a:    " + a);
+                System.out.println("A: " + a + "\nLetter: " + l);
+
                 if (a == null) {
                     a = new Amount(1);
                     amountBotDAO.insert(a);
                 }
 
-                letterAmount = new LetterAmount(INFO_DAO.get(info.getId()));
+                letterAmount = new LetterAmount(info, l, a);
 
                 LETTER_AMOUNT_DAO.insert(letterAmount);
 
-                letterAmount = LETTER_AMOUNT_DAO.get(info.getId());
-
-                LETTER_AMOUNT_DAO.update(letterAmount, a, l);
-
                 letterAmounts.add(letterAmount);
 
-                System.out.println("SLEEP");
-                Thread.sleep(5000);
             } else {
                 System.out.println("NOT NULL");
 
                 int newA = letterAmount.getAmount().getAmount() + 1;
-
                 Amount a = amountBotDAO.get(newA);
-                a = a == null ? new Amount(newA) : a;
 
-                LETTER_AMOUNT_DAO.update(letterAmount, a, letterAmount.getLetter());
+                if(a == null){
+                    a = new Amount(newA);
+                    amountBotDAO.insert(a);
+                }
+
+                LETTER_AMOUNT_DAO.update(letterAmount, a);
             }
-
-            INFO_DAO.update(info, letterAmounts, null);
         }
+
+        INFO_DAO.update(info, letterAmounts, null);
 
         System.out.println("Messages:\n" + messages + "\n\n");
 
