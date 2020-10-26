@@ -80,7 +80,7 @@ public class InfoBotDAO implements InfoDAO {
         try {
             tx.begin();
 
-            List<Object[]> list = em.createNativeQuery("select letter, times from guild.letter where info_id = (select id from guild.info where user_id = '" + user_id + "')")
+            List<Object[]> list = em.createNativeQuery("select letter, amount from guild.letter_amount where info_id = '" + user_id + "'")
                     .getResultList();
 
             for (Object[] result :
@@ -112,7 +112,7 @@ public class InfoBotDAO implements InfoDAO {
         try {
             tx.begin();
 
-            List<Object[]> list = em.createNativeQuery("select word, times from guild.word where info_id = (select id from guild.info where user_id = '" + user_id + "')")
+            List<Object[]> list = em.createNativeQuery("select word, amount from guild.word_amount where info_id = '" + user_id + "'")
                     .getResultList();
 
             for (Object[] result :
@@ -152,17 +152,17 @@ public class InfoBotDAO implements InfoDAO {
     }
 
     @Override
-    public void insert(Info info, List<LetterAmount> letterTimes, List<WordAmount> words) {
+    public void update(Info info, List<LetterAmount> letterTimes, List<WordAmount> words) {
         EntityManager em = EMF.createEntityManager();
         EntityTransaction tx = em.getTransaction();
 
         try {
             tx.begin();
 
+            info = em.merge(info);
+
             info.setLetters(letterTimes);
             info.setWords(words);
-
-            em.merge(info);
 
             tx.commit();
         } catch (Exception e) {
