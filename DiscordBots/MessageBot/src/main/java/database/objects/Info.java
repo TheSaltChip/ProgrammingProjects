@@ -8,34 +8,23 @@ import java.util.List;
 public class Info {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private int id;
-
-    @OneToOne
+    @OneToOne(mappedBy = "info")
+    @Column(name = "user_id")
     private UserDB user;
 
-    @OneToMany(mappedBy = "info", cascade = CascadeType.ALL)
-    private List<Word> words;
+    @OneToMany(mappedBy = "info")
+    private List<WordAmount> words;
 
-    @OneToMany(mappedBy = "info", cascade = CascadeType.ALL)
-    private List<Letter> letters;
+    @OneToMany(mappedBy = "info")
+    private List<LetterAmount> letterTimes;
 
     protected Info() {
     }
 
-    public Info(UserDB user, List<Word> words, List<Letter> letters) {
+    public Info(UserDB user, List<WordAmount> words, List<LetterAmount> letterTimes) {
         this.user = user;
         this.words = words;
-        this.letters = letters;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
+        this.letterTimes = letterTimes;
     }
 
     public UserDB getUser() {
@@ -46,24 +35,24 @@ public class Info {
         this.user = user;
     }
 
-    public List<Word> getWords() {
+    public List<WordAmount> getWords() {
         return words;
     }
 
-    public void setWords(List<Word> words) {
+    public void setWords(List<WordAmount> words) {
         this.words = words;
     }
 
-    public List<Letter> getLetters() {
-        return letters;
+    public List<LetterAmount> getLetters() {
+        return letterTimes;
     }
 
-    public void setLetters(List<Letter> letters) {
-        this.letters = letters;
+    public void setLetters(List<LetterAmount> letterTimes) {
+        this.letterTimes = letterTimes;
     }
 
     @Override
     public String toString() {
-        return String.format("{id: %s, user: %s, words: %s, letters: %s}", id, user, words, letters);
+        return String.format("{user: %s, words: %s, letters: %s}", user, words, letterTimes);
     }
 }
