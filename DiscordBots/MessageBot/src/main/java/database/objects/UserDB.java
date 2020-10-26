@@ -1,7 +1,6 @@
 package database.objects;
 
 import javax.persistence.*;
-import javax.xml.registry.infomodel.User;
 import java.util.List;
 
 @Entity
@@ -16,7 +15,7 @@ public class UserDB {
     private String discriminator;
 
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "user")
-    @JoinColumn(name = "id", referencedColumnName = "id")
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
     private Info info;
 
     protected UserDB() {
