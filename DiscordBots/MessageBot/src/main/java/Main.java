@@ -5,10 +5,13 @@ import database.dao.letter.LetterBotDAO;
 import database.dao.letter_amount.LetterAmountBotDAO;
 import database.dao.message.MessageBotDAO;
 import database.dao.user.UserBotDAO;
-import database.objects.*;
+import database.objects.Info;
+import database.objects.MessageDB;
 
-import java.util.LinkedList;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 public class Main {
@@ -33,67 +36,33 @@ public class Main {
             info = INFO_DAO.get("159995722429628416");
         }
 
-        //LETTERS
-        List<LetterAmount> letterAmounts = info.getLetters() == null ? new LinkedList<>() : info.getLetters();
+        Map<Character, Integer> letters = new HashMap<>();
 
-        List<Character> chars = messages.stream()
-                .map(s -> s.replaceAll(" ", ""))
+        messages.stream()
+                .map(m -> m.replaceAll("[^\\p{L}]+", ""))
                 .reduce("", (a, b) -> a + b)
                 .chars()
                 .mapToObj(c -> (char) c)
-                .collect(Collectors.toList());
+                .forEach(c -> {
+                            if (!letters.containsKey(c)) {
+                                letters.put(c, null);
+                            }
 
-        for (Character c :
-                chars) {
+                            letters.compute(c, (le, i) -> i == null ? 1 : i + 1);
+                        }
+                );
 
-            LetterAmount letterAmount = letterAmounts.stream()
-                    .filter(l -> l != null && l.getLetter() != null)
-                    .filter(l -> l.getLetter().getLetter() == c)
-                    .findFirst().orElse(null);
+        /*Map<String, Integer> words = new HashMap<>();
 
-            if (letterAmount == null) {
-                System.out.println("NULL");
+        messages.stream()
+                .map(m -> m.split(" "))
+                .forEach(sa ->
+                        Arrays.stream(sa)
+                                .filter(s -> !s.equals(" "))
+                                .map()
+                );*/
 
-                Letter l = letterDAO.get(c);
-
-                if (l == null) {
-                    l = new Letter(c);
-                    letterDAO.insert(l);
-                }
-
-                Amount a = amountBotDAO.get(1);
-                System.out.println("A: " + a + "\nLetter: " + l);
-
-                if (a == null) {
-                    a = new Amount(1);
-                    amountBotDAO.insert(a);
-                }
-
-                letterAmount = new LetterAmount(info, l, a);
-
-                LETTER_AMOUNT_DAO.insert(letterAmount);
-
-                letterAmounts.add(letterAmount);
-
-            } else {
-                System.out.println("NOT NULL");
-
-                int newA = letterAmount.getAmount().getAmount() + 1;
-                Amount a = amountBotDAO.get(newA);
-
-                if(a == null){
-                    a = new Amount(newA);
-                    amountBotDAO.insert(a);
-                }
-
-                LETTER_AMOUNT_DAO.update(letterAmount, a);
-            }
-        }
-
-        INFO_DAO.update(info, letterAmounts, null);
-
-        System.out.println("Messages:\n" + messages + "\n\n");
-
+        System.out.println(letters);
     }
 
 }
