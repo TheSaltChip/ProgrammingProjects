@@ -29,7 +29,8 @@ CREATE TABLE message
 --INFO 1 info has many word_amount and many letter_amount
 create table info
 (
-    user_id varchar(18) references "user" (id) primary key
+    user_id varchar(18) references "user" (id) primary key,
+    latest_message timestamp
 );
 
 alter table "user"
@@ -48,10 +49,11 @@ create table word
 );
 
 --AMOUNT
-create table amount
+/*create table amount
 (
     amount int primary key
 );
+ */
 
 --WORD_AMOUNT 1 info has 1 word_amount
 create table word_amount
@@ -59,7 +61,7 @@ create table word_amount
     id      serial primary key,
     info_id varchar(18) references info (user_id),
     word    varchar(100) references word (word),
-    amount  int references amount (amount)
+    amount  int --references amount (amount)
 );
 
 alter table info
@@ -71,7 +73,7 @@ create table letter_amount
     id      serial primary key,
     info_id varchar(18) references info (user_id),
     letter  char references letter (letter),
-    amount  int references amount (amount)
+    amount  int --references amount (amount)
 );
 
 alter table info
