@@ -1,6 +1,7 @@
 package database.objects;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -15,6 +16,9 @@ public class Info {
     @MapsId
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private UserDB user;
+
+    @Column(name = "latest_message")
+    private LocalDateTime latestMessage;
 
     @OneToMany(mappedBy = "info", fetch = FetchType.LAZY)
     private List<WordAmount> wordAmounts;
