@@ -24,8 +24,8 @@ public class AnalyzeDatabase {
         USER = user;
     }
 
-    /*public void compute() {
-        List<String> messages = USER_DAO.get(USER.getId()).getMessages()
+    public void compute() {
+      /* List<String> messages = USER_DAO.get(USER.getId()).getMessages()
                 .stream()
                 .map(MessageDB::getMsg_content)
                 .collect(Collectors.toList());
@@ -98,9 +98,9 @@ public class AnalyzeDatabase {
         INFO_DAO.update(info, letterAmounts, null);
 
         System.out.println("Messages:\n" + messages + "\n\n");
-
-    }
 */
+    }
+
     public boolean exists() {
         return USER_DAO.exists(USER.getId());
     }
