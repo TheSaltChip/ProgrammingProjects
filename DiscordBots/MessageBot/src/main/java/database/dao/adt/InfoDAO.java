@@ -5,7 +5,6 @@ import database.objects.LetterAmount;
 import database.objects.WordAmount;
 
 import java.util.List;
-import java.util.Map;
 
 public interface InfoDAO {
     /**
@@ -24,22 +23,20 @@ public interface InfoDAO {
     Info get(String user_id);
 
     /**
-     * Gets a map which maps all letters and how many times they
-     * occurred in the message history of the user with the given user_id
+     * Attempts to fetch all LetterAmount object associated with the user with the given user_id
      *
      * @param user_id The id of the user
-     * @return The map of letters
+     * @return List of all LetterAmounts
      */
-    Map<Character, Integer> getLetters(String user_id);
+    List<LetterAmount> getLetters(String user_id);
 
     /**
-     * Gets a map which maps all words and how many times they
-     * occurred in the message history of the user with the given user_id
+     * Attempts to fetch all WordAmount objects associated with the user with the given user_id
      *
      * @param user_id The id of the user
-     * @return The map of words
+     * @return List of all WordAmounts
      */
-    Map<String, Integer> getWords(String user_id);
+    List<WordAmount> getWords(String user_id);
 
     /**
      * Inserts the given info-object to the database

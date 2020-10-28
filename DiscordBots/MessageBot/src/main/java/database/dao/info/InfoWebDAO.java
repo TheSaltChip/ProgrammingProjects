@@ -7,10 +7,7 @@ import database.objects.WordAmount;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import java.util.Comparator;
 import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
 
 public class InfoWebDAO implements InfoDAO {
     @PersistenceContext(name = "DiscordBotJTAPU")
@@ -30,39 +27,19 @@ public class InfoWebDAO implements InfoDAO {
                 .getSingleResult();
     }
 
-    @SuppressWarnings("unchecked")
     @Override
-    public Map<Character, Integer> getLetters(String user_id) {
-        Map<Character, Integer> letters = new TreeMap<>(
-                Comparator.comparingInt(c -> c)
-        );
-
-        List<Object[]> list = em.createNativeQuery("select letter, amount from guild.letter_amount where info_id = '" + user_id + "'")
+    public List<LetterAmount> getLetters(String user_id) {
+        return em.createQuery("select la from LetterAmount la where la.info.id = :user_id", LetterAmount.class)
+                .setParameter("user_id", user_id)
                 .getResultList();
 
-        for (Object[] result :
-                list) {
-            letters.put(result[0].toString().charAt(0), Integer.parseInt(result[1].toString()));
-        }
-        return letters;
     }
 
-    @SuppressWarnings("unchecked")
     @Override
-    public Map<String, Integer> getWords(String user_id) {
-        Map<String, Integer> words = new TreeMap<>(
-                Comparator.comparing(c -> c)
-        );
-
-        List<Object[]> list = em.createNativeQuery("select word, amount from guild.word_amount where info_id = '" + user_id + "'")
+    public List<WordAmount> getWords(String user_id) {
+        return em.createQuery("select wa from WordAmount wa where wa.info.id = :user_id", WordAmount.class)
+                .setParameter("user_id", user_id)
                 .getResultList();
-
-        for (Object[] result :
-                list) {
-            words.put(result[0].toString(), Integer.parseInt(result[1].toString()));
-        }
-
-        return words;
     }
 
     @Override
