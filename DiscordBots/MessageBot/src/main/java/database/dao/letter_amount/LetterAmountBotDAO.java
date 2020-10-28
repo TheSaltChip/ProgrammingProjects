@@ -1,7 +1,5 @@
 package database.dao.letter_amount;
 
-import database.objects.Amount;
-import database.objects.Letter;
 import database.objects.LetterAmount;
 
 import javax.persistence.EntityManager;
@@ -31,7 +29,7 @@ public class LetterAmountBotDAO {
         }
     }
 
-    public void update(LetterAmount la, Amount a) {
+    public void update(LetterAmount la, Integer i) {
         EntityManager em = EMF.createEntityManager();
         EntityTransaction tx = em.getTransaction();
 
@@ -39,7 +37,7 @@ public class LetterAmountBotDAO {
             tx.begin();
 
             LetterAmount letterAmount = em.merge(la);
-            letterAmount.setAmount(a);
+            letterAmount.setAmount(i);
 
             tx.commit();
 

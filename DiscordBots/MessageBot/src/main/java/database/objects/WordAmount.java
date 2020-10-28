@@ -13,18 +13,16 @@ public class WordAmount {
     @JoinColumn(name = "info_id", referencedColumnName = "user_id")
     private Info info;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne()
     @JoinColumn(name = "word", referencedColumnName = "word")
     private Word word;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "amount", referencedColumnName = "amount")
-    private Amount amount;
+    private Integer amount;
 
     protected WordAmount() {
     }
 
-    public WordAmount(Word word, Amount amount) {
+    public WordAmount(Word word, Integer amount) {
         this.word = word;
         this.amount = amount;
     }
@@ -47,6 +45,6 @@ public class WordAmount {
 
     @Override
     public String toString() {
-        return String.format("[word: %s, times: %s]", word, amount);//"[word: " + word + ", times: " + times + "]";
+        return String.format("[word: %s, times: %d]", word, amount);//"[word: " + word + ", times: " + times + "]";
     }
 }
